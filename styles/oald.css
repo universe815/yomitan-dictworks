@@ -1,0 +1,20 @@
+[data-oald~="entry"] { margin-bottom: 0.8em; }
+[data-oald~="webtop"] { border-bottom: 1px solid #d7dce2; margin-bottom: 0.5em; padding-bottom: 0.25em; }
+[data-oald~="headword"] { color: #0072cf; font-size: 1.35em; font-weight: bold; }
+[data-oald~="pos"] { color: #b45f06; font-style: italic; font-weight: bold; margin-left: 0.5em; }
+[data-oald~="phon"] { color: #555; margin-left: 0.4em; }
+[data-oald~="grammar"], [data-oald~="labels"] { color: #765; font-style: italic; }
+[data-oald~="shcut"], [data-oald~="idioms_heading"], [data-oald~="box_title"], [data-oald~="patterns"] { color: #007a6c; font-weight: bold; margin-top: 0.7em; }
+[data-oald~="def"] { font-weight: bold; }
+[data-oald~="zh"] { color: #18794e; }
+[data-oald~="deft"], [data-oald~="xt"], [data-oald~="unxt"], [data-oald~="undt"], [data-oald~="ubx"] { display: block; margin-left: 0.5em; }
+[data-oald~="cf"] { color: #7a3e9d; font-weight: bold; }
+[data-oald~="examples"] { margin-bottom: 0.5em; margin-top: 0.25em; }
+[data-oald~="x"], [data-oald~="unx"] { color: #334; }
+[data-oald~="sense"] { margin-bottom: 0.65em; }
+[data-oald~="iteration"] { color: #0072cf; font-weight: bold; margin-right: 0.35em; }
+[data-oald~="topic_name"], [data-oald~="topic_cefr"] { color: #666; font-size: 0.9em; }
+[data-oald~="image-placeholder"] { color: #888; font-style: italic; }
+[data-oald~="redirect"] { color: #666; }
+table { border-collapse: collapse; margin: 0.4em 0; }
+td, th { border: 1px solid #ccd2d8; padding: 0.2em 0.4em; }

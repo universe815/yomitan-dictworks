@@ -1,0 +1,13 @@
+[
+  {
+    "id": "sample-ja-zh",
+    "title": "示例日中词典",
+    "revision": "2026.07.15.1",
+    "author": "请改成你的名字",
+    "description": "用于确认构建流程的最小示例词典。",
+    "attribution": "请填写数据来源、许可协议和必要的署名。",
+    "url": "https://example.com/replace-me",
+    "input": "data/sample-ja-zh.json",
+    "outputFile": "sample-ja-zh.zip"
+  }
+]

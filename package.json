@@ -1,0 +1,32 @@
+{
+  "name": "yomitan-dictworks",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "description": "Reproducible converters and build tools for personal Yomitan dictionaries.",
+  "homepage": "https://github.com/universe815/yomitan-dictworks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/universe815/yomitan-dictworks.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dict": "tsc -p tsconfig.json && node dist/build.js",
+    "dict:all": "tsc -p tsconfig.json && node dist/build.js --all",
+    "oald:build": "tsc -p tsconfig.json && node dist/build-oald.js",
+    "oald:build:rich": "tsc -p tsconfig.json && node dist/build-oald.js config/oald-rich.json",
+    "xsjrh:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/xsjrh.json",
+    "onomatopoeia:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/onomatopoeia.json",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "yomichan-dict-builder": "2.11.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  }
+}

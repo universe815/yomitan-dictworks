@@ -1,0 +1,50 @@
+# Dependencies and build products
+node_modules/
+.venv/
+dist/
+generated/
+dictionary-output/*
+!dictionary-output/.gitkeep
+/index.json
+
+# Source dictionaries and extracted proprietary assets
+*.mdx
+*.mdd
+*.zim
+*.epwing
+*.dsl
+*.ifo
+*.idx
+*.dict
+*.dict.dz
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.mp3
+*.ogg
+*.wav
+*.m4a
+
+# Local configuration, reports and caches
+.env
+.env.*
+!.env.example
+*.log
+*-report.json
+qa-output/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+Desktop.ini
+.DS_Store

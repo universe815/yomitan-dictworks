@@ -1,0 +1,55 @@
+name: Dictionary or converter bug
+description: Report an entry, formatting, media, lookup, or build problem
+title: "[Dictionary] "
+labels: ["dictionary-bug"]
+body:
+  - type: dropdown
+    id: dictionary
+    attributes:
+      label: Dictionary
+      options:
+        - OALD
+        - 新世纪日汉双解大辞典
+        - 新日汉拟声拟态词词典
+        - Sample or another dictionary
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Dictionary revision
+      placeholder: "YYYY.MM.DD.N"
+    validations:
+      required: true
+  - type: input
+    id: term
+    attributes:
+      label: Headword or lookup
+      description: Do not paste copyrighted definitions in full.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the incorrect display, lookup, build, or media behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Yomitan version, browser, OS, and relevant build command.
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Content safety
+      options:
+        - label: I did not attach proprietary MDX/MDD files or a full copyrighted entry.
+          required: true

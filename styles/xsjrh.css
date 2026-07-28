@@ -1,0 +1,76 @@
+@font-face {
+  font-family: "XSJRH Mincho";
+  src: url("fonts/Ten Mincho Text Regular.otf") format("opentype");
+}
+
+[data-sc-xsjrh~="xsjrh-entry"] {
+  color: var(--text-color, #222);
+  font-family: "XSJRH Mincho", "Yu Mincho", "Noto Serif CJK JP", serif;
+  line-height: 1.65;
+}
+[data-sc-xsjrh~="xsjrh-head"] { margin-bottom: .25em; }
+[data-sc-xsjrh~="xsjrh-word1"], [data-sc-xsjrh~="xsjrh-pword"], [data-sc-xsjrh~="xsjrh-word2"] {
+  color: #982727;
+  font-size: 1.28em;
+  font-weight: bold;
+}
+[data-sc-xsjrh~="xsjrh-cat"] {
+  display: inline-block;
+  margin: .1em .25em;
+  padding: 0 .28em;
+  border: 1px solid #d8cec8;
+  border-radius: 3px;
+  background: #f8efea;
+  font-size: .82em;
+  font-weight: bold;
+}
+[data-sc-xsjrh~="xsjrh-sense"] { margin-top: .16em; }
+[data-sc-xsjrh~="xsjrh-sid"] {
+  display: inline-block;
+  min-width: 1.45em;
+  font-weight: bold;
+}
+[data-sc-xsjrh~="xsjrh-sense-wrap"] { display: inline; }
+[data-sc-xsjrh~="xsjrh-c"] {
+  display: block;
+  margin: .12em 0 .2em;
+  padding: .18em .45em;
+  border-radius: 4px;
+  background: rgba(128, 128, 128, .12);
+  color: var(--text-color, #4e3b30);
+  font-family: "Noto Serif CJK SC", "Microsoft YaHei", sans-serif;
+}
+[data-sc-xsjrh~="xsjrh-exbox"] {
+  display: block;
+  margin-left: .75em;
+  color: #397aa8;
+  font-size: .93em;
+}
+[data-sc-xsjrh~="xsjrh-exbox"]::before { content: "● "; color: #e99aaa; }
+[data-sc-xsjrh~="xsjrh-exbox"] [data-sc-xsjrh~="xsjrh-c"] {
+  display: inline;
+  margin-left: .3em;
+  padding: 0;
+  background: transparent;
+  color: var(--text-color, #777);
+}
+[data-sc-xsjrh~="xsjrh-k"], [data-sc-xsjrh~="xsjrh-t"] { font-size: .78em; }
+[data-sc-xsjrh~="xsjrh-pbox"] { margin-top: .65em; }
+[data-sc-xsjrh~="xsjrh-ptitle"] {
+  padding: .12em .45em;
+  border-radius: 4px;
+  background: rgba(28, 144, 144, .12);
+  color: #1c9090;
+  font-weight: bold;
+  cursor: pointer;
+}
+[data-sc-xsjrh~="xsjrh-plist"] { margin: .25em 0 .1em 1.4em; padding: 0; }
+[data-sc-xsjrh~="xsjrh-foot"] { margin-top: .45em; }
+[data-sc-xsjrh~="xsjrh-foot"]::before { content: "» "; }
+[data-sc-xsjrh~="xsjrh-svg3"] {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: .4em auto;
+}
+[data-sc-xsjrh~="redirect"] { color: var(--text-color, #666); }

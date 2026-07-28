@@ -1,0 +1,51 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          python -m pip install fastjsonschema==2.22.1
+
+      - name: Check source and repository policy
+        run: |
+          pnpm check
+          python -m compileall -q scripts
+          python scripts/check_repository.py
+
+      - name: Build and validate the sample dictionary
+        run: |
+          pnpm dict -- sample-ja-zh
+          python scripts/validate_yomitan_schema.py dictionary-output/sample-ja-zh.zip
