@@ -19,6 +19,7 @@ pnpm install --frozen-lockfile
 pnpm check
 python -m compileall -q scripts
 python scripts/check_repository.py
+python scripts/check_catalog.py
 ```
 
 For a generated ZIP, also run:

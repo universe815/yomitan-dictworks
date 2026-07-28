@@ -1,6 +1,25 @@
-# OALD local converter
+# OALD English–Chinese
 
-Status: converter and styles only. No dictionary data or generated ZIP is distributed.
+## Status
+
+| Edition | Revision | Build | Public ZIP | Planned asset |
+| --- | --- | --- | --- | --- |
+| Text | `2026.07.15.1` | Ready | Rights review | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.15.2` | Ready | Rights review | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+
+## Features
+
+- English–Chinese structured entries and lookup redirects;
+- original entry hierarchy and dictionary-scoped styling;
+- optional complete illustration packaging;
+- separate local MDD audio server to avoid a multi-gigabyte term archive.
+
+## Download
+
+Both editions are listed in the public catalog, but their ZIP files remain withheld
+until redistribution rights for the dictionary text and media are documented. Once
+authorized, this page will contain direct GitHub Release links, checksums, licenses,
+and Yomitan automatic-update indexes.
 
 ## Build the text edition
 

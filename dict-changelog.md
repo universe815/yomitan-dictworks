@@ -3,6 +3,15 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-07-28 — catalog update
+
+- Reorganized dictionaries as source language → type → language pair → dictionary,
+  following the catalog style of MarvNC/yomitan-dictionaries.
+- Added Japanese and English category pages, a download center, and a machine-readable
+  catalog with separate build and distribution states.
+- Added catalog validation and a per-dictionary versioned Release/update-index
+  workflow suitable for multiple independently updated dictionaries.
+
 ## 2026-07-28
 
 - Initialized the public source repository and multi-dictionary catalog.

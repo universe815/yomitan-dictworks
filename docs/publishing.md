@@ -19,10 +19,10 @@ Before making a dictionary downloadable, verify:
 Use Git for source code and small update indexes. Put ZIP files in GitHub Releases,
 not in repository history.
 
-For each public dictionary:
+For each public edition:
 
 - Release asset:
-  `https://github.com/universe815/yomitan-dictworks/releases/latest/download/<name>.zip`
+  `https://github.com/universe815/yomitan-dictworks/releases/download/<id>-<revision>/<name>.zip`
 - Update index:
   `https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/<id>/index.json`
 
@@ -31,13 +31,16 @@ placeholder, and commit it. The remote index is ordinary Yomitan `index.json`
 metadata; Yomitan compares its `revision` with the installed dictionary and then
 downloads `downloadUrl`.
 
+Do not use `releases/latest/download/...` in a multi-dictionary repository: the
+latest repository release may belong to another dictionary and omit this asset.
+
 The dictionary's own config must contain the same stable URLs:
 
 ```json
 {
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/<id>/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/latest/download/<name>.zip"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/<id>-<revision>/<name>.zip"
 }
 ```
 
@@ -46,12 +49,33 @@ fails the build when only part of the update configuration is present.
 
 ## Release sequence
 
-1. Build and validate locally.
-2. Create a versioned tag such as `<id>-2026.07.28.1`.
-3. Create the GitHub Release and upload the fixed-name ZIP asset.
-4. Confirm the `releases/latest/download/...` URL returns that ZIP.
-5. Update and commit `manifests/<id>/index.json`.
-6. Import once from the update-index URL and test an update from the previous revision.
+1. Record the content license and redistribution evidence in
+   `catalog/dictionaries.json`.
+2. Choose a versioned tag such as `<id>-2026.07.28.1` and put that URL in the
+   dictionary config.
+3. Build and validate locally.
+4. Create the GitHub Release and upload the fixed-name ZIP asset:
+
+   ```powershell
+   gh release create "<id>-<revision>" `
+     "dictionary-output/<name>.zip" `
+     --repo universe815/yomitan-dictworks `
+     --title "<title> <revision>" `
+     --notes "See the dictionary page and dict-changelog.md."
+   ```
+
+5. Confirm the versioned download URL returns that ZIP.
+6. Extract its embedded index as the remote update index:
+
+   ```powershell
+   python scripts/extract_update_index.py `
+     "dictionary-output/<name>.zip" `
+     "manifests/<id>/index.json"
+   ```
+
+7. Change the catalog distribution state to `published`, fill every URL/license
+   field, and commit the manifest and catalog.
+8. Import once from the update-index URL and test an update from the previous revision.
 
 If a dictionary may not legally be redistributed, stop after local validation. Keep
 its manifest absent and its release status listed as “converter only”.

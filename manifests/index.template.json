@@ -10,5 +10,5 @@
   "targetLanguage": "zh",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/REPLACE_ME/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/latest/download/REPLACE_ME.zip"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/REPLACE_ME-YYYY.MM.DD.N/REPLACE_ME.zip"
 }

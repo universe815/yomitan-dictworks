@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "repository": "universe815/yomitan-dictworks",
+  "dictionaries": [
+    {
+      "id": "xsjrh-illustrated",
+      "title": "新世纪日汉双解大辞典（完整图文版）",
+      "sourceLanguage": "ja",
+      "targetLanguage": "zh",
+      "category": "term",
+      "page": "japanese/term/ja-zh/xsjrh/README.md",
+      "config": "config/xsjrh.json",
+      "buildCommand": "pnpm xsjrh:build",
+      "revision": "2026.07.21.2",
+      "buildStatus": "ready",
+      "distribution": {
+        "status": "rights-review",
+        "contentLicense": null,
+        "rightsEvidence": null,
+        "releaseTag": null,
+        "assetName": "XSJRH-2026.07.21-yomitan-illustrated.zip",
+        "indexUrl": null,
+        "downloadUrl": null
+      }
+    },
+    {
+      "id": "shin-nikkan-onomatopoeia",
+      "title": "新日汉拟声拟态词词典 第2版",
+      "sourceLanguage": "ja",
+      "targetLanguage": "zh",
+      "category": "term",
+      "page": "japanese/term/ja-zh/onomatopoeia/README.md",
+      "config": "config/onomatopoeia.json",
+      "buildCommand": "pnpm onomatopoeia:build",
+      "revision": "2026.07.28.3",
+      "buildStatus": "ready",
+      "distribution": {
+        "status": "rights-review",
+        "contentLicense": null,
+        "rightsEvidence": null,
+        "releaseTag": null,
+        "assetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip",
+        "indexUrl": null,
+        "downloadUrl": null
+      }
+    },
+    {
+      "id": "oald-en-zh",
+      "title": "OALDPE En-Cn 2025.02.14（本地转换版）",
+      "sourceLanguage": "en",
+      "targetLanguage": "zh",
+      "category": "term",
+      "page": "english/term/en-zh/oald/README.md",
+      "config": "config/oald.json",
+      "buildCommand": "pnpm oald:build",
+      "revision": "2026.07.15.1",
+      "buildStatus": "ready",
+      "distribution": {
+        "status": "rights-review",
+        "contentLicense": null,
+        "rightsEvidence": null,
+        "releaseTag": null,
+        "assetName": "OALDPE-En-Cn-2025.02.14-yomitan.zip",
+        "indexUrl": null,
+        "downloadUrl": null
+      }
+    },
+    {
+      "id": "oald-en-zh-illustrated",
+      "title": "OALDPE En-Cn 2025.02.14（完整插图版）",
+      "sourceLanguage": "en",
+      "targetLanguage": "zh",
+      "category": "term",
+      "page": "english/term/en-zh/oald/README.md",
+      "config": "config/oald-rich.json",
+      "buildCommand": "pnpm oald:build:rich",
+      "revision": "2026.07.15.2",
+      "buildStatus": "ready",
+      "distribution": {
+        "status": "rights-review",
+        "contentLicense": null,
+        "rightsEvidence": null,
+        "releaseTag": null,
+        "assetName": "OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
+        "indexUrl": null,
+        "downloadUrl": null
+      }
+    }
+  ]
+}

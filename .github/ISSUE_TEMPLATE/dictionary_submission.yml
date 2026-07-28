@@ -1,0 +1,67 @@
+name: Dictionary submission
+description: Propose a new redistributable dictionary for the public catalog
+title: "[Dictionary submission] "
+labels: ["dictionary-submission"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Dictionary title
+    validations:
+      required: true
+  - type: input
+    id: languages
+    attributes:
+      label: Language direction
+      placeholder: "ja → zh"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Dictionary type
+      options:
+        - Term
+        - Frequency
+        - Grammar
+        - Kanji
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Authoritative source URL
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: Content license
+      description: Give the exact license name and version.
+    validations:
+      required: true
+  - type: input
+    id: evidence
+    attributes:
+      label: Redistribution evidence
+      description: Link directly to the license or written permission.
+    validations:
+      required: true
+  - type: textarea
+    id: components
+    attributes:
+      label: Covered components
+      description: Explain whether definitions, examples, images, audio, and fonts may be redistributed.
+    validations:
+      required: true
+  - type: textarea
+    id: build
+    attributes:
+      label: Proposed build or conversion method
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have not attached source files or content that I am not allowed to redistribute.
+          required: true
