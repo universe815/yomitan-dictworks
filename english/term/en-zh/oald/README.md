@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.29.2` | Ready | Personal local server | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.29.2` | Ready | Personal local server | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.29.2` | Ready | Google Drive + local server | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.29.2` | Ready | Google Drive + local server | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -17,16 +17,18 @@
 ## Links and updates
 
 - Text edition: [Yomitan 更新清单](../../../../manifests/oald-en-zh/index.json)
+  · [Google Drive](https://drive.google.com/file/d/1OnmPmRFtpCtaNUGszWlxyQB3tPBSQr5j/view)
 - Complete illustrated edition:
   [Yomitan 更新清单](../../../../manifests/oald-en-zh-illustrated/index.json)
+  · [Google Drive](https://drive.google.com/file/d/1dGChYanOf3V5Hum8GwSj0YalkJg_2owT/view)
 
 本机更新地址分别为：
 
 - `http://127.0.0.1:8765/oald-en-zh/OALDPE-En-Cn-2025.02.14-yomitan.zip`
 - `http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip`
 
-本仓库只提供词典目录、转换工具和更新清单，不提供 ZIP。首次从本地
-`dictionary-output` 导入；之后启动本地更新服务并在 Yomitan 中检查更新。
+ZIP 归档在 Google Drive 的 `en-zh/OALDPE En-Cn/`。本仓库只提供词典目录、
+转换工具和更新清单；之后从同步盘启动本机更新服务并在 Yomitan 中检查更新。
 
 ## Build the text edition
 

@@ -52,6 +52,10 @@ Add a page under `<source language>/<category>/<pair>/<id>/`, an entry in
 even if the source data version did not change.
 
 For a personal dictionary, enable the remote-update fields only after its local
-archive route and stable update manifest are configured as described in
+archive route, Google Drive `archivePath`, and stable update manifest are configured
+as described in
 [publishing.md](publishing.md). Public hosting additionally requires permission to
 redistribute every included content type.
+
+After the first Google Drive sync, record the private file link as `driveFileUrl` so
+the catalog can link to the exact archive without publishing it through GitHub.

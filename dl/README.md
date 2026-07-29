@@ -7,4 +7,5 @@ ZIP，也不使用 GitHub Release。
 - [新日汉拟声拟态词词典](../japanese/term/ja-zh/onomatopoeia/)
 - [OALDPE En-Cn](../english/term/en-zh/oald/)
 
-自动更新清单位于 [`manifests/`](../manifests/)，成品 ZIP 由本机更新服务提供。
+自动更新清单位于 [`manifests/`](../manifests/)。成品 ZIP 统一保存在个人
+Google Drive，由本机更新服务从同步目录提供。
