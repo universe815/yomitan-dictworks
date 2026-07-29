@@ -11,7 +11,7 @@
       "page": "japanese/term/ja-zh/xsjrh/README.md",
       "config": "config/xsjrh.json",
       "buildCommand": "pnpm xsjrh:build",
-      "revision": "2026.07.29.4",
+      "revision": "2026.07.29.5",
       "buildStatus": "ready",
       "distribution": {
         "status": "public",
@@ -20,15 +20,18 @@
         "contentLicense": null,
         "rightsEvidence": null,
         "hosting": "google-drive-public",
+        "updateHosting": "github-release",
         "assetName": "XSJRH-yomitan-illustrated.zip",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "XSJRH-yomitan-illustrated-2026.07.29.5.zip",
         "archivePath": "Downloads/[JA-ZH] 新世纪日汉双解大辞典（完整图文版）.zip",
-        "bytes": 39002431,
-        "sha256": "9978E087B4D5977314B4AA14D0E257B0E8A5421FD845C0E1D66BB4D368FB2AAF",
+        "bytes": 39002398,
+        "sha256": "3BD2AEC9783AEF7B28CA5169FF35D903A0B3682C1C644A3C34EF50D0E1BC1CBF",
         "driveFileId": "1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
         "driveFileUrl": "https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/xsjrh-illustrated/index.json",
-        "downloadUrl": "https://drive.usercontent.google.com/download?id=1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa&export=download&confirm=t"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/XSJRH-yomitan-illustrated-2026.07.29.5.zip"
       }
     },
     {

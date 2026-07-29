@@ -22,7 +22,7 @@ def request(url: str, *, method: str, timeout: float):
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Verify public manifests and Google Drive ZIP downloads."
+        description="Verify public manifests and automatic-update ZIP downloads."
     )
     parser.add_argument("--timeout", type=float, default=30)
     parser.add_argument(

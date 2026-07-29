@@ -7,9 +7,9 @@
 | Direction | Japanese → Chinese |
 | Type | Term dictionary |
 | Edition | Complete illustrated edition |
-| Revision | `2026.07.29.4` |
+| Revision | `2026.07.29.5` |
 | Build | Ready |
-| Update mode | Public Google Drive |
+| Update mode | GitHub Release |
 | Archive | `XSJRH-yomitan-illustrated.zip` |
 
 ## Features
@@ -26,8 +26,9 @@
 - [下载可直接导入的 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
-下载的 ZIP 可直接导入 Yomitan。`2026.07.29.3` 及之后版本会通过公开
-Google Drive 地址自动更新，不需要启动本机服务。
+下载的 ZIP 可直接导入 Yomitan。Google Drive 继续提供手动下载和归档；
+`2026.07.29.5` 及之后版本通过 GitHub Release 资产自动更新，不需要启动
+本机服务。
 
 ## Local build
 

@@ -3,10 +3,11 @@
 本项目的所有现役词典均采用公开模式：
 
 - GitHub 保存目录、转换器、配置和稳定更新清单；
-- Google Drive 保存每个版本可直接导入的完整 ZIP；
+- Google Drive 保存每个版本可直接导入的完整 ZIP，供手动下载和归档；
+- GitHub Release 保存供 Yomitan 自动更新使用的版本化 ZIP 资产；
 - Yomitan 通过 GitHub `indexUrl` 检查 revision，通过公开 HTTPS
   `downloadUrl` 下载新版；
-- 用户不需要 GitHub Release，也不需要运行本机服务器。
+- 用户不需要运行本机服务器。
 
 ## URL 结构
 
@@ -17,12 +18,14 @@
 {
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/<id>/index.json",
-  "downloadUrl": "https://drive.usercontent.google.com/download?id=<DRIVE_FILE_ID>&export=download&confirm=t"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/<VERSIONED_ASSET>.zip"
 }
 ```
 
 README 面向用户链接 `https://drive.google.com/file/d/<DRIVE_FILE_ID>/view`；
-Yomitan 的 `downloadUrl` 使用直接返回 ZIP 的 `drive.usercontent.google.com`。
+Yomitan 的 `downloadUrl` 使用 GitHub Release 资产。机器目录同时记录
+`updateHosting`、`releaseTag` 和 `releaseAssetName`。尚未迁移的旧条目仍可
+暂时使用 Drive 更新地址，但新发布和新修订应使用 Release。
 
 ## 首次安装
 
@@ -44,9 +47,12 @@ Yomitan 的 `downloadUrl` 使用直接返回 ZIP 的 `drive.usercontent.google.c
    ```
 
 3. 计算并记录每个 ZIP 的 `bytes` 与 `sha256`。
-4. **覆盖原 Google Drive 文件的内容，不要删除后重新上传。** 保持
-   `driveFileId` 不变，Yomitan 的稳定下载地址才能继续工作。
-5. 验证 Drive 文件大小、公开权限和匿名直接下载；再从最终 ZIP 提取清单：
+4. 使用版本化文件名将最终 ZIP 上传到 `dictionary-assets` Release。不要
+   覆盖同名资产；每个 revision 使用新的 `releaseAssetName`。
+5. 匿名下载 Release 资产，核对 Content-Length、SHA-256 和 ZIP 完整性。
+6. **覆盖原 Google Drive 文件的内容，不要删除后重新上传。** 保持
+   `driveFileId` 不变，并验证 Drive 文件大小和公开权限。
+7. 从最终 ZIP 提取清单：
 
    ```powershell
    python scripts/extract_update_index.py `
@@ -54,7 +60,7 @@ Yomitan 的 `downloadUrl` 使用直接返回 ZIP 的 `drive.usercontent.google.c
      "manifests/<id>/index.json"
    ```
 
-6. 运行完整检查：
+8. 运行完整检查：
 
    ```powershell
    pnpm check
@@ -64,8 +70,8 @@ Yomitan 的 `downloadUrl` 使用直接返回 ZIP 的 `drive.usercontent.google.c
    python scripts/check_public_links.py
    ```
 
-7. 提交并合并配置、目录、清单和文档；不要提交 ZIP。
-8. 使用另一套 Yomitan 配置执行一次真实的 **Check for Updates**。
+9. 提交并合并配置、目录、清单和文档；不要提交 ZIP。
+10. 使用另一套 Yomitan 配置执行一次真实的 **Check for Updates**。
 
 ## Google Drive 目录
 

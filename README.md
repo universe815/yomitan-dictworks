@@ -52,17 +52,19 @@
 1. 从上表下载所需的完整 ZIP；不要解压，也不要下载或导入更新清单 JSON。
 2. 打开 Yomitan 设置中的 **Dictionaries**，选择 **Import** 并导入 ZIP。
 3. 以后在同一页面点击 **Check for Updates**。词典会从 GitHub 读取最新
-   revision，再从公开 Google Drive 地址下载新版 ZIP。
+   revision；已迁移的词典再从 GitHub Release 下载新版 ZIP。
 
-四个版本从 `2026.07.29.3` 起均使用公开 HTTPS 自动更新，不要求用户运行
-本机服务器。更新清单只是 Yomitan 的机器接口，首次安装仍必须导入 ZIP。
+《新世纪日汉双解大辞典》从 `2026.07.29.5` 起使用 GitHub Release 自动
+更新。其余版本将在验证完成后迁移；迁移期间仍使用原有公开 Drive 更新
+地址。更新清单只是 Yomitan 的机器接口，首次安装仍必须导入 ZIP。
 
 ---
 
 ## 项目结构
 
 GitHub 仓库保存公开目录、转换器、样式、配置、测试和稳定更新清单；生成的
-词典 ZIP 存放在 Google Drive，不提交到 Git，也不使用 GitHub Release。
+词典 ZIP 不提交到 Git。Google Drive 保存手动下载与归档副本，GitHub
+Release 保存 Yomitan 自动更新所需的版本化资产。
 
 ```text
 <源语言>/<类型>/<语言方向>/<词典>/
