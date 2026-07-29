@@ -23,12 +23,12 @@
 ## Links and updates
 
 - [Yomitan 更新清单](../../../../manifests/xsjrh-illustrated/index.json)
-- [Google Drive 词典文件](https://drive.google.com/file/d/1h9eVj8eNT-C8r1IqSiFkYLdxoOFxUhuL/view)
+- [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 - 本机更新地址：
   `http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip`
 
-ZIP 归档在 Google Drive 的 `ja-zh/新世纪日汉双解大辞典/`。本仓库只提供
-词典目录、转换工具和更新清单；之后从同步盘启动本机更新服务并检查更新。
+Google Drive 文件夹中的 `[JA-ZH] 新世纪日汉双解大辞典（完整图文版）.zip`
+可直接导入 Yomitan；之后从同步盘启动本机更新服务并检查更新。
 
 ## Local build
 
