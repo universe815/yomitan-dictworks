@@ -46,9 +46,12 @@ python scripts/check_repository.py
 
 ## 5. Document and version
 
-Add a short page under `<source language>/<pair>/<id>/`, a row in the root catalog,
-and an entry in `dict-changelog.md`. Increment `revision` whenever the generated
-dictionary changes, even if the source data version did not change.
+Add a page under `<source language>/<category>/<pair>/<id>/`, an entry in
+`catalog/dictionaries.json`, a row in the root catalog, and an entry in
+`dict-changelog.md`. Increment `revision` whenever the generated dictionary changes,
+even if the source data version did not change.
 
-Only after a distributable ZIP has a stable public location should the config enable
-the remote-update fields described in [publishing.md](publishing.md).
+For a personal dictionary, enable the remote-update fields only after its local
+archive route and stable update manifest are configured as described in
+[publishing.md](publishing.md). Public hosting additionally requires permission to
+redistribute every included content type.

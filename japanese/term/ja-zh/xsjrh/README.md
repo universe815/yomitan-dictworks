@@ -1,0 +1,55 @@
+# 新世纪日汉双解大辞典
+
+## Status
+
+| Item | Value |
+| --- | --- |
+| Direction | Japanese → Chinese |
+| Type | Term dictionary |
+| Edition | Complete illustrated edition |
+| Revision | `2026.07.29.2` |
+| Build | Ready |
+| Update mode | Personal local server |
+| Archive | `XSJRH-yomitan-illustrated.zip` |
+
+## Features
+
+- Japanese and Chinese definitions and examples;
+- Ruby annotation and internal query links;
+- searchable aliases;
+- encyclopedia illustrations, gaiji, and bundled font resources;
+- Yomitan structured content and dictionary-scoped CSS.
+
+## Links and updates
+
+- [Yomitan 更新清单](../../../../manifests/xsjrh-illustrated/index.json)
+- 本机更新地址：
+  `http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip`
+
+本仓库只提供词典目录、转换工具和更新清单，不提供 ZIP。首次从本地
+`dictionary-output` 导入；之后启动本地更新服务并在 Yomitan 中检查更新。
+
+## Local build
+
+```powershell
+python scripts/convert_xsjrh.py `
+  --mdx "<path-to-your-dictionary.mdx>" `
+  --mdd "<path-to-your-dictionary.mdd>" `
+  --output generated/xsjrh.ndjson `
+  --report generated/xsjrh-report.json `
+  --resources-dir generated/xsjrh-resources
+
+pnpm xsjrh:build
+python scripts/qa_xsjrh.py `
+  dictionary-output/XSJRH-yomitan-illustrated.zip
+
+python scripts/validate_yomitan_schema.py `
+  dictionary-output/XSJRH-yomitan-illustrated.zip
+```
+
+The pipeline preserves Japanese and Chinese definitions, examples, Ruby annotation,
+internal links, lookup redirects, illustrations, and gaiji resources. The QA step
+checks representative entries and archive structure; also inspect entries in Yomitan
+after every formatting change.
+
+Update `config/xsjrh.json` when the source edition or generated revision changes.

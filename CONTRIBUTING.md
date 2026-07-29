@@ -19,12 +19,20 @@ pnpm install --frozen-lockfile
 pnpm check
 python -m compileall -q scripts
 python scripts/check_repository.py
+python scripts/check_catalog.py
 ```
 
 For a generated ZIP, also run:
 
 ```powershell
 python scripts/validate_yomitan_schema.py dictionary-output/<dictionary>.zip
+```
+
+Before updating the personal dictionary set, verify every configured archive against
+the catalog and embedded update metadata:
+
+```powershell
+python scripts/check_update_archives.py --output-dir dictionary-output
 ```
 
 Commercial dictionary compatibility fixes are acceptable as source code, but the
