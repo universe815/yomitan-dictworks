@@ -1,9 +1,5 @@
 # Yomitan 词典目录
 
-> 这份目录公开整理由 universe815 维护的 Yomitan 词典、下载入口、特色说明与
-> 自动更新信息。部分词典包含第三方商业内容；内容版权归原权利人所有，请在
-> 拥有合法内容来源并符合当地法律的前提下使用。本项目与原出版方无隶属关系。
-
 目录呈现方式主要参考
 [W1ght/yomitan-guide](https://github.com/W1ght/yomitan-guide) 与
 [MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries)；
