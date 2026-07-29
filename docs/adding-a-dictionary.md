@@ -57,7 +57,9 @@ are configured as described in [publishing.md](publishing.md).
 
 Record `driveFileId`, `driveFileUrl`, and `driveFolderUrl` for manual downloads.
 For automatic updates, record `updateHosting: github-release`, `releaseTag`,
-`releaseAssetName`, and the Release `downloadUrl`. Put one directly importable ZIP
-per edition in the flat Drive `Downloads/` folder, with a language/type prefix in
-its filename. Record `rightsStatus` and a truthful `rightsStatement`; never infer
-or invent a content license.
+`releaseAssetName`, and the Release `downloadUrl`. Release asset filenames must
+remain ASCII because GitHub rewrites CJK filenames; use an optional Chinese
+`releaseAssetLabel` for Japanese dictionaries. Put one directly importable ZIP per
+edition in the flat Drive `Downloads/` folder, with a language/type prefix in its
+filename. Record `rightsStatus` and a truthful `rightsStatement`; never infer or
+invent a content license.

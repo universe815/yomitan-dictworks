@@ -3,6 +3,18 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-07-30
+
+- Migrated all four active editions to versioned GitHub Release automatic
+  downloads in `2026.07.30.1`, while retaining the same public Google Drive
+  files for manual downloads and archival copies.
+- Changed the two Japanese dictionary build filenames and Release display labels
+  to Chinese user-facing names; GitHub-safe Release filenames, stable internal
+  catalog IDs, and update-manifest paths remain ASCII.
+- Added metadata-only ZIP repacking for already validated formal archives.
+- Strengthened scheduled public-link checks with bounded ZIP end-of-directory
+  validation and required catalog byte-size/SHA-256 metadata.
+
 ## 2026-07-29
 
 - Migrated 《新世纪日汉双解大辞典》 automatic downloads to a GitHub

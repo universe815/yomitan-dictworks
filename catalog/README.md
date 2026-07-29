@@ -1,7 +1,17 @@
 # 机器可读词典目录
 
 `dictionaries.json` 是所有公开 edition 的单一目录源，记录语言方向、类型、
-revision、构建命令、Google Drive 文件 ID、用户下载页和 Yomitan 直下载地址。
+revision、构建命令、文件大小、SHA-256、Google Drive 归档信息和 Yomitan
+自动更新地址。
+
+分发字段分成两层：
+
+- `hosting`、`driveFileId`、`driveFileUrl` 和 `archivePath`：面向用户的
+  Google Drive 手动下载及归档副本；
+- `updateHosting`、`indexUrl` 和 `downloadUrl`：Yomitan 自动更新链路。
+  所有现役版本使用 `github-release`，并记录 `releaseTag` 与版本化
+  `releaseAssetName`。Release 实际文件名使用 ASCII；日语词典可以另记
+  中文 `releaseAssetLabel`，Yomitan 的 `title` 与手动下载 ZIP 使用中文。
 
 分发状态：
 

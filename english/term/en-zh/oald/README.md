@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.29.3` | Ready | Public Google Drive | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.29.3` | Ready | Public Google Drive | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.30.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.30.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -23,8 +23,9 @@
   · [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
-两个 OALD ZIP 均可直接导入 Yomitan。`2026.07.29.3` 及之后版本分别通过
-各自的公开 Google Drive 文件自动更新，不需要启动本机服务。
+两个 OALD ZIP 均可直接导入 Yomitan。Google Drive 继续提供手动下载和
+归档；`2026.07.30.1` 及之后版本分别通过 GitHub Release 资产自动更新，
+不需要启动本机服务。
 
 ## Build the text edition
 

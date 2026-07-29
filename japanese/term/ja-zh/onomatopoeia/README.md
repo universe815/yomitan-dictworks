@@ -7,10 +7,10 @@
 | Direction | Japanese → Chinese |
 | Type | Specialized term dictionary |
 | Edition | Second edition |
-| Revision | `2026.07.29.3` |
+| Revision | `2026.07.30.1` |
 | Build | Ready |
-| Update mode | Public Google Drive |
-| Archive | `Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip` |
+| Update mode | GitHub Release |
+| Archive | `新日汉拟声拟态词词典-第2版-Yomitan.zip` |
 
 ## Features
 
@@ -26,8 +26,9 @@
 - [下载可直接导入的 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
-下载的 ZIP 可直接导入 Yomitan。`2026.07.29.3` 及之后版本会通过公开
-Google Drive 地址自动更新，不需要启动本机服务。
+下载的 ZIP 可直接导入 Yomitan。Google Drive 继续提供手动下载和归档；
+`2026.07.30.1` 及之后版本通过中文命名的 GitHub Release 资产自动更新，
+不需要启动本机服务。
 
 ## Local build
 
@@ -40,10 +41,10 @@ python scripts/convert_onomatopoeia.py `
 
 pnpm onomatopoeia:build
 python scripts/qa_onomatopoeia.py `
-  dictionary-output/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip
+  dictionary-output/新日汉拟声拟态词词典-第2版-Yomitan.zip
 
 python scripts/validate_yomitan_schema.py `
-  dictionary-output/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip
+  dictionary-output/新日汉拟声拟态词词典-第2版-Yomitan.zip
 ```
 
 The converter preserves the original visual hierarchy, colored headwords and

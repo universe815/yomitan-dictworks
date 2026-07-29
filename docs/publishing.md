@@ -24,8 +24,10 @@
 
 README 面向用户链接 `https://drive.google.com/file/d/<DRIVE_FILE_ID>/view`；
 Yomitan 的 `downloadUrl` 使用 GitHub Release 资产。机器目录同时记录
-`updateHosting`、`releaseTag` 和 `releaseAssetName`。尚未迁移的旧条目仍可
-暂时使用 Drive 更新地址，但新发布和新修订应使用 Release。
+`updateHosting`、`releaseTag` 和 `releaseAssetName`。所有现役词典统一
+使用 Release。GitHub 会改写中文资产文件名，因此 Release 的实际文件名
+使用稳定 ASCII，日语词典另设中文资产标签；Yomitan 标题和用于手动下载的
+ZIP 仍使用中文。
 
 ## 首次安装
 
@@ -47,8 +49,16 @@ Yomitan 的 `downloadUrl` 使用 GitHub Release 资产。机器目录同时记�
    ```
 
 3. 计算并记录每个 ZIP 的 `bytes` 与 `sha256`。
-4. 使用版本化文件名将最终 ZIP 上传到 `dictionary-assets` Release。不要
-   覆盖同名资产；每个 revision 使用新的 `releaseAssetName`。
+4. 使用版本化 ASCII 文件名将最终 ZIP 上传到 `dictionary-assets` Release。
+   不要覆盖同名资产；每个 revision 使用新的 `releaseAssetName`。日语
+   词典通过 `#中文标签` 设置 Release 页面显示名：
+
+   ```powershell
+   gh release upload dictionary-assets `
+     "<ASCII_ASSET>.zip#<中文词典名>" `
+     --repo universe815/yomitan-dictworks
+   ```
+
 5. 匿名下载 Release 资产，核对 Content-Length、SHA-256 和 ZIP 完整性。
 6. **覆盖原 Google Drive 文件的内容，不要删除后重新上传。** 保持
    `driveFileId` 不变，并验证 Drive 文件大小和公开权限。
@@ -72,6 +82,19 @@ Yomitan 的 `downloadUrl` 使用 GitHub Release 资产。机器目录同时记�
 
 9. 提交并合并配置、目录、清单和文档；不要提交 ZIP。
 10. 使用另一套 Yomitan 配置执行一次真实的 **Check for Updates**。
+
+如果正文和资源没有改变，只迁移或修正更新元数据，可以从已经通过 QA 的
+正式 ZIP 生成新版本，避免重新转换第三方源文件：
+
+```powershell
+python scripts/repack_update_archive.py `
+  --dictionary-id "<catalog-id>" `
+  --source "<previous-formal-zip>" `
+  --output-dir dictionary-output
+```
+
+该命令只替换 ZIP 内的 `index.json`，其余成员保持原有顺序、路径和压缩
+方式；生成后仍必须运行完整 ZIP、schema、SHA-256 与公开下载检查。
 
 ## Google Drive 目录
 
