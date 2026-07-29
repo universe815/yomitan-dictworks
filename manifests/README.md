@@ -7,7 +7,7 @@
 
 - `indexUrl`：GitHub Raw 上的稳定清单；
 - `downloadUrl`：`http://127.0.0.1:8765/<id>/<archive>.zip`；
-- ZIP：保存在本机 `dictionary-output`，由
+- ZIP：归档在个人 Google Drive，由
   [`scripts/serve_local_updates.py`](../scripts/serve_local_updates.py) 提供。
 
 新增版本时从 `index.template.json` 复制清单，并确保清单、词典配置及 ZIP 内

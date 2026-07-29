@@ -1,7 +1,8 @@
 # 个人词典自动更新
 
 本项目不创建 GitHub Release，也不把生成的词典 ZIP 提交到公开仓库。
-GitHub 负责保存目录、转换工具和稳定的更新清单；本机负责提供 ZIP。
+GitHub 负责保存目录、转换工具和稳定的更新清单；Google Drive 统一保存
+成品 ZIP，本机更新服务从 Google Drive 同步盘提供文件。
 
 ## URL 结构
 
@@ -38,15 +39,27 @@ GitHub 负责保存目录、转换工具和稳定的更新清单；本机负责�
 3. 用 `scripts/extract_update_index.py` 从 ZIP 更新对应清单。
 4. 运行 `scripts/check_update_archives.py`，确认四个版本的配置、清单与 ZIP
    内元数据一致。
-5. 提交目录、配置和清单，不提交 ZIP。
-6. 启动本地服务：
+5. 按 `catalog/dictionaries.json` 中的 `archivePath` 同步到 Google Drive：
+
+   ```powershell
+   python scripts/sync_google_drive_archives.py `
+     --source-dir "<dictionary-output-path>" `
+     --drive-root "<google-drive-yomitan-path>"
+   ```
+
+   脚本复制完成后会逐个计算 SHA-256，源文件与云盘副本不一致时直接失败。
+   新词典首次同步后，把 Google Drive 私有文件链接记录到目录的
+   `driveFileUrl`；后续覆盖同名同步文件时继续使用该链接。
+
+6. 提交目录、配置和清单，不提交 ZIP。
+7. 启动本地服务，直接从 Google Drive 同步目录读取：
 
    ```powershell
    python scripts/serve_local_updates.py `
-     --output-dir "<dictionary-output-path>"
+     --archive-root "<google-drive-yomitan-path>"
    ```
 
-7. 在 Yomitan 中点击 **Check for Updates**。
+8. 在 Yomitan 中点击 **Check for Updates**。
 
 本机服务只监听 `127.0.0.1`，其他设备无法访问。需要跨设备使用时，应另外
 准备你有权使用的私有 HTTPS 存储，并同步修改配置与清单中的 `downloadUrl`。

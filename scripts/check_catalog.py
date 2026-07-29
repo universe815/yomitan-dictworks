@@ -89,8 +89,25 @@ def main() -> None:
             missing = [field for field in required_update_fields if not distribution.get(field)]
             if missing:
                 raise ValueError(f"{dictionary_id}: personal entry lacks {', '.join(missing)}")
-            if distribution.get("hosting") != "local":
-                raise ValueError(f"{dictionary_id}: personal entry must use local hosting")
+            if distribution.get("hosting") != "google-drive-sync":
+                raise ValueError(
+                    f"{dictionary_id}: personal entry must use Google Drive sync hosting"
+                )
+            archive_path = distribution.get("archivePath")
+            if not isinstance(archive_path, str) or not archive_path:
+                raise ValueError(f"{dictionary_id}: personal entry lacks archivePath")
+            if Path(archive_path).is_absolute() or ".." in Path(archive_path).parts:
+                raise ValueError(
+                    f"{dictionary_id}: archivePath must stay inside the Drive archive root"
+                )
+            if Path(archive_path).name != asset_name:
+                raise ValueError(f"{dictionary_id}: archivePath filename mismatch")
+            drive_file_url = distribution.get("driveFileUrl")
+            if (
+                not isinstance(drive_file_url, str)
+                or not drive_file_url.startswith("https://drive.google.com/file/d/")
+            ):
+                raise ValueError(f"{dictionary_id}: invalid driveFileUrl")
             manifest = ROOT / "manifests" / dictionary_id / "index.json"
             if not manifest.is_file():
                 raise ValueError(f"{dictionary_id}: personal entry lacks {manifest.relative_to(ROOT)}")

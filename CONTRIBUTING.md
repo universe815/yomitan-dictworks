@@ -35,5 +35,8 @@ the catalog and embedded update metadata:
 python scripts/check_update_archives.py --output-dir dictionary-output
 ```
 
+Personal archives are then copied to their catalog-defined Google Drive paths with
+`scripts/sync_google_drive_archives.py`; generated ZIPs remain outside Git.
+
 Commercial dictionary compatibility fixes are acceptable as source code, but the
 original content and generated archive must stay outside the repository.

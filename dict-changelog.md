@@ -8,7 +8,10 @@ not make proprietary source data redistributable.
 - Enabled Yomitan update metadata in all four build configurations.
 - Assigned stable per-edition GitHub Raw `indexUrl` values and localhost
   `downloadUrl` values for personal updates without GitHub Releases.
-- Added a localhost update server for the ZIP files in `dictionary-output`.
+- Added a localhost update server for catalog archives stored in the Google Drive
+  sync folder.
+- Standardized personal ZIP storage under a catalog-driven Google Drive tree and
+  added SHA-256-verified synchronization from `dictionary-output`.
 - Reworked the root README as a language/type/direction dictionary catalog.
 - Bumped all four editions to `2026.07.29.2`, allowing installations of
   `2026.07.29.1` to receive the corrected non-Release update metadata.
