@@ -1,15 +1,15 @@
 {
   "title": "新日汉拟声拟态词词典 第2版",
-  "revision": "2026.07.29.2",
-  "author": "原辞典编纂者 / 本地重制版制作者",
-  "description": "由用户本地《新日汉拟声拟态词词典 第2版》MDX/CSS 转换。保留原版红色词头、分类标签、日中例句配色、相关词形与词群跳转，并将子词条加入独立检索。",
-  "attribution": "仅供个人学习研究使用。内容版权归原权利人所有；转换源来自用户本地文件。不得公开传播或用于商业用途。",
-  "url": "",
+  "revision": "2026.07.29.3",
+  "author": "原辞典编纂者 / Yomitan 转换维护：universe815",
+  "description": "《新日汉拟声拟态词词典 第2版》非官方 Yomitan 转换版。保留红色词头、分类标签、日中例句配色、相关词形与词群跳转，并将子词条加入独立检索。",
+  "attribution": "词典内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护，本项目与原出版方无隶属关系。请仅在符合当地法律并拥有合法内容来源的前提下使用。",
+  "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/onomatopoeia",
   "inputNdjson": "generated/onomatopoeia.ndjson",
   "outputFile": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip",
   "stylesFile": "styles/onomatopoeia.css",
   "resourcesDir": "generated/onomatopoeia-resources",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/shin-nikkan-onomatopoeia/index.json",
-  "downloadUrl": "http://127.0.0.1:8765/shin-nikkan-onomatopoeia/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip"
+  "downloadUrl": "https://drive.usercontent.google.com/download?id=1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy&export=download&confirm=t"
 }

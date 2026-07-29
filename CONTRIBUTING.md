@@ -28,15 +28,17 @@ For a generated ZIP, also run:
 python scripts/validate_yomitan_schema.py dictionary-output/<dictionary>.zip
 ```
 
-Before updating the personal dictionary set, verify every configured archive against
+Before updating the public dictionary set, verify every configured archive against
 the catalog and embedded update metadata:
 
 ```powershell
 python scripts/check_update_archives.py --output-dir dictionary-output
 ```
 
-Personal archives are then copied to their catalog-defined Google Drive paths with
-`scripts/sync_google_drive_archives.py`; generated ZIPs remain outside Git.
+Public archives are copied to their catalog-defined Google Drive paths with
+`scripts/sync_google_drive_archives.py`, then checked with
+`scripts/check_public_links.py`; generated ZIPs remain outside Git.
 
 Commercial dictionary compatibility fixes are acceptable as source code, but the
-original content and generated archive must stay outside the repository.
+original content and generated archive must stay outside the Git repository. Do not
+claim a license or affiliation that has not been verified.

@@ -19,7 +19,7 @@ def sha256(path: Path) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Copy built personal dictionaries into a Google Drive sync tree."
+        description="Copy built public dictionaries into the Google Drive download folder."
     )
     parser.add_argument(
         "--source-dir",
@@ -47,7 +47,7 @@ def main() -> None:
 
     for entry in catalog["dictionaries"]:
         distribution = entry["distribution"]
-        if distribution["status"] != "personal":
+        if distribution["status"] != "public":
             continue
 
         source = (source_dir / distribution["assetName"]).resolve()

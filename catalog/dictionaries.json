@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "repository": "universe815/yomitan-dictworks",
   "dictionaries": [
     {
@@ -11,18 +11,24 @@
       "page": "japanese/term/ja-zh/xsjrh/README.md",
       "config": "config/xsjrh.json",
       "buildCommand": "pnpm xsjrh:build",
-      "revision": "2026.07.29.2",
+      "revision": "2026.07.29.3",
       "buildStatus": "ready",
       "distribution": {
-        "status": "personal",
+        "status": "public",
+        "rightsStatus": "third-party",
+        "rightsStatement": "词典内容版权归原权利人所有；本仓库不主张对第三方词典内容拥有版权，也不代表原出版方。",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "google-drive-sync",
+        "hosting": "google-drive-public",
         "assetName": "XSJRH-yomitan-illustrated.zip",
         "archivePath": "Downloads/[JA-ZH] 新世纪日汉双解大辞典（完整图文版）.zip",
+        "bytes": 39002408,
+        "sha256": "3899506E9872CC8A8B53923D33F69D7AD83D4791029278C0BCA02154DC620B81",
+        "driveFileId": "1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
+        "driveFileUrl": "https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/xsjrh-illustrated/index.json",
-        "downloadUrl": "http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip"
+        "downloadUrl": "https://drive.usercontent.google.com/download?id=1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa&export=download&confirm=t"
       }
     },
     {
@@ -34,41 +40,53 @@
       "page": "japanese/term/ja-zh/onomatopoeia/README.md",
       "config": "config/onomatopoeia.json",
       "buildCommand": "pnpm onomatopoeia:build",
-      "revision": "2026.07.29.2",
+      "revision": "2026.07.29.3",
       "buildStatus": "ready",
       "distribution": {
-        "status": "personal",
+        "status": "public",
+        "rightsStatus": "third-party",
+        "rightsStatement": "词典内容版权归原权利人所有；本仓库不主张对第三方词典内容拥有版权，也不代表原出版方。",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "google-drive-sync",
+        "hosting": "google-drive-public",
         "assetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip",
         "archivePath": "Downloads/[JA-ZH Onomatopoeia] 新日汉拟声拟态词词典 第2版.zip",
+        "bytes": 732633,
+        "sha256": "2EC9B9FD1DE19DF4E694106C3FFC3F86FB40C167F235E320990491291189A429",
+        "driveFileId": "1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
+        "driveFileUrl": "https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/shin-nikkan-onomatopoeia/index.json",
-        "downloadUrl": "http://127.0.0.1:8765/shin-nikkan-onomatopoeia/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip"
+        "downloadUrl": "https://drive.usercontent.google.com/download?id=1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy&export=download&confirm=t"
       }
     },
     {
       "id": "oald-en-zh",
-      "title": "OALDPE En-Cn 2025.02.14（本地转换版）",
+      "title": "OALDPE En-Cn 2025.02.14（正文版）",
       "sourceLanguage": "en",
       "targetLanguage": "zh",
       "category": "term",
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald.json",
       "buildCommand": "pnpm oald:build",
-      "revision": "2026.07.29.2",
+      "revision": "2026.07.29.3",
       "buildStatus": "ready",
       "distribution": {
-        "status": "personal",
+        "status": "public",
+        "rightsStatus": "third-party",
+        "rightsStatement": "Oxford University Press 及相关内容版权归原权利人所有；本仓库不代表 Oxford University Press。",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "google-drive-sync",
+        "hosting": "google-drive-public",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan.zip",
         "archivePath": "Downloads/[EN-ZH] OALDPE En-Cn 2025.02.14.zip",
+        "bytes": 42972621,
+        "sha256": "0B6911DAE62CCE774A832C41B6EAC76EEA56C910DDD008597CA509D3EF7E6B88",
+        "driveFileId": "1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
+        "driveFileUrl": "https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh/index.json",
-        "downloadUrl": "http://127.0.0.1:8765/oald-en-zh/OALDPE-En-Cn-2025.02.14-yomitan.zip"
+        "downloadUrl": "https://drive.usercontent.google.com/download?id=1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz&export=download&confirm=t"
       }
     },
     {
@@ -80,18 +98,24 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald-rich.json",
       "buildCommand": "pnpm oald:build:rich",
-      "revision": "2026.07.29.2",
+      "revision": "2026.07.29.3",
       "buildStatus": "ready",
       "distribution": {
-        "status": "personal",
+        "status": "public",
+        "rightsStatus": "third-party",
+        "rightsStatement": "Oxford University Press 及相关内容版权归原权利人所有；本仓库不代表 Oxford University Press。",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "google-drive-sync",
+        "hosting": "google-drive-public",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
         "archivePath": "Downloads/[EN-ZH Images] OALDPE En-Cn 2025.02.14（完整插图版）.zip",
+        "bytes": 232998844,
+        "sha256": "EB2F86A479F6F5011C9B69C824880DB86ABE82E720174884A58F8F2574B5E352",
+        "driveFileId": "1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
+        "driveFileUrl": "https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh-illustrated/index.json",
-        "downloadUrl": "http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip"
+        "downloadUrl": "https://drive.usercontent.google.com/download?id=1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu&export=download&confirm=t"
       }
     }
   ]

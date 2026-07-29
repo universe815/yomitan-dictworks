@@ -1,18 +1,19 @@
-# Dictionary catalog
+# 机器可读词典目录
 
-`dictionaries.json` is the machine-readable source of truth for the dictionary
-catalog. It records language direction, type, build command, revision, archive name,
-and update location for every edition.
+`dictionaries.json` 是所有公开 edition 的单一目录源，记录语言方向、类型、
+revision、构建命令、Google Drive 文件 ID、用户下载页和 Yomitan 直下载地址。
 
-Distribution states:
+分发状态：
 
-- `personal`: the converter and update metadata are ready; the ZIP is stored in the
-  owner's Google Drive and served from its local sync directory;
-- `published`: a stable public archive, update index, license, and evidence are all
-  present;
-- `retired`: no longer offered to new users, while historical information remains.
+- `public`：公开 ZIP、稳定更新清单和 HTTPS 自动更新地址均已配置；
+- `retired`：停止向新用户提供，且不得保留活动下载或更新字段。
 
-Both update-enabled states require a matching `manifests/<id>/index.json`. Changing
-an entry to `published` additionally requires a redistribution license and evidence.
-For personal entries, `archivePath` is relative to the configured Google Drive
-Yomitan root. CI validates these invariants.
+`rightsStatus` 独立描述第三方内容状态：
+
+- `third-party`：版权归第三方，本仓库不主张授权或隶属关系；
+- `licensed`：存在可核验的公开许可或书面授权；
+- `public-domain`：内容已确认属于公有领域。
+
+`status: public` 只描述技术可访问性，不等同于版权许可。`rightsStatement`
+必须如实显示；标记为 `licensed` 时还必须提供 `contentLicense` 和
+`rightsEvidence`。

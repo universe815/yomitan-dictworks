@@ -1,55 +1,81 @@
-# Yomitan Dictworks
+# Yomitan 词典目录
 
-个人维护的 Yomitan 词典目录与可复现转换工程。目录组织参考
-[MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries)，
-构建层使用
+> 这份目录公开整理由 universe815 维护的 Yomitan 词典、下载入口、特色说明与
+> 自动更新信息。部分词典包含第三方商业内容；内容版权归原权利人所有，请在
+> 拥有合法内容来源并符合当地法律的前提下使用。本项目与原出版方无隶属关系。
+
+目录呈现方式主要参考
+[W1ght/yomitan-guide](https://github.com/W1ght/yomitan-guide) 与
+[MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries)；
+转换层使用
 [MarvNC/yomichan-dict-builder](https://github.com/MarvNC/yomichan-dict-builder)。
-本仓库不使用 GitHub Release，也不提交本地生成的商业词典 ZIP。
 
-## 词典目录
+---
 
-### 日语
+## 核心入口
 
-#### 词语词典
+| 资源 | 用途 | 链接 |
+|---|---|---|
+| Google Drive 公开下载目录 | 全部可直接导入 Yomitan 的完整 ZIP | [打开文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8) |
+| 词典更新记录 | 版本号、格式修复与资源变更 | [dict-changelog.md](dict-changelog.md) |
+| 机器可读目录 | 文件 ID、公开下载地址与构建配置 | [catalog/dictionaries.json](catalog/dictionaries.json) |
+| 发布流程 | 构建、验证、上传与自动更新步骤 | [docs/publishing.md](docs/publishing.md) |
+| 添加词典 | 新增公开词典的目录和质量要求 | [docs/adding-a-dictionary.md](docs/adding-a-dictionary.md) |
+| Yomitan | 浏览器扩展与官方格式说明 | <https://yomitan.wiki/> |
 
-##### 日语 → 中文
+---
 
-- [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/)
-  · [更新清单](manifests/xsjrh-illustrated/index.json)
-- [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/)
-  · [更新清单](manifests/shin-nikkan-onomatopoeia/index.json)
+## 日语词典
 
-[浏览日语词典目录](japanese/)
+### 日中 / 双语
 
-### 英语
+| 词典 | 说明 | 获取 | 自动更新 |
+|---|---|---|---|
+| [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/) | 日中双解；保留例句、Ruby、内部链接、百科插图、外字与字体资源 | [下载 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing) | [更新清单](manifests/xsjrh-illustrated/index.json) |
+| [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/) | 拟声拟态词专项；保留原版层级、配色、分类、词群关系和独立子词条检索 | [下载 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing) | [更新清单](manifests/shin-nikkan-onomatopoeia/index.json) |
 
-#### 词语词典
+[浏览日语分类目录](japanese/)
 
-##### 英语 → 中文
+---
 
-- [OALDPE En-Cn 2025.02.14](english/term/en-zh/oald/)
-  · [正文版更新清单](manifests/oald-en-zh/index.json)
-  · [完整插图版更新清单](manifests/oald-en-zh-illustrated/index.json)
+## 英语词典
 
-[浏览英语词典目录](english/)
+### 英中 / 双语
 
-## 自动更新
+| 词典 | 类型 | 说明 | 获取 | 自动更新 |
+|---|---|---|---|---|
+| [OALDPE En-Cn 2025.02.14（正文版）](english/term/en-zh/oald/) | 英中学习词典 | 完整正文与检索别名；不打包插图和音频，体积较小 | [下载 ZIP](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing) | [更新清单](manifests/oald-en-zh/index.json) |
+| [OALDPE En-Cn 2025.02.14（完整插图版）](english/term/en-zh/oald/) | 英中学习词典 / 图文 | 完整正文、检索别名与全部 PNG 插图；音频由本地伴侣提供 | [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing) | [更新清单](manifests/oald-en-zh-illustrated/index.json) |
 
-三部词典都已写入 Yomitan 自动更新元数据。GitHub 保存稳定的
-`indexUrl`，ZIP 统一归档到个人 Google Drive；本机更新服务从同步盘读取
-ZIP，不放入仓库或 Release。
+[浏览英语分类目录](english/)
 
-- [Google Drive：全部可直接导入的 ZIP](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
-- [个人自动更新说明](docs/publishing.md)
-- [添加词典](docs/adding-a-dictionary.md)
-- [机器可读目录](catalog/README.md)
-- [词典更新记录](dict-changelog.md)
+---
 
-首次需从本地生成目录导入 ZIP；之后启动本机服务并在 Yomitan 中点击
-**Check for Updates**。
+## 安装与自动更新
 
-## 许可与第三方内容
+1. 从上表下载所需的完整 ZIP；不要解压，也不要下载或导入更新清单 JSON。
+2. 打开 Yomitan 设置中的 **Dictionaries**，选择 **Import** 并导入 ZIP。
+3. 以后在同一页面点击 **Check for Updates**。词典会从 GitHub 读取最新
+   revision，再从公开 Google Drive 地址下载新版 ZIP。
 
-原创代码和文档使用 MIT 许可证。词典正文、例句、图片、音频、字体、商标和
-其他第三方内容仍受各自权利与许可约束，详见
+四个版本从 `2026.07.29.3` 起均使用公开 HTTPS 自动更新，不要求用户运行
+本机服务器。更新清单只是 Yomitan 的机器接口，首次安装仍必须导入 ZIP。
+
+---
+
+## 项目结构
+
+GitHub 仓库保存公开目录、转换器、样式、配置、测试和稳定更新清单；生成的
+词典 ZIP 存放在 Google Drive，不提交到 Git，也不使用 GitHub Release。
+
+```text
+<源语言>/<类型>/<语言方向>/<词典>/
+config/       构建与公开更新元数据
+manifests/    Yomitan 稳定更新清单
+scripts/      转换、QA、发布和公开链接检查
+styles/       词典专用样式
+```
+
+原创代码和文档使用 MIT 许可证。第三方词典正文、例句、图片、音频、字体、
+商标及其他内容不包含在该许可证中，详见
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

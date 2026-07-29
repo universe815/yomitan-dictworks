@@ -51,11 +51,11 @@ Add a page under `<source language>/<category>/<pair>/<id>/`, an entry in
 `dict-changelog.md`. Increment `revision` whenever the generated dictionary changes,
 even if the source data version did not change.
 
-For a personal dictionary, enable the remote-update fields only after its local
-archive route, Google Drive `archivePath`, and stable update manifest are configured
-as described in
-[publishing.md](publishing.md). Public hosting additionally requires permission to
-redistribute every included content type.
+All active dictionaries use public mode. Enable update fields only after the stable
+Google Drive file ID, public ZIP download, and GitHub Raw update manifest are
+configured as described in [publishing.md](publishing.md).
 
-Record the shared download folder as `driveFolderUrl`. Put one directly importable
-ZIP per edition in that flat folder, with a language/type prefix in its filename.
+Record `driveFileId`, `driveFileUrl`, `driveFolderUrl`, and the anonymous
+`downloadUrl`. Put one directly importable ZIP per edition in the flat `Downloads/`
+folder, with a language/type prefix in its filename. Record `rightsStatus` and a
+truthful `rightsStatement`; never infer or invent a content license.
