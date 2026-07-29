@@ -5,6 +5,9 @@ not make proprietary source data redistributable.
 
 ## 2026-07-29
 
+- Migrated 《新世纪日汉双解大辞典》 automatic downloads to a GitHub
+  Release asset in `2026.07.29.5`; Google Drive remains the manual download
+  and archive location.
 - Refreshed 《新世纪日汉双解大辞典》 typography in `2026.07.29.4`:
   removed the gray Chinese-gloss background, changed Japanese and Chinese text
   to system sans-serif stacks, and reduced the visual weight of headwords and

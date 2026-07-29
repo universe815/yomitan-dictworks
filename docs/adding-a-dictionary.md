@@ -52,10 +52,12 @@ Add a page under `<source language>/<category>/<pair>/<id>/`, an entry in
 even if the source data version did not change.
 
 All active dictionaries use public mode. Enable update fields only after the stable
-Google Drive file ID, public ZIP download, and GitHub Raw update manifest are
-configured as described in [publishing.md](publishing.md).
+Google Drive file ID, versioned GitHub Release asset, and GitHub Raw update manifest
+are configured as described in [publishing.md](publishing.md).
 
-Record `driveFileId`, `driveFileUrl`, `driveFolderUrl`, and the anonymous
-`downloadUrl`. Put one directly importable ZIP per edition in the flat `Downloads/`
-folder, with a language/type prefix in its filename. Record `rightsStatus` and a
-truthful `rightsStatement`; never infer or invent a content license.
+Record `driveFileId`, `driveFileUrl`, and `driveFolderUrl` for manual downloads.
+For automatic updates, record `updateHosting: github-release`, `releaseTag`,
+`releaseAssetName`, and the Release `downloadUrl`. Put one directly importable ZIP
+per edition in the flat Drive `Downloads/` folder, with a language/type prefix in
+its filename. Record `rightsStatus` and a truthful `rightsStatement`; never infer
+or invent a content license.

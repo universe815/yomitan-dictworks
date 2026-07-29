@@ -1,12 +1,14 @@
 import argparse
 import hashlib
 import json
+import re
 import zipfile
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RELEASE_COMPONENT = re.compile(r"^[A-Za-z0-9._-]+$")
 
 
 def https_url(value: object) -> bool:
@@ -29,14 +31,28 @@ def main() -> None:
         description="Check built ZIP indexes against catalog and update configs."
     )
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--dictionary-id",
+        dest="dictionary_ids",
+        action="append",
+        help="Check only the selected catalog ID; repeat for multiple editions.",
+    )
     args = parser.parse_args()
 
     catalog = json.loads(
         (ROOT / "catalog" / "dictionaries.json").read_text(encoding="utf-8")
     )
+    repository = catalog["repository"]
+    selected_ids = set(args.dictionary_ids or [])
+    known_ids = {entry["id"] for entry in catalog["dictionaries"]}
+    unknown_ids = selected_ids - known_ids
+    if unknown_ids:
+        raise ValueError(f"unknown dictionary IDs: {sorted(unknown_ids)}")
     results = []
     for entry in catalog["dictionaries"]:
         dictionary_id = entry["id"]
+        if selected_ids and dictionary_id not in selected_ids:
+            continue
         distribution = entry["distribution"]
         if distribution["status"] != "public":
             continue
@@ -71,14 +87,38 @@ def main() -> None:
         for field in ("indexUrl", "downloadUrl"):
             if not https_url(index[field]):
                 raise ValueError(f"{dictionary_id}: {field} must use HTTPS")
-        parsed_download = urlparse(index["downloadUrl"])
-        if (
-            parsed_download.hostname != "drive.usercontent.google.com"
-            or parsed_download.path != "/download"
-            or parse_qs(parsed_download.query).get("id")
-            != [distribution["driveFileId"]]
-        ):
-            raise ValueError(f"{dictionary_id}: public downloadUrl differs from Drive file")
+        update_hosting = distribution.get("updateHosting", "google-drive-public")
+        if update_hosting == "google-drive-public":
+            parsed_download = urlparse(index["downloadUrl"])
+            if (
+                parsed_download.hostname != "drive.usercontent.google.com"
+                or parsed_download.path != "/download"
+                or parse_qs(parsed_download.query).get("id")
+                != [distribution["driveFileId"]]
+            ):
+                raise ValueError(
+                    f"{dictionary_id}: public downloadUrl differs from Drive file"
+                )
+        elif update_hosting == "github-release":
+            release_tag = distribution.get("releaseTag")
+            release_asset_name = distribution.get("releaseAssetName")
+            if (
+                not isinstance(release_tag, str)
+                or not RELEASE_COMPONENT.fullmatch(release_tag)
+                or not isinstance(release_asset_name, str)
+                or not RELEASE_COMPONENT.fullmatch(release_asset_name)
+            ):
+                raise ValueError(f"{dictionary_id}: invalid Release metadata")
+            expected_download_url = (
+                f"https://github.com/{repository}/releases/download/"
+                f"{release_tag}/{release_asset_name}"
+            )
+            if index["downloadUrl"] != expected_download_url:
+                raise ValueError(
+                    f"{dictionary_id}: public downloadUrl differs from Release asset"
+                )
+        else:
+            raise ValueError(f"{dictionary_id}: unsupported updateHosting")
         expected_index_path = f"/manifests/{dictionary_id}/index.json"
         if not index["indexUrl"].endswith(expected_index_path):
             raise ValueError(f"{dictionary_id}: indexUrl path mismatch")

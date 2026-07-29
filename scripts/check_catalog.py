@@ -12,6 +12,7 @@ ALLOWED_DISTRIBUTION_STATUSES = {"public", "retired"}
 ALLOWED_RIGHTS_STATUSES = {"third-party", "licensed", "public-domain"}
 LANGUAGE_CODE = re.compile(r"^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$")
 DRIVE_FILE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
+RELEASE_COMPONENT = re.compile(r"^[A-Za-z0-9._-]+$")
 
 
 def require_relative_file(value: object, field: str, dictionary_id: str) -> Path:
@@ -31,6 +32,11 @@ def main() -> None:
     dictionaries = catalog.get("dictionaries")
     if catalog.get("schemaVersion") != 2 or not isinstance(dictionaries, list):
         raise ValueError("catalog must use schemaVersion 2 and contain dictionaries[]")
+    repository = catalog.get("repository")
+    if not isinstance(repository, str) or not re.fullmatch(
+        r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository
+    ):
+        raise ValueError("catalog repository must use owner/name format")
 
     ids: set[str] = set()
     asset_names: set[str] = set()
@@ -127,18 +133,46 @@ def main() -> None:
             )
             if distribution.get("driveFileUrl") != expected_file_url:
                 raise ValueError(f"{dictionary_id}: driveFileUrl differs from driveFileId")
+            update_hosting = distribution.get(
+                "updateHosting", "google-drive-public"
+            )
+            if update_hosting not in {"google-drive-public", "github-release"}:
+                raise ValueError(f"{dictionary_id}: invalid updateHosting")
             download_url = distribution.get("downloadUrl")
             if not isinstance(download_url, str):
                 raise ValueError(f"{dictionary_id}: downloadUrl must be a string")
-            parsed_download = urlparse(download_url)
-            if (
-                parsed_download.scheme != "https"
-                or parsed_download.hostname != "drive.usercontent.google.com"
-                or parsed_download.path != "/download"
-                or parse_qs(parsed_download.query).get("id") != [drive_file_id]
-                or parse_qs(parsed_download.query).get("export") != ["download"]
-            ):
-                raise ValueError(f"{dictionary_id}: invalid public downloadUrl")
+            if update_hosting == "google-drive-public":
+                parsed_download = urlparse(download_url)
+                if (
+                    parsed_download.scheme != "https"
+                    or parsed_download.hostname != "drive.usercontent.google.com"
+                    or parsed_download.path != "/download"
+                    or parse_qs(parsed_download.query).get("id") != [drive_file_id]
+                    or parse_qs(parsed_download.query).get("export") != ["download"]
+                ):
+                    raise ValueError(f"{dictionary_id}: invalid Drive downloadUrl")
+            else:
+                release_tag = distribution.get("releaseTag")
+                release_asset_name = distribution.get("releaseAssetName")
+                if (
+                    not isinstance(release_tag, str)
+                    or not RELEASE_COMPONENT.fullmatch(release_tag)
+                ):
+                    raise ValueError(f"{dictionary_id}: invalid releaseTag")
+                if (
+                    not isinstance(release_asset_name, str)
+                    or not RELEASE_COMPONENT.fullmatch(release_asset_name)
+                    or not release_asset_name.endswith(".zip")
+                ):
+                    raise ValueError(f"{dictionary_id}: invalid releaseAssetName")
+                expected_download_url = (
+                    f"https://github.com/{repository}/releases/download/"
+                    f"{release_tag}/{release_asset_name}"
+                )
+                if download_url != expected_download_url:
+                    raise ValueError(
+                        f"{dictionary_id}: Release downloadUrl differs from release metadata"
+                    )
             if config.get("indexUrl") != distribution.get("indexUrl"):
                 raise ValueError(f"{dictionary_id}: catalog indexUrl differs from config")
             if config.get("downloadUrl") != download_url:
