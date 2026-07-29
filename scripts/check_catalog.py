@@ -100,14 +100,16 @@ def main() -> None:
                 raise ValueError(
                     f"{dictionary_id}: archivePath must stay inside the Drive archive root"
                 )
-            if Path(archive_path).name != asset_name:
-                raise ValueError(f"{dictionary_id}: archivePath filename mismatch")
-            drive_file_url = distribution.get("driveFileUrl")
+            if Path(archive_path).suffix.lower() != ".zip":
+                raise ValueError(f"{dictionary_id}: archivePath must end in .zip")
+            drive_folder_url = distribution.get("driveFolderUrl")
             if (
-                not isinstance(drive_file_url, str)
-                or not drive_file_url.startswith("https://drive.google.com/file/d/")
+                not isinstance(drive_folder_url, str)
+                or not drive_folder_url.startswith(
+                    "https://drive.google.com/drive/folders/"
+                )
             ):
-                raise ValueError(f"{dictionary_id}: invalid driveFileUrl")
+                raise ValueError(f"{dictionary_id}: invalid driveFolderUrl")
             manifest = ROOT / "manifests" / dictionary_id / "index.json"
             if not manifest.is_file():
                 raise ValueError(f"{dictionary_id}: personal entry lacks {manifest.relative_to(ROOT)}")
