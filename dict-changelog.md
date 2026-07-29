@@ -5,6 +5,10 @@ not make proprietary source data redistributable.
 
 ## 2026-07-29
 
+- Refreshed 《新世纪日汉双解大辞典》 typography in `2026.07.29.4`:
+  removed the gray Chinese-gloss background, changed Japanese and Chinese text
+  to system sans-serif stacks, and reduced the visual weight of headwords and
+  Chinese translations.
 - Switched all four editions from localhost-only updates to public Google Drive
   downloads and bumped them to `2026.07.29.3`.
 - Added one stable public file page and one anonymous direct update URL per edition.

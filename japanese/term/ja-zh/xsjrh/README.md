@@ -7,7 +7,7 @@
 | Direction | Japanese → Chinese |
 | Type | Term dictionary |
 | Edition | Complete illustrated edition |
-| Revision | `2026.07.29.3` |
+| Revision | `2026.07.29.4` |
 | Build | Ready |
 | Update mode | Public Google Drive |
 | Archive | `XSJRH-yomitan-illustrated.zip` |
