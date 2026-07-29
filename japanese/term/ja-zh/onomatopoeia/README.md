@@ -7,7 +7,7 @@
 | Direction | Japanese → Chinese |
 | Type | Specialized term dictionary |
 | Edition | Second edition |
-| Revision | `2026.07.28.3` |
+| Revision | `2026.07.29.1` |
 | Build | Ready |
 | Public ZIP | Rights review |
 | Planned asset | `Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip` |

@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Public ZIP | Planned asset |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.15.1` | Ready | Rights review | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.15.2` | Ready | Rights review | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.29.1` | Ready | Rights review | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.29.1` | Ready | Rights review | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 

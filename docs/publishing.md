@@ -75,7 +75,9 @@ fails the build when only part of the update configuration is present.
 
 7. Change the catalog distribution state to `published`, fill every URL/license
    field, and commit the manifest and catalog.
-8. Import once from the update-index URL and test an update from the previous revision.
+8. For the bootstrap release, import the ZIP itself or its `downloadUrl` once. The
+   `indexUrl` is JSON used only for later update checks; it is not a dictionary ZIP.
+9. Test an update from the previous bootstrap-enabled revision.
 
 If a dictionary may not legally be redistributed, stop after local validation. Keep
 its manifest absent and its release status listed as “converter only”.

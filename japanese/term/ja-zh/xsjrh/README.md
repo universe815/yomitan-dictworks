@@ -7,10 +7,10 @@
 | Direction | Japanese → Chinese |
 | Type | Term dictionary |
 | Edition | Complete illustrated edition |
-| Revision | `2026.07.21.2` |
+| Revision | `2026.07.29.1` |
 | Build | Ready |
 | Public ZIP | Rights review |
-| Planned asset | `XSJRH-2026.07.21-yomitan-illustrated.zip` |
+| Planned asset | `XSJRH-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -39,10 +39,10 @@ python scripts/convert_xsjrh.py `
 
 pnpm xsjrh:build
 python scripts/qa_xsjrh.py `
-  dictionary-output/XSJRH-2026.07.21-yomitan-illustrated.zip
+  dictionary-output/XSJRH-yomitan-illustrated.zip
 
 python scripts/validate_yomitan_schema.py `
-  dictionary-output/XSJRH-2026.07.21-yomitan-illustrated.zip
+  dictionary-output/XSJRH-yomitan-illustrated.zip
 ```
 
 The pipeline preserves Japanese and Chinese definitions, examples, Ruby annotation,

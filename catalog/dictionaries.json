@@ -11,14 +11,14 @@
       "page": "japanese/term/ja-zh/xsjrh/README.md",
       "config": "config/xsjrh.json",
       "buildCommand": "pnpm xsjrh:build",
-      "revision": "2026.07.21.2",
+      "revision": "2026.07.29.1",
       "buildStatus": "ready",
       "distribution": {
         "status": "rights-review",
         "contentLicense": null,
         "rightsEvidence": null,
         "releaseTag": null,
-        "assetName": "XSJRH-2026.07.21-yomitan-illustrated.zip",
+        "assetName": "XSJRH-yomitan-illustrated.zip",
         "indexUrl": null,
         "downloadUrl": null
       }
@@ -32,7 +32,7 @@
       "page": "japanese/term/ja-zh/onomatopoeia/README.md",
       "config": "config/onomatopoeia.json",
       "buildCommand": "pnpm onomatopoeia:build",
-      "revision": "2026.07.28.3",
+      "revision": "2026.07.29.1",
       "buildStatus": "ready",
       "distribution": {
         "status": "rights-review",
@@ -53,7 +53,7 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald.json",
       "buildCommand": "pnpm oald:build",
-      "revision": "2026.07.15.1",
+      "revision": "2026.07.29.1",
       "buildStatus": "ready",
       "distribution": {
         "status": "rights-review",
@@ -74,7 +74,7 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald-rich.json",
       "buildCommand": "pnpm oald:build:rich",
-      "revision": "2026.07.15.2",
+      "revision": "2026.07.29.1",
       "buildStatus": "ready",
       "distribution": {
         "status": "rights-review",

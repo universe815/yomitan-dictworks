@@ -3,6 +3,16 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-07-29
+
+- Enabled Yomitan update metadata in all four build configurations.
+- Assigned stable per-edition `indexUrl` values and versioned GitHub Release
+  `downloadUrl` values.
+- Standardized four-part numeric revisions at `2026.07.29.1`.
+- Renamed the XSJRH release asset to a stable filename independent of its revision.
+- Clarified that the first update-enabled release must be installed from its ZIP or
+  ZIP URL, not from the JSON update index.
+
 ## 2026-07-28 — catalog update
 
 - Reorganized dictionaries as source language → type → language pair → dictionary,
