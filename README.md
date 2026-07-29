@@ -15,10 +15,8 @@
 ##### 日语 → 中文
 
 - [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/)
-  · [Google Drive](https://drive.google.com/file/d/1h9eVj8eNT-C8r1IqSiFkYLdxoOFxUhuL/view)
   · [更新清单](manifests/xsjrh-illustrated/index.json)
 - [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/)
-  · [Google Drive](https://drive.google.com/file/d/1-82pMpECT4k8BDFIRMdCAfldRLVjw1hj/view)
   · [更新清单](manifests/shin-nikkan-onomatopoeia/index.json)
 
 [浏览日语词典目录](japanese/)
@@ -30,8 +28,6 @@
 ##### 英语 → 中文
 
 - [OALDPE En-Cn 2025.02.14](english/term/en-zh/oald/)
-  · [正文版 Google Drive](https://drive.google.com/file/d/1OnmPmRFtpCtaNUGszWlxyQB3tPBSQr5j/view)
-  · [完整插图版 Google Drive](https://drive.google.com/file/d/1dGChYanOf3V5Hum8GwSj0YalkJg_2owT/view)
   · [正文版更新清单](manifests/oald-en-zh/index.json)
   · [完整插图版更新清单](manifests/oald-en-zh-illustrated/index.json)
 
@@ -43,6 +39,7 @@
 `indexUrl`，ZIP 统一归档到个人 Google Drive；本机更新服务从同步盘读取
 ZIP，不放入仓库或 Release。
 
+- [Google Drive：全部可直接导入的 ZIP](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 - [个人自动更新说明](docs/publishing.md)
 - [添加词典](docs/adding-a-dictionary.md)
 - [机器可读目录](catalog/README.md)

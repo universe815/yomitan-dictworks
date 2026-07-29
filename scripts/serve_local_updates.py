@@ -72,7 +72,10 @@ def make_handler(routes: dict[str, Path]) -> type[BaseHTTPRequestHandler]:
             content_type = mimetypes.guess_type(archive.name)[0] or "application/zip"
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(size))
-            self.send_header("Content-Disposition", f'attachment; filename="{archive.name}"')
+            download_name = route.rsplit("/", 1)[-1]
+            self.send_header(
+                "Content-Disposition", f'attachment; filename="{download_name}"'
+            )
             self.end_headers()
             if include_body:
                 with archive.open("rb") as stream:

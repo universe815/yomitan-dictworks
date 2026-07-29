@@ -48,8 +48,8 @@ GitHub 负责保存目录、转换工具和稳定的更新清单；Google Drive 
    ```
 
    脚本复制完成后会逐个计算 SHA-256，源文件与云盘副本不一致时直接失败。
-   新词典首次同步后，把 Google Drive 私有文件链接记录到目录的
-   `driveFileUrl`；后续覆盖同名同步文件时继续使用该链接。
+   每个版本在共享 `Downloads/` 目录中对应一个可直接导入的 ZIP。把该共享
+   文件夹链接记录为 `driveFolderUrl`，README 只链接统一下载入口。
 
 6. 提交目录、配置和清单，不提交 ZIP。
 7. 启动本地服务，直接从 Google Drive 同步目录读取：

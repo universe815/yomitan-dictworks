@@ -17,18 +17,17 @@
 ## Links and updates
 
 - Text edition: [Yomitan 更新清单](../../../../manifests/oald-en-zh/index.json)
-  · [Google Drive](https://drive.google.com/file/d/1OnmPmRFtpCtaNUGszWlxyQB3tPBSQr5j/view)
 - Complete illustrated edition:
   [Yomitan 更新清单](../../../../manifests/oald-en-zh-illustrated/index.json)
-  · [Google Drive](https://drive.google.com/file/d/1dGChYanOf3V5Hum8GwSj0YalkJg_2owT/view)
+- [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
 本机更新地址分别为：
 
 - `http://127.0.0.1:8765/oald-en-zh/OALDPE-En-Cn-2025.02.14-yomitan.zip`
 - `http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip`
 
-ZIP 归档在 Google Drive 的 `en-zh/OALDPE En-Cn/`。本仓库只提供词典目录、
-转换工具和更新清单；之后从同步盘启动本机更新服务并在 Yomitan 中检查更新。
+Google Drive 下载文件夹中的两个 OALD ZIP 均可直接导入 Yomitan。本仓库只
+提供词典目录、转换工具和更新清单；之后从同步盘启动服务并检查更新。
 
 ## Build the text edition
 

@@ -57,5 +57,5 @@ as described in
 [publishing.md](publishing.md). Public hosting additionally requires permission to
 redistribute every included content type.
 
-After the first Google Drive sync, record the private file link as `driveFileUrl` so
-the catalog can link to the exact archive without publishing it through GitHub.
+Record the shared download folder as `driveFolderUrl`. Put one directly importable
+ZIP per edition in that flat folder, with a language/type prefix in its filename.
