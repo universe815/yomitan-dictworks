@@ -9,7 +9,7 @@
 | Edition | Complete illustrated edition |
 | Revision | `2026.07.29.2` |
 | Build | Ready |
-| Update mode | Personal local server |
+| Update mode | Google Drive + local server |
 | Archive | `XSJRH-yomitan-illustrated.zip` |
 
 ## Features
@@ -23,11 +23,12 @@
 ## Links and updates
 
 - [Yomitan 更新清单](../../../../manifests/xsjrh-illustrated/index.json)
+- [Google Drive 词典文件](https://drive.google.com/file/d/1h9eVj8eNT-C8r1IqSiFkYLdxoOFxUhuL/view)
 - 本机更新地址：
   `http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip`
 
-本仓库只提供词典目录、转换工具和更新清单，不提供 ZIP。首次从本地
-`dictionary-output` 导入；之后启动本地更新服务并在 Yomitan 中检查更新。
+ZIP 归档在 Google Drive 的 `ja-zh/新世纪日汉双解大辞典/`。本仓库只提供
+词典目录、转换工具和更新清单；之后从同步盘启动本机更新服务并检查更新。
 
 ## Local build
 

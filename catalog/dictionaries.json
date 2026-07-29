@@ -17,8 +17,10 @@
         "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "local",
+        "hosting": "google-drive-sync",
         "assetName": "XSJRH-yomitan-illustrated.zip",
+        "archivePath": "ja-zh/新世纪日汉双解大辞典/XSJRH-yomitan-illustrated.zip",
+        "driveFileUrl": "https://drive.google.com/file/d/1h9eVj8eNT-C8r1IqSiFkYLdxoOFxUhuL/view",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/xsjrh-illustrated/index.json",
         "downloadUrl": "http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip"
       }
@@ -38,8 +40,10 @@
         "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "local",
+        "hosting": "google-drive-sync",
         "assetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip",
+        "archivePath": "ja-zh/新日汉拟声拟态词词典/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip",
+        "driveFileUrl": "https://drive.google.com/file/d/1-82pMpECT4k8BDFIRMdCAfldRLVjw1hj/view",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/shin-nikkan-onomatopoeia/index.json",
         "downloadUrl": "http://127.0.0.1:8765/shin-nikkan-onomatopoeia/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip"
       }
@@ -59,8 +63,10 @@
         "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "local",
+        "hosting": "google-drive-sync",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan.zip",
+        "archivePath": "en-zh/OALDPE En-Cn/OALDPE-En-Cn-2025.02.14-yomitan.zip",
+        "driveFileUrl": "https://drive.google.com/file/d/1OnmPmRFtpCtaNUGszWlxyQB3tPBSQr5j/view",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh/index.json",
         "downloadUrl": "http://127.0.0.1:8765/oald-en-zh/OALDPE-En-Cn-2025.02.14-yomitan.zip"
       }
@@ -80,8 +86,10 @@
         "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "hosting": "local",
+        "hosting": "google-drive-sync",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
+        "archivePath": "en-zh/OALDPE En-Cn/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
+        "driveFileUrl": "https://drive.google.com/file/d/1dGChYanOf3V5Hum8GwSj0YalkJg_2owT/view",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh-illustrated/index.json",
         "downloadUrl": "http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip"
       }
