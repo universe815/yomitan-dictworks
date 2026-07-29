@@ -1,9 +1,10 @@
 # Yomitan Dictworks
 
-个人维护的 Yomitan 词典目录与可复现转换工具。目录组织参考
+个人维护的 Yomitan 词典目录与可复现转换工程。目录组织参考
 [MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries)，
-按源语言、词典类型和翻译方向分类；本仓库不使用 GitHub Release，也不提交
-本地生成的商业词典 ZIP。
+构建层使用
+[MarvNC/yomichan-dict-builder](https://github.com/MarvNC/yomichan-dict-builder)。
+本仓库不使用 GitHub Release，也不提交本地生成的商业词典 ZIP。
 
 ## 词典目录
 
@@ -34,51 +35,19 @@
 
 ## 自动更新
 
-三部词典都已写入 Yomitan 自动更新元数据。GitHub 仅保存稳定的
-`indexUrl`；ZIP 由本机 `127.0.0.1:8765` 提供，不放入仓库或 Release。
+三部词典都已写入 Yomitan 自动更新元数据。GitHub 保存稳定的
+`indexUrl`，ZIP 由个人本机更新服务提供，不放入仓库或 Release。
 
-启动本地更新服务：
-
-```powershell
-python scripts/serve_local_updates.py `
-  --output-dir "<dictionary-output-path>"
-```
-
-保持窗口运行，然后在 Yomitan 的词典管理页面点击 **Check for Updates**。
-首次仍需手动导入对应 ZIP；之后 Yomitan 才能依据内嵌的 `indexUrl` 检查更新。
-
-## 仓库结构
-
-```text
-english/term/en-zh/<dictionary>/   英中词语词典说明
-japanese/term/ja-zh/<dictionary>/  日中词语词典说明
-manifests/<edition>/index.json     Yomitan 更新清单
-config/                            构建与更新元数据
-scripts/                           转换、质量检查和本地更新服务
-styles/                            词典专用样式
-dictionary-output/                 本地生成物（Git 忽略）
-```
-
-## 本地构建
-
-环境要求：Node.js 20+、pnpm、Python 3.11+。
-
-```powershell
-pnpm install --frozen-lockfile
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
-
-具体转换、构建和质量检查命令见每部词典的目录页。
-
+- [个人自动更新说明](docs/publishing.md)
 - [添加词典](docs/adding-a-dictionary.md)
-- [个人更新流程](docs/publishing.md)
 - [机器可读目录](catalog/README.md)
 - [词典更新记录](dict-changelog.md)
 
+首次需从本地生成目录导入 ZIP；之后启动本机服务并在 Yomitan 中点击
+**Check for Updates**。
+
 ## 许可与第三方内容
 
-原创代码和文档使用 MIT 许可证。词典正文、例句、图片、音频、字体和品牌等
-第三方内容仍受各自权利与许可约束，详见
+原创代码和文档使用 MIT 许可证。词典正文、例句、图片、音频、字体、商标和
+其他第三方内容仍受各自权利与许可约束，详见
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
