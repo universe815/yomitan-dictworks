@@ -7,10 +7,10 @@
 | Direction | Japanese → Chinese |
 | Type | Term dictionary |
 | Edition | Complete illustrated edition |
-| Revision | `2026.07.29.5` |
+| Revision | `2026.07.30.1` |
 | Build | Ready |
 | Update mode | GitHub Release |
-| Archive | `XSJRH-yomitan-illustrated.zip` |
+| Archive | `新世纪日汉双解大辞典-完整图文版-Yomitan.zip` |
 
 ## Features
 
@@ -27,7 +27,7 @@
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
 下载的 ZIP 可直接导入 Yomitan。Google Drive 继续提供手动下载和归档；
-`2026.07.29.5` 及之后版本通过 GitHub Release 资产自动更新，不需要启动
+`2026.07.30.1` 及之后版本通过中文命名的 GitHub Release 资产自动更新，不需要启动
 本机服务。
 
 ## Local build
@@ -42,10 +42,10 @@ python scripts/convert_xsjrh.py `
 
 pnpm xsjrh:build
 python scripts/qa_xsjrh.py `
-  dictionary-output/XSJRH-yomitan-illustrated.zip
+  dictionary-output/新世纪日汉双解大辞典-完整图文版-Yomitan.zip
 
 python scripts/validate_yomitan_schema.py `
-  dictionary-output/XSJRH-yomitan-illustrated.zip
+  dictionary-output/新世纪日汉双解大辞典-完整图文版-Yomitan.zip
 ```
 
 The pipeline preserves Japanese and Chinese definitions, examples, Ruby annotation,

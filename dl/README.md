@@ -11,5 +11,6 @@
 - [OALDPE En-Cn 2025.02.14（正文版）](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing)
 - [OALDPE En-Cn 2025.02.14（完整插图版）](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing)
 
-GitHub 不保存生成 ZIP，也不使用 Release；自动更新清单位于
-[`manifests/`](../manifests/)。
+Google Drive 是首次安装、手动下载和归档入口。自动更新清单位于
+[`manifests/`](../manifests/)；四个现役版本均由 Yomitan 从版本化 GitHub
+Release 资产下载更新。生成的 ZIP 不提交到 Git 仓库。

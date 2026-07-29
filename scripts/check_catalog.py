@@ -1,7 +1,6 @@
 import json
 import re
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +12,7 @@ ALLOWED_RIGHTS_STATUSES = {"third-party", "licensed", "public-domain"}
 LANGUAGE_CODE = re.compile(r"^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$")
 DRIVE_FILE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 RELEASE_COMPONENT = re.compile(r"^[A-Za-z0-9._-]+$")
+SHA256 = re.compile(r"^[A-F0-9]{64}$")
 
 
 def require_relative_file(value: object, field: str, dictionary_id: str) -> Path:
@@ -97,6 +97,21 @@ def main() -> None:
                 raise ValueError(f"{dictionary_id}: public entry lacks {', '.join(missing)}")
             if distribution.get("rightsStatus") not in ALLOWED_RIGHTS_STATUSES:
                 raise ValueError(f"{dictionary_id}: invalid rightsStatus")
+            archive_bytes = distribution.get("bytes")
+            if (
+                not isinstance(archive_bytes, int)
+                or isinstance(archive_bytes, bool)
+                or archive_bytes <= 0
+            ):
+                raise ValueError(f"{dictionary_id}: bytes must be a positive integer")
+            archive_sha256 = distribution.get("sha256")
+            if (
+                not isinstance(archive_sha256, str)
+                or not SHA256.fullmatch(archive_sha256)
+            ):
+                raise ValueError(
+                    f"{dictionary_id}: sha256 must be 64 uppercase hexadecimal characters"
+                )
             if distribution["rightsStatus"] == "licensed":
                 for field in ("contentLicense", "rightsEvidence"):
                     if not distribution.get(field):
@@ -133,46 +148,42 @@ def main() -> None:
             )
             if distribution.get("driveFileUrl") != expected_file_url:
                 raise ValueError(f"{dictionary_id}: driveFileUrl differs from driveFileId")
-            update_hosting = distribution.get(
-                "updateHosting", "google-drive-public"
-            )
-            if update_hosting not in {"google-drive-public", "github-release"}:
-                raise ValueError(f"{dictionary_id}: invalid updateHosting")
+            update_hosting = distribution.get("updateHosting")
+            if update_hosting != "github-release":
+                raise ValueError(
+                    f"{dictionary_id}: public automatic updates must use GitHub Release"
+                )
             download_url = distribution.get("downloadUrl")
             if not isinstance(download_url, str):
                 raise ValueError(f"{dictionary_id}: downloadUrl must be a string")
-            if update_hosting == "google-drive-public":
-                parsed_download = urlparse(download_url)
-                if (
-                    parsed_download.scheme != "https"
-                    or parsed_download.hostname != "drive.usercontent.google.com"
-                    or parsed_download.path != "/download"
-                    or parse_qs(parsed_download.query).get("id") != [drive_file_id]
-                    or parse_qs(parsed_download.query).get("export") != ["download"]
-                ):
-                    raise ValueError(f"{dictionary_id}: invalid Drive downloadUrl")
-            else:
-                release_tag = distribution.get("releaseTag")
-                release_asset_name = distribution.get("releaseAssetName")
-                if (
-                    not isinstance(release_tag, str)
-                    or not RELEASE_COMPONENT.fullmatch(release_tag)
-                ):
-                    raise ValueError(f"{dictionary_id}: invalid releaseTag")
-                if (
-                    not isinstance(release_asset_name, str)
-                    or not RELEASE_COMPONENT.fullmatch(release_asset_name)
-                    or not release_asset_name.endswith(".zip")
-                ):
-                    raise ValueError(f"{dictionary_id}: invalid releaseAssetName")
-                expected_download_url = (
-                    f"https://github.com/{repository}/releases/download/"
-                    f"{release_tag}/{release_asset_name}"
+            release_tag = distribution.get("releaseTag")
+            release_asset_name = distribution.get("releaseAssetName")
+            if (
+                not isinstance(release_tag, str)
+                or not RELEASE_COMPONENT.fullmatch(release_tag)
+            ):
+                raise ValueError(f"{dictionary_id}: invalid releaseTag")
+            if (
+                not isinstance(release_asset_name, str)
+                or not RELEASE_COMPONENT.fullmatch(release_asset_name)
+                or not release_asset_name.endswith(".zip")
+            ):
+                raise ValueError(f"{dictionary_id}: invalid releaseAssetName")
+            release_asset_label = distribution.get("releaseAssetLabel")
+            if release_asset_label is not None and (
+                not isinstance(release_asset_label, str)
+                or not release_asset_label
+                or any(ord(character) < 32 for character in release_asset_label)
+            ):
+                raise ValueError(f"{dictionary_id}: invalid releaseAssetLabel")
+            expected_download_url = (
+                f"https://github.com/{repository}/releases/download/"
+                f"{release_tag}/{release_asset_name}"
+            )
+            if download_url != expected_download_url:
+                raise ValueError(
+                    f"{dictionary_id}: Release downloadUrl differs from release metadata"
                 )
-                if download_url != expected_download_url:
-                    raise ValueError(
-                        f"{dictionary_id}: Release downloadUrl differs from release metadata"
-                    )
             if config.get("indexUrl") != distribution.get("indexUrl"):
                 raise ValueError(f"{dictionary_id}: catalog indexUrl differs from config")
             if config.get("downloadUrl") != download_url:

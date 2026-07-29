@@ -1,15 +1,15 @@
 {
   "title": "新世纪日汉双解大辞典（完整图文版）",
-  "revision": "2026.07.29.5",
+  "revision": "2026.07.30.1",
   "author": "原辞典编纂者 / Yomitan 转换维护：universe815",
   "description": "《新世纪日汉双解大辞典》非官方 Yomitan 完整图文转换版。保留日文释义、中文释义、例句、Ruby 注音、内部链接、检索别名、百科插图、外字与字体资源。",
   "attribution": "词典内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护，本项目与原出版方无隶属关系。请仅在符合当地法律并拥有合法内容来源的前提下使用。",
   "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/xsjrh",
   "inputNdjson": "generated/xsjrh.ndjson",
-  "outputFile": "XSJRH-yomitan-illustrated.zip",
+  "outputFile": "新世纪日汉双解大辞典-完整图文版-Yomitan.zip",
   "stylesFile": "styles/xsjrh.css",
   "resourcesDir": "generated/xsjrh-resources",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/xsjrh-illustrated/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/XSJRH-yomitan-illustrated-2026.07.29.5.zip"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/XSJRH-yomitan-illustrated-2026.07.30.1.zip"
 }
