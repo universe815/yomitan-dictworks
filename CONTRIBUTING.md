@@ -28,11 +28,11 @@ For a generated ZIP, also run:
 python scripts/validate_yomitan_schema.py dictionary-output/<dictionary>.zip
 ```
 
-Before a multi-dictionary release, verify every configured archive against the
-catalog and embedded update metadata:
+Before updating the personal dictionary set, verify every configured archive against
+the catalog and embedded update metadata:
 
 ```powershell
-python scripts/check_release_archives.py --output-dir dictionary-output
+python scripts/check_update_archives.py --output-dir dictionary-output
 ```
 
 Commercial dictionary compatibility fixes are acceptable as source code, but the

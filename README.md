@@ -1,82 +1,67 @@
 # Yomitan Dictworks
 
-A categorized collection of multilingual dictionaries and reproducible conversion
-tools for [Yomitan](https://github.com/yomidevs/yomitan).
+个人维护的 Yomitan 词典目录与可复现转换工具。目录组织参考
+[MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries)，
+按源语言、词典类型和翻译方向分类；本仓库不使用 GitHub Release，也不提交
+本地生成的商业词典 ZIP。
 
-The catalog layout follows
-[MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries):
-dictionaries are grouped by source language, dictionary type, and translation
-direction. This project additionally keeps a machine-readable catalog, per-dictionary
-update indexes, reproducible QA, and versioned GitHub Releases.
+## 词典目录
 
-## Dictionary collection
+### 日语
 
-### What should I install?
+#### 词语词典
 
-- For Japanese reading with Chinese explanations:
-  [新世纪日汉双解大辞典](japanese/term/ja-zh/xsjrh/) is the broad general dictionary;
-  [新日汉拟声拟态词词典](japanese/term/ja-zh/onomatopoeia/) is the specialized
-  companion for mimetic and onomatopoeic expressions.
-- For English reading with Chinese explanations:
-  [OALD](english/term/en-zh/oald/) provides text and illustrated editions.
-
-“Build ready” and “public download available” are separate states. Commercial
-dictionary content remains unavailable until redistribution rights are documented.
-
-### Downloads and updates
-
-[Open the download center](dl/) for public ZIP files, checksums, revisions, licenses,
-and Yomitan automatic-update indexes.
-
-| Source language | Type | Direction | Dictionary | Build | Download |
-| --- | --- | --- | --- | --- | --- |
-| Japanese | Term | JA → ZH | [新世纪日汉双解大辞典](japanese/term/ja-zh/xsjrh/) | Ready | Rights review |
-| Japanese | Term | JA → ZH | [新日汉拟声拟态词词典](japanese/term/ja-zh/onomatopoeia/) | Ready | Rights review |
-| English | Term | EN → ZH | [OALD text edition](english/term/en-zh/oald/) | Ready | Rights review |
-| English | Term | EN → ZH | [OALD illustrated edition](english/term/en-zh/oald/) | Ready | Rights review |
-
-## Japanese
-
-### Terms
-
-#### Japanese → Chinese
+##### 日语 → 中文
 
 - [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/)
+  · [更新清单](manifests/xsjrh-illustrated/index.json)
 - [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/)
+  · [更新清单](manifests/shin-nikkan-onomatopoeia/index.json)
 
-The Japanese section is prepared for the same top-level categories used by larger
-Yomitan collections: `term`, `frequency`, `grammar`, and `kanji`.
+[浏览日语词典目录](japanese/)
 
-[Browse all Japanese dictionaries](japanese/).
+### 英语
 
-## English
+#### 词语词典
 
-### Terms
+##### 英语 → 中文
 
-#### English → Chinese
+- [OALDPE En-Cn 2025.02.14](english/term/en-zh/oald/)
+  · [正文版更新清单](manifests/oald-en-zh/index.json)
+  · [完整插图版更新清单](manifests/oald-en-zh-illustrated/index.json)
 
-- [OALD text and illustrated editions](english/term/en-zh/oald/)
+[浏览英语词典目录](english/)
 
-[Browse all English dictionaries](english/).
+## 自动更新
 
-## Repository layout
+三部词典都已写入 Yomitan 自动更新元数据。GitHub 仅保存稳定的
+`indexUrl`；ZIP 由本机 `127.0.0.1:8765` 提供，不放入仓库或 Release。
 
-```text
-catalog/                         machine-readable dictionary catalog
-dl/                              public download center
-english/term/en-zh/<dictionary>/ English term dictionaries
-japanese/term/ja-zh/<dictionary>/ Japanese term dictionaries
-config/                          build metadata
-src/                             Yomitan archive builders
-scripts/                         converters, QA, schema and catalog checks
-styles/                          dictionary-scoped CSS
-manifests/<id>/index.json        public automatic-update indexes
-dictionary-output/               ignored local build output
+启动本地更新服务：
+
+```powershell
+python scripts/serve_local_updates.py `
+  --output-dir "<dictionary-output-path>"
 ```
 
-## Build a local dictionary
+保持窗口运行，然后在 Yomitan 的词典管理页面点击 **Check for Updates**。
+首次仍需手动导入对应 ZIP；之后 Yomitan 才能依据内嵌的 `indexUrl` 检查更新。
 
-Requirements: Node.js 20+, pnpm, and Python 3.11+.
+## 仓库结构
+
+```text
+english/term/en-zh/<dictionary>/   英中词语词典说明
+japanese/term/ja-zh/<dictionary>/  日中词语词典说明
+manifests/<edition>/index.json     Yomitan 更新清单
+config/                            构建与更新元数据
+scripts/                           转换、质量检查和本地更新服务
+styles/                            词典专用样式
+dictionary-output/                 本地生成物（Git 忽略）
+```
+
+## 本地构建
+
+环境要求：Node.js 20+、pnpm、Python 3.11+。
 
 ```powershell
 pnpm install --frozen-lockfile
@@ -85,30 +70,15 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-Build and validate the redistributable sample:
+具体转换、构建和质量检查命令见每部词典的目录页。
 
-```powershell
-pnpm dict -- sample-ja-zh
-python scripts/validate_yomitan_schema.py dictionary-output/sample-ja-zh.zip
-```
+- [添加词典](docs/adding-a-dictionary.md)
+- [个人更新流程](docs/publishing.md)
+- [机器可读目录](catalog/README.md)
+- [词典更新记录](dict-changelog.md)
 
-Commercial dictionaries require a legally obtained local MDX/MDD. See each
-dictionary page for its converter, build, and QA commands.
+## 许可与第三方内容
 
-## Add or publish a dictionary
-
-- [Adding a dictionary](docs/adding-a-dictionary.md)
-- [Publishing and automatic updates](docs/publishing.md)
-- [Catalog conventions](catalog/README.md)
-- [Dictionary changelog](dict-changelog.md)
-- [Contributing](CONTRIBUTING.md)
-
-Public editions use a stable raw `indexUrl` and a versioned GitHub Release
-`downloadUrl`. The repository does not use a single `releases/latest` link because
-the newest release may belong to a different dictionary.
-
-## License and content rights
-
-Original code and documentation are MIT licensed. Dictionary entries, examples,
-images, audio, fonts, branding, and other third-party content retain their own
-licenses. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+原创代码和文档使用 MIT 许可证。词典正文、例句、图片、音频、字体和品牌等
+第三方内容仍受各自权利与许可约束，详见
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "catalog" / "dictionaries.json"
 ALLOWED_CATEGORIES = {"term", "frequency", "grammar", "kanji"}
 ALLOWED_BUILD_STATUSES = {"planned", "ready", "retired"}
-ALLOWED_DISTRIBUTION_STATUSES = {"rights-review", "published", "retired"}
+ALLOWED_DISTRIBUTION_STATUSES = {"personal", "published", "retired"}
 LANGUAGE_CODE = re.compile(r"^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$")
 
 
@@ -69,26 +69,34 @@ def main() -> None:
         if config.get("outputFile") != asset_name:
             raise ValueError(f"{dictionary_id}: assetName differs from config outputFile")
         if asset_name in asset_names:
-            raise ValueError(f"duplicate release assetName: {asset_name}")
+            raise ValueError(f"duplicate archive assetName: {asset_name}")
         asset_names.add(asset_name)
 
-        required_public_fields = (
-            "contentLicense",
-            "rightsEvidence",
-            "releaseTag",
-            "indexUrl",
-            "downloadUrl",
-        )
+        required_update_fields = ("hosting", "indexUrl", "downloadUrl")
         if status == "published":
+            required_public_fields = (
+                "contentLicense",
+                "rightsEvidence",
+                *required_update_fields,
+            )
             missing = [field for field in required_public_fields if not distribution.get(field)]
             if missing:
                 raise ValueError(f"{dictionary_id}: published entry lacks {', '.join(missing)}")
             manifest = ROOT / "manifests" / dictionary_id / "index.json"
             if not manifest.is_file():
                 raise ValueError(f"{dictionary_id}: published entry lacks {manifest.relative_to(ROOT)}")
-        elif any(distribution.get(field) for field in required_public_fields):
+        elif status == "personal":
+            missing = [field for field in required_update_fields if not distribution.get(field)]
+            if missing:
+                raise ValueError(f"{dictionary_id}: personal entry lacks {', '.join(missing)}")
+            if distribution.get("hosting") != "local":
+                raise ValueError(f"{dictionary_id}: personal entry must use local hosting")
+            manifest = ROOT / "manifests" / dictionary_id / "index.json"
+            if not manifest.is_file():
+                raise ValueError(f"{dictionary_id}: personal entry lacks {manifest.relative_to(ROOT)}")
+        elif any(distribution.get(field) for field in (*required_update_fields, "contentLicense", "rightsEvidence")):
             raise ValueError(
-                f"{dictionary_id}: non-published entries must not expose live distribution fields"
+                f"{dictionary_id}: retired entries must not expose live distribution fields"
             )
 
     print(f"Dictionary catalog check passed ({len(dictionaries)} editions).")

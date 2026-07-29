@@ -1,83 +1,52 @@
-# Publishing and automatic updates
+# 个人词典自动更新
 
-GitHub source code and dictionary data have different licensing risk. Publishing a
-converter does not authorize publishing the archive it creates.
+本项目不创建 GitHub Release，也不把生成的词典 ZIP 提交到公开仓库。
+GitHub 负责保存目录、转换工具和稳定的更新清单；本机负责提供 ZIP。
 
-## Release gate
+## URL 结构
 
-Before making a dictionary downloadable, verify:
-
-1. the data and every bundled media type may be redistributed;
-2. attribution and license text are present;
-3. source files, local paths, reports, credentials, and unrelated resources are absent;
-4. dictionary-specific QA and official schema validation pass;
-5. the ZIP imports into a clean Yomitan profile;
-6. its revision is greater than the previous public revision.
-
-## Recommended GitHub layout
-
-Use Git for source code and small update indexes. Put ZIP files in GitHub Releases,
-not in repository history.
-
-For each public edition:
-
-- Release asset:
-  `https://github.com/universe815/yomitan-dictworks/releases/download/<id>-<revision>/<name>.zip`
-- Update index:
-  `https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/<id>/index.json`
-
-Copy `manifests/index.template.json` to `manifests/<id>/index.json`, replace every
-placeholder, and commit it. The remote index is ordinary Yomitan `index.json`
-metadata; Yomitan compares its `revision` with the installed dictionary and then
-downloads `downloadUrl`.
-
-Do not use `releases/latest/download/...` in a multi-dictionary repository: the
-latest repository release may belong to another dictionary and omit this asset.
-
-The dictionary's own config must contain the same stable URLs:
+每个词典配置同时包含：
 
 ```json
 {
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/<id>/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/<id>-<revision>/<name>.zip"
+  "downloadUrl": "http://127.0.0.1:8765/<id>/<archive>.zip"
 }
 ```
 
-Do not enable these fields before the URLs work. `src/update-metadata.ts` deliberately
-fails the build when only part of the update configuration is present.
+`indexUrl` 也写入 `manifests/<id>/index.json`。`downloadUrl` 的路径由机器可读
+目录中的 `id` 与 `assetName` 组成。
 
-## Release sequence
+## 首次安装
 
-1. Record the content license and redistribution evidence in
-   `catalog/dictionaries.json`.
-2. Choose a versioned tag such as `<id>-2026.07.28.1` and put that URL in the
-   dictionary config.
-3. Build and validate locally.
-4. Create the GitHub Release and upload the fixed-name ZIP asset:
+1. 在本地完成转换、构建和词典专项 QA。
+2. 运行：
 
    ```powershell
-   gh release create "<id>-<revision>" `
-     "dictionary-output/<name>.zip" `
-     --repo universe815/yomitan-dictworks `
-     --title "<title> <revision>" `
-     --notes "See the dictionary page and dict-changelog.md."
+   python scripts/check_update_archives.py `
+     --output-dir "<dictionary-output-path>"
    ```
 
-5. Confirm the versioned download URL returns that ZIP.
-6. Extract its embedded index as the remote update index:
+3. 手动把 ZIP 导入 Yomitan。只有带 `isUpdatable`、`indexUrl` 和
+   `downloadUrl` 的版本才能参与后续自动更新。
+
+## 发布一次个人更新
+
+1. 增加词典 `revision`，不要复用旧版本号。
+2. 重新构建 ZIP并完成 QA。
+3. 用 `scripts/extract_update_index.py` 从 ZIP 更新对应清单。
+4. 运行 `scripts/check_update_archives.py`，确认四个版本的配置、清单与 ZIP
+   内元数据一致。
+5. 提交目录、配置和清单，不提交 ZIP。
+6. 启动本地服务：
 
    ```powershell
-   python scripts/extract_update_index.py `
-     "dictionary-output/<name>.zip" `
-     "manifests/<id>/index.json"
+   python scripts/serve_local_updates.py `
+     --output-dir "<dictionary-output-path>"
    ```
 
-7. Change the catalog distribution state to `published`, fill every URL/license
-   field, and commit the manifest and catalog.
-8. For the bootstrap release, import the ZIP itself or its `downloadUrl` once. The
-   `indexUrl` is JSON used only for later update checks; it is not a dictionary ZIP.
-9. Test an update from the previous bootstrap-enabled revision.
+7. 在 Yomitan 中点击 **Check for Updates**。
 
-If a dictionary may not legally be redistributed, stop after local validation. Keep
-its manifest absent and its release status listed as “converter only”.
+本机服务只监听 `127.0.0.1`，其他设备无法访问。需要跨设备使用时，应另外
+准备你有权使用的私有 HTTPS 存储，并同步修改配置与清单中的 `downloadUrl`。

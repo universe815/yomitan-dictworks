@@ -7,10 +7,10 @@
 | Direction | Japanese → Chinese |
 | Type | Term dictionary |
 | Edition | Complete illustrated edition |
-| Revision | `2026.07.29.1` |
+| Revision | `2026.07.29.2` |
 | Build | Ready |
-| Public ZIP | Rights review |
-| Planned asset | `XSJRH-yomitan-illustrated.zip` |
+| Update mode | Personal local server |
+| Archive | `XSJRH-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -20,12 +20,14 @@
 - encyclopedia illustrations, gaiji, and bundled font resources;
 - Yomitan structured content and dictionary-scoped CSS.
 
-## Download
+## Links and updates
 
-The catalog entry is public, but the generated archive is not yet offered because a
-redistribution license for the source dictionary and embedded media has not been
-documented. Once authorized, this page will contain the direct GitHub Release link,
-checksum, license, and automatic-update index.
+- [Yomitan 更新清单](../../../../manifests/xsjrh-illustrated/index.json)
+- 本机更新地址：
+  `http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip`
+
+本仓库只提供词典目录、转换工具和更新清单，不提供 ZIP。首次从本地
+`dictionary-output` 导入；之后启动本地更新服务并在 Yomitan 中检查更新。
 
 ## Local build
 

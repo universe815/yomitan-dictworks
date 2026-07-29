@@ -1,6 +1,6 @@
 {
   "title": "新世纪日汉双解大辞典（完整图文版）",
-  "revision": "2026.07.29.1",
+  "revision": "2026.07.29.2",
   "format": 3,
   "author": "原辞典编纂者 / 本地重制版制作者",
   "description": "由用户本地《新世纪日汉双解大辞典 重制版》MDX/MDD 转换。保留日文释义、中文释义、例句、Ruby 注音、内部链接、检索别名、百科插图及外字资源。",
@@ -11,5 +11,5 @@
   "targetLanguage": "zh",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/xsjrh-illustrated/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/xsjrh-illustrated-2026.07.29.1/XSJRH-yomitan-illustrated.zip"
+  "downloadUrl": "http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip"
 }

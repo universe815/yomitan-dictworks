@@ -9,11 +9,13 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def https_url(value: object) -> bool:
+def update_url(value: object) -> bool:
     if not isinstance(value, str):
         return False
     parsed = urlparse(value)
-    return parsed.scheme == "https" and bool(parsed.netloc)
+    if parsed.scheme == "https" and bool(parsed.netloc):
+        return True
+    return parsed.scheme == "http" and parsed.hostname in {"127.0.0.1", "localhost"}
 
 
 def sha256(path: Path) -> str:
@@ -26,7 +28,7 @@ def sha256(path: Path) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Check built release ZIP indexes against catalog and configs."
+        description="Check built ZIP indexes against catalog and update configs."
     )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
@@ -62,12 +64,11 @@ def main() -> None:
         if mismatches:
             raise ValueError(f"{dictionary_id}: index mismatch: {mismatches}")
         for field in ("indexUrl", "downloadUrl"):
-            if not https_url(index[field]):
-                raise ValueError(f"{dictionary_id}: invalid HTTPS {field}")
-        if f"/{dictionary_id}-{entry['revision']}/" not in index["downloadUrl"]:
-            raise ValueError(f"{dictionary_id}: downloadUrl tag does not match id/revision")
-        if not index["downloadUrl"].endswith(f"/{asset_name}"):
-            raise ValueError(f"{dictionary_id}: downloadUrl asset name mismatch")
+            if not update_url(index[field]):
+                raise ValueError(f"{dictionary_id}: invalid update URL in {field}")
+        expected_download_path = f"/{dictionary_id}/{asset_name}"
+        if not index["downloadUrl"].endswith(expected_download_path):
+            raise ValueError(f"{dictionary_id}: local downloadUrl path mismatch")
         expected_index_path = f"/manifests/{dictionary_id}/index.json"
         if not index["indexUrl"].endswith(expected_index_path):
             raise ValueError(f"{dictionary_id}: indexUrl path mismatch")
@@ -85,7 +86,7 @@ def main() -> None:
             }
         )
 
-    print(json.dumps({"releaseArchivesValid": True, "archives": results}, ensure_ascii=False, indent=2))
+    print(json.dumps({"updateArchivesValid": True, "archives": results}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

@@ -11,16 +11,16 @@
       "page": "japanese/term/ja-zh/xsjrh/README.md",
       "config": "config/xsjrh.json",
       "buildCommand": "pnpm xsjrh:build",
-      "revision": "2026.07.29.1",
+      "revision": "2026.07.29.2",
       "buildStatus": "ready",
       "distribution": {
-        "status": "rights-review",
+        "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "releaseTag": null,
+        "hosting": "local",
         "assetName": "XSJRH-yomitan-illustrated.zip",
-        "indexUrl": null,
-        "downloadUrl": null
+        "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/xsjrh-illustrated/index.json",
+        "downloadUrl": "http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip"
       }
     },
     {
@@ -32,16 +32,16 @@
       "page": "japanese/term/ja-zh/onomatopoeia/README.md",
       "config": "config/onomatopoeia.json",
       "buildCommand": "pnpm onomatopoeia:build",
-      "revision": "2026.07.29.1",
+      "revision": "2026.07.29.2",
       "buildStatus": "ready",
       "distribution": {
-        "status": "rights-review",
+        "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "releaseTag": null,
+        "hosting": "local",
         "assetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip",
-        "indexUrl": null,
-        "downloadUrl": null
+        "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/shin-nikkan-onomatopoeia/index.json",
+        "downloadUrl": "http://127.0.0.1:8765/shin-nikkan-onomatopoeia/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip"
       }
     },
     {
@@ -53,16 +53,16 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald.json",
       "buildCommand": "pnpm oald:build",
-      "revision": "2026.07.29.1",
+      "revision": "2026.07.29.2",
       "buildStatus": "ready",
       "distribution": {
-        "status": "rights-review",
+        "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "releaseTag": null,
+        "hosting": "local",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan.zip",
-        "indexUrl": null,
-        "downloadUrl": null
+        "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh/index.json",
+        "downloadUrl": "http://127.0.0.1:8765/oald-en-zh/OALDPE-En-Cn-2025.02.14-yomitan.zip"
       }
     },
     {
@@ -74,16 +74,16 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald-rich.json",
       "buildCommand": "pnpm oald:build:rich",
-      "revision": "2026.07.29.1",
+      "revision": "2026.07.29.2",
       "buildStatus": "ready",
       "distribution": {
-        "status": "rights-review",
+        "status": "personal",
         "contentLicense": null,
         "rightsEvidence": null,
-        "releaseTag": null,
+        "hosting": "local",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
-        "indexUrl": null,
-        "downloadUrl": null
+        "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh-illustrated/index.json",
+        "downloadUrl": "http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip"
       }
     }
   ]

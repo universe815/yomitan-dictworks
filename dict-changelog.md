@@ -6,11 +6,14 @@ not make proprietary source data redistributable.
 ## 2026-07-29
 
 - Enabled Yomitan update metadata in all four build configurations.
-- Assigned stable per-edition `indexUrl` values and versioned GitHub Release
-  `downloadUrl` values.
-- Standardized four-part numeric revisions at `2026.07.29.1`.
-- Renamed the XSJRH release asset to a stable filename independent of its revision.
-- Clarified that the first update-enabled release must be installed from its ZIP or
+- Assigned stable per-edition GitHub Raw `indexUrl` values and localhost
+  `downloadUrl` values for personal updates without GitHub Releases.
+- Added a localhost update server for the ZIP files in `dictionary-output`.
+- Reworked the root README as a language/type/direction dictionary catalog.
+- Bumped all four editions to `2026.07.29.2`, allowing installations of
+  `2026.07.29.1` to receive the corrected non-Release update metadata.
+- Renamed the XSJRH archive to a stable filename independent of its revision.
+- Clarified that the first update-enabled build must be installed from its ZIP or
   ZIP URL, not from the JSON update index.
 
 ## 2026-07-28 — catalog update
