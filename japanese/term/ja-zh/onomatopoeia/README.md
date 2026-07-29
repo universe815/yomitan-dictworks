@@ -23,6 +23,7 @@
 ## Links and updates
 
 - [Yomitan 更新清单](../../../../manifests/shin-nikkan-onomatopoeia/index.json)
+- [下载可直接导入的 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 - 本机更新地址：
   `http://127.0.0.1:8765/shin-nikkan-onomatopoeia/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip`

@@ -17,8 +17,10 @@
 ## Links and updates
 
 - Text edition: [Yomitan 更新清单](../../../../manifests/oald-en-zh/index.json)
+  · [下载 ZIP](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing)
 - Complete illustrated edition:
   [Yomitan 更新清单](../../../../manifests/oald-en-zh-illustrated/index.json)
+  · [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
 本机更新地址分别为：

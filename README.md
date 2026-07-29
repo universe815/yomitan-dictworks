@@ -15,8 +15,10 @@
 ##### 日语 → 中文
 
 - [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/)
+  · [下载 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing)
   · [更新清单](manifests/xsjrh-illustrated/index.json)
 - [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/)
+  · [下载 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing)
   · [更新清单](manifests/shin-nikkan-onomatopoeia/index.json)
 
 [浏览日语词典目录](japanese/)
@@ -28,6 +30,8 @@
 ##### 英语 → 中文
 
 - [OALDPE En-Cn 2025.02.14](english/term/en-zh/oald/)
+  · [下载正文版 ZIP](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing)
+  · [下载完整插图版 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing)
   · [正文版更新清单](manifests/oald-en-zh/index.json)
   · [完整插图版更新清单](manifests/oald-en-zh-illustrated/index.json)
 

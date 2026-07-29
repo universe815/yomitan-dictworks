@@ -23,6 +23,7 @@
 ## Links and updates
 
 - [Yomitan 更新清单](../../../../manifests/xsjrh-illustrated/index.json)
+- [下载可直接导入的 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 - 本机更新地址：
   `http://127.0.0.1:8765/xsjrh-illustrated/XSJRH-yomitan-illustrated.zip`
