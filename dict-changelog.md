@@ -5,6 +5,14 @@ not make proprietary source data redistributable.
 
 ## 2026-07-29
 
+- Switched all four editions from localhost-only updates to public Google Drive
+  downloads and bumped them to `2026.07.29.3`.
+- Added one stable public file page and one anonymous direct update URL per edition.
+- Reworked the root catalog in the table-led style of W1ght/yomitan-guide, with
+  separate descriptions, downloads, and update manifests.
+- Added scheduled public-link verification and explicit Drive file-ID validation.
+- Replaced contradictory "do not distribute" metadata with neutral third-party
+  ownership and non-affiliation notices without asserting a content license.
 - Enabled Yomitan update metadata in all four build configurations.
 - Assigned stable per-edition GitHub Raw `indexUrl` values and localhost
   `downloadUrl` values for personal updates without GitHub Releases.

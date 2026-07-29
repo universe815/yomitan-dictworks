@@ -1,21 +1,20 @@
-# Japanese dictionaries
+# 日语词典
 
-## Terms
+## 词语词典
 
-### Japanese → Chinese
+### 日语 → 中文
 
-| Dictionary | Format | Build | Public distribution |
-| --- | --- | --- | --- |
-| [新世纪日汉双解大辞典](term/ja-zh/xsjrh/) | Structured content, illustrations | Ready | Rights review |
-| [新日汉拟声拟态词词典](term/ja-zh/onomatopoeia/) | Structured content | Ready | Rights review |
+| 词典 | 特色 | 获取 |
+|---|---|---|
+| [新世纪日汉双解大辞典（完整图文版）](term/ja-zh/xsjrh/) | 日中双解、例句、Ruby、百科插图、外字与字体 | [下载 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing) |
+| [新日汉拟声拟态词词典 第2版](term/ja-zh/onomatopoeia/) | 原版配色、分类、日中例句、词群和子词条检索 | [下载 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing) |
 
-See [term/README.md](term/README.md) for the term-dictionary layout.
+全部 ZIP 均可直接导入 Yomitan，并包含公开自动更新地址。
 
-## Planned categories
+## 预留分类
 
 - `frequency/`: frequency and level dictionaries;
 - `grammar/`: grammar references;
 - `kanji/`: kanji information, variants, and frequency.
 
-Only dictionaries backed by redistributable data will receive public download and
-automatic-update links.
+新词典加入公开目录前必须完成来源说明、转换 QA、公开下载和自动更新验证。

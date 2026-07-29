@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.29.2` | Ready | Google Drive + local server | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.29.2` | Ready | Google Drive + local server | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.29.3` | Ready | Public Google Drive | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.29.3` | Ready | Public Google Drive | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -23,13 +23,8 @@
   · [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
 
-本机更新地址分别为：
-
-- `http://127.0.0.1:8765/oald-en-zh/OALDPE-En-Cn-2025.02.14-yomitan.zip`
-- `http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip`
-
-Google Drive 下载文件夹中的两个 OALD ZIP 均可直接导入 Yomitan。本仓库只
-提供词典目录、转换工具和更新清单；之后从同步盘启动服务并检查更新。
+两个 OALD ZIP 均可直接导入 Yomitan。`2026.07.29.3` 及之后版本分别通过
+各自的公开 Google Drive 文件自动更新，不需要启动本机服务。
 
 ## Build the text edition
 

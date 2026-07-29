@@ -17,7 +17,7 @@ def load_routes(archive_root: Path) -> dict[str, Path]:
     routes: dict[str, Path] = {}
     for entry in catalog["dictionaries"]:
         distribution = entry["distribution"]
-        if distribution["status"] != "personal":
+        if distribution["status"] != "public":
             continue
         asset_name = distribution["assetName"]
         route = f"/{entry['id']}/{asset_name}"
@@ -138,7 +138,7 @@ def self_test(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Serve personal Yomitan dictionary ZIPs from localhost."
+        description="Serve built Yomitan ZIPs locally for release testing."
     )
     parser.add_argument(
         "--archive-root",

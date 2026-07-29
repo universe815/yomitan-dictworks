@@ -7,9 +7,9 @@
 | Direction | Japanese → Chinese |
 | Type | Specialized term dictionary |
 | Edition | Second edition |
-| Revision | `2026.07.29.2` |
+| Revision | `2026.07.29.3` |
 | Build | Ready |
-| Update mode | Google Drive + local server |
+| Update mode | Public Google Drive |
 | Archive | `Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip` |
 
 ## Features
@@ -25,12 +25,9 @@
 - [Yomitan 更新清单](../../../../manifests/shin-nikkan-onomatopoeia/index.json)
 - [下载可直接导入的 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing)
 - [Google Drive 下载文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)
-- 本机更新地址：
-  `http://127.0.0.1:8765/shin-nikkan-onomatopoeia/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan.zip`
 
-Google Drive 文件夹中的
-`[JA-ZH Onomatopoeia] 新日汉拟声拟态词词典 第2版.zip` 可直接导入
-Yomitan；之后从同步盘启动本机更新服务并检查更新。
+下载的 ZIP 可直接导入 Yomitan。`2026.07.29.3` 及之后版本会通过公开
+Google Drive 地址自动更新，不需要启动本机服务。
 
 ## Local build
 

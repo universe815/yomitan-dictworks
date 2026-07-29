@@ -1,15 +1,15 @@
 {
   "title": "OALDPE En-Cn 2025.02.14（完整插图版）",
-  "revision": "2026.07.29.2",
+  "revision": "2026.07.29.3",
   "format": 3,
-  "author": "Oxford University Press / 本地 MDX 制作者",
-  "description": "由本地 OALDPE En-Cn MDX 转换为 Yomitan structured content。保留完整正文、检索别名和原词典全部 PNG 插图；发音由本地音频伴侣提供。",
-  "attribution": "仅供个人学习研究使用。内容版权归原权利人所有；转换源来自用户本地文件。不得将生成物公开传播或用于商业用途。",
+  "author": "Oxford University Press / Yomitan 转换维护：universe815",
+  "description": "OALDPE En-Cn 2025.02.14 非官方 Yomitan 完整插图转换版。保留完整正文、检索别名和原词典全部 PNG 插图；发音由本地音频伴侣提供。",
+  "attribution": "Oxford University Press 及相关内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护，本项目与 Oxford University Press 无隶属关系。请仅在符合当地法律并拥有合法内容来源的前提下使用。",
   "url": "https://www.oxfordlearnersdictionaries.com/",
   "sequenced": true,
   "sourceLanguage": "en",
   "targetLanguage": "zh",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh-illustrated/index.json",
-  "downloadUrl": "http://127.0.0.1:8765/oald-en-zh-illustrated/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip"
+  "downloadUrl": "https://drive.usercontent.google.com/download?id=1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu&export=download&confirm=t"
 }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@11.9.0",
-  "description": "Reproducible converters and build tools for personal Yomitan dictionaries.",
+  "description": "Public Yomitan dictionary catalog, converters, and update tooling.",
   "homepage": "https://github.com/universe815/yomitan-dictworks",
   "repository": {
     "type": "git",
