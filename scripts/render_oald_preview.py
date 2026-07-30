@@ -52,7 +52,7 @@ def render_node(value: Any) -> str:
     attributes: list[str] = []
     for name, data_value in value.get('data', {}).items():
         attributes.append(
-            f'data-{html.escape(name, quote=True)}='
+            f'data-sc-{html.escape(name, quote=True)}='
             f'"{html.escape(str(data_value), quote=True)}"'
         )
     for source_name, html_name in (
