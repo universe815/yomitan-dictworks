@@ -32,6 +32,25 @@ def resource_number(value: str) -> int:
     return int(match.group(1)) if match else 999999
 
 
+def normalize_accent(value: str | None) -> str | None:
+    if value is None:
+        return None
+    normalized = re.sub(r'[^a-z]', '', value.casefold())
+    if normalized in {'uk', 'gb', 'bre', 'british', 'britishenglish'}:
+        return 'UK'
+    if normalized in {'us', 'usa', 'ame', 'american', 'americanenglish', 'na'}:
+        return 'US'
+    return None
+
+
+def source_accent(item: dict[str, str]) -> str | None:
+    accent = normalize_accent(item.get('accent'))
+    if accent:
+        return accent
+    match = re.search(r'\b(UK|US)\b', item.get('name', ''), flags=re.IGNORECASE)
+    return match.group(1).upper() if match else None
+
+
 class AudioLibrary:
     def __init__(self, index_path: Path, mdd_paths: list[Path], public_port: int):
         self.index = json.loads(index_path.read_text(encoding='utf-8'))
@@ -83,13 +102,21 @@ class AudioLibrary:
         folded = term.casefold()
         return self.folded_terms.get(folded) or self.folded_redirects.get(folded)
 
-    def sources(self, term: str, scope: str) -> list[dict[str, str]]:
+    def sources(
+        self,
+        term: str,
+        scope: str,
+        accent: str | None = None,
+    ) -> list[dict[str, str]]:
         resolved = self.resolve_term(term.strip())
         if not resolved:
             return []
         group = 'all' if scope == 'all' else 'headword'
+        normalized_accent = normalize_accent(accent)
         result = []
         for item in self.terms[resolved].get(group, []):
+            if normalized_accent and source_accent(item) != normalized_accent:
+                continue
             filename = item['file']
             if not self.resource_descriptor(filename):
                 continue
@@ -111,7 +138,7 @@ class AudioLibrary:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'OALDAudio/1.0'
+    server_version = 'OALDAudio/1.1'
 
     def send_common_headers(self, content_type: str, content_length: int) -> None:
         self.send_header('Content-Type', content_type)
@@ -144,8 +171,12 @@ class Handler(BaseHTTPRequestHandler):
         query = parse_qs(parsed.query)
         term = query.get('term', [''])[0]
         scope = query.get('scope', ['headword'])[0]
+        accent = query.get('accent', query.get('user', [None]))[0]
         if term:
-            payload = {'type': 'audioSourceList', 'audioSources': library.sources(term, scope)}
+            payload = {
+                'type': 'audioSourceList',
+                'audioSources': library.sources(term, scope, accent),
+            }
             content = json.dumps(payload, ensure_ascii=False).encode('utf-8')
             self.send_response(200)
             self.send_common_headers('application/json; charset=utf-8', len(content))
@@ -153,7 +184,10 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(content)
             return
 
-        content = 'OALD audio server is running. Use /?term=take'.encode('utf-8')
+        content = (
+            'OALD audio server is running. Use /?term=take, '
+            '/?term=take&accent=UK, or /?term=take&accent=US'
+        ).encode('utf-8')
         self.send_response(200)
         self.send_common_headers('text/plain; charset=utf-8', len(content))
         self.end_headers()
@@ -176,6 +210,13 @@ def main() -> None:
     )
     parser.add_argument('--port', type=int, default=5051)
     parser.add_argument('--self-test', metavar='TERM')
+    parser.add_argument(
+        '--require-accent',
+        action='append',
+        choices=('UK', 'US'),
+        default=[],
+        help='with --self-test, require and read at least one source for this accent',
+    )
     args = parser.parse_args()
     mdd_paths = args.mdd
 
@@ -188,12 +229,39 @@ def main() -> None:
         sources = library.sources(args.self_test, 'headword')
         if not sources:
             raise SystemExit(f'No headword audio found for {args.self_test!r}')
-        filename = unquote(urlparse(sources[0]['url']).path.rsplit('/', 1)[-1])
-        content = library.read_audio(filename)
-        if not content or not content.startswith(b'ID3') and content[:2] != b'\xff\xfb':
-            raise SystemExit('Audio self-test failed: retrieved resource is not recognizable MP3 data')
-        print(json.dumps({'term': args.self_test, 'sources': sources, 'firstAudioBytes': len(content)},
-                         ensure_ascii=False, indent=2))
+        tested_sources = []
+        required_accents = args.require_accent or [
+            accent
+            for accent in ('UK', 'US')
+            if library.sources(args.self_test, 'headword', accent)
+        ]
+        for accent in required_accents:
+            accent_sources = library.sources(args.self_test, 'headword', accent)
+            if not accent_sources:
+                raise SystemExit(
+                    f'No {accent} headword audio found for {args.self_test!r}'
+                )
+            source = accent_sources[0]
+            filename = unquote(urlparse(source['url']).path.rsplit('/', 1)[-1])
+            content = library.read_audio(filename)
+            if (
+                not content
+                or not content.startswith(b'ID3')
+                and content[:2] not in {b'\xff\xfb', b'\xff\xf3', b'\xff\xf2'}
+            ):
+                raise SystemExit(
+                    f'Audio self-test failed: {accent} resource is not recognizable MP3 data'
+                )
+            tested_sources.append({
+                'accent': accent,
+                'source': source,
+                'audioBytes': len(content),
+            })
+        print(json.dumps({
+            'term': args.self_test,
+            'sources': sources,
+            'testedSources': tested_sources,
+        }, ensure_ascii=False, indent=2))
         return
 
     server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)

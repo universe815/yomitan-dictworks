@@ -29,6 +29,15 @@ def audio_name(element, *, example: bool) -> str:
     return f'OALD {accent} example' if example else f'OALD {accent}'
 
 
+def audio_accent(element) -> str | None:
+    classes = class_tokens(element)
+    if 'pron-uk' in classes:
+        return 'UK'
+    if 'pron-us' in classes:
+        return 'US'
+    return None
+
+
 def unique_sources(values: list[dict[str, str]]) -> list[dict[str, str]]:
     result = []
     seen = set()
@@ -52,7 +61,11 @@ def extract_audio(source: str) -> tuple[list[dict[str, str]], list[dict[str, str
         if not filename:
             continue
         example = 'app' in class_tokens(anchor)
-        all_sources.append({'file': filename, 'name': audio_name(anchor, example=example)})
+        source = {'file': filename, 'name': audio_name(anchor, example=example)}
+        accent = audio_accent(anchor)
+        if accent:
+            source['accent'] = accent
+        all_sources.append(source)
 
     # The main pronunciation block is a direct child of each webtop. This excludes
     # inflected-form tables nested under the collapse panel.
@@ -65,7 +78,11 @@ def extract_audio(source: str) -> tuple[list[dict[str, str]], list[dict[str, str
     for anchor in document.xpath(xpath):
         filename = sound_file(anchor.get('href') or '')
         if filename:
-            headword_sources.append({'file': filename, 'name': audio_name(anchor, example=False)})
+            source = {'file': filename, 'name': audio_name(anchor, example=False)}
+            accent = audio_accent(anchor)
+            if accent:
+                source['accent'] = accent
+            headword_sources.append(source)
 
     return unique_sources(headword_sources), unique_sources(all_sources)
 
