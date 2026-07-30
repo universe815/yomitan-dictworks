@@ -11,7 +11,9 @@ from mdict_utils.base.readmdict import MDX
 
 
 WHITESPACE_RE = re.compile(r'\s+')
-OXFORD_SYMBOL_RE = re.compile(r'^ox(?P<list>[35])ksym_(?P<level>[abc][12])$')
+OXFORD_SYMBOL_RE = re.compile(
+    r'^ox(?P<list>[35])ksym(?:sub)?_(?P<level>[abc][12])$'
+)
 SKIP_TAGS = {'script', 'style', 'link', 'meta'}
 BLOCK_TAGS = {'html', 'body', 'oaldpe', 'div', 'aside', 'section', 'article', 'p',
               'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
@@ -21,7 +23,8 @@ SEMANTIC_CLASSES = {
     'entry', 'top-container', 'top-g', 'webtop', 'symbols', 'opal_symbol',
     'headword', 'pos', 'phonetics', 'phons_br', 'phons_n_am', 'phon',
     'jumplinks', 'jumplink', 'grammar', 'labels', 'senses_multiple',
-    'senses_single', 'shcut-g', 'shcut', 'sense', 'sensetop', 'iteration',
+    'senses_single', 'sense_single', 'shcut-g', 'shcut', 'sense', 'sensetop',
+    'iteration',
     'variants', 'v-g', 'v', 'def', 'deft', 'examples', 'x', 'xt', 'unx',
     'unxt', 'cl', 'gloss', 'cf', 'xrefs', 'prefix', 'xr-g', 'xh', 'sep',
     'collapse', 'unbox', 'box_title', 'body', 'closed', 'p', 'deflist',
@@ -29,10 +32,39 @@ SEMANTIC_CLASSES = {
     'collocs_list', 'topic-g', 'topic', 'topic_name', 'topic_cefr', 'idioms',
     'idioms_heading', 'idm-g', 'idm', 'phrasalverb', 'phrasal_verb_links',
     'verb_forms_table', 'verb_form', 'vf_prefix', 'verb_phons', 'inflections',
-    'use', 'xref', 'single',
+    'use', 'xref', 'single', 'app', 'ndv', 'belong-to', 'dis-g', 'dtxt',
+    'subj', 'inflected_form', 'st', 'pv-g', 'pv', 'ebi', 'inline', 'dh',
+    'xw', 'wfp', 'wfw', 'pvarr', 'xs', 'pvrefs', 'idmsep', 'def_qt', 'wx',
+    'wfo', 'lisep', 'blockquote', 'p-g', 'hm', 'eph', 'phons_we',
+    'phon_label', 'alt', 'sup', 'xhm', 'xh_bold', 've', 'esc', 'er', 'sub',
+    'alt-g', 'frac-g', 'num', 'den', 'footer', 'h4',
 }
-CHINESE_TAGS = {'chn', 'deft', 'xt', 'unxt', 'undt', 'ubx', 'labelx',
-                'unboxx', 'shcut', 'oald', 'ai', 'leon'}
+CLASS_TOKEN_ALIASES = {
+    'Ref': ('ref',),
+    'sense_single': ('sense_single', 'senses_single'),
+}
+TAG_TOKEN_ALIASES = {
+    'chn': ('zh',),
+    'chn_sc': ('zh', 'zh-sc'),
+    'chn_tc': ('zh', 'zh-tc'),
+    'deft': ('deft', 'translation', 'definition-translation', 'zh'),
+    'dtxtx': ('dtxt', 'translation', 'inline-translation', 'zh'),
+    'xt': ('xt', 'translation', 'example-translation', 'zh'),
+    'unxt': ('unxt', 'translation', 'example-translation', 'zh'),
+    'undt': ('undt', 'translation', 'note-translation', 'zh'),
+    'ubx': ('ubx', 'translation', 'box-translation', 'zh'),
+    'labelx': ('labelx', 'zh'),
+    'unboxx': ('unboxx', 'zh'),
+    'uset': ('uset', 'zh'),
+    'shcut': ('shortcut-zh', 'zh'),
+    'oald': ('source-oald', 'zh'),
+    'leon': ('source-leon', 'zh'),
+    'ai': ('source-ai', 'zh'),
+}
+CHINESE_TAGS = {
+    'chn', 'chn_sc', 'chn_tc', 'deft', 'dtxtx', 'xt', 'unxt', 'undt',
+    'ubx', 'labelx', 'unboxx', 'uset', 'shcut', 'oald', 'ai', 'leon',
+}
 ITALIC_CLASSES = {'ei'}
 BOLD_CLASSES = {'eb'}
 
@@ -117,6 +149,26 @@ def internal_href(source_href: str) -> str | None:
     return f'?query={quote(target)}'
 
 
+def semantic_tokens(element: Any, classes: set[str], tag: str) -> list[str]:
+    tokens: set[str] = set()
+    for class_name in classes:
+        if class_name in SEMANTIC_CLASSES:
+            tokens.add(class_name)
+        tokens.update(CLASS_TOKEN_ALIASES.get(class_name, ()))
+    tokens.update(TAG_TOKEN_ALIASES.get(tag, ()))
+
+    form = (element.get('form') or '').strip().lower()
+    if form and re.fullmatch(r'[a-z0-9_-]+', form):
+        tokens.add(f'form-{form}')
+    un_kind = (element.get('un') or '').strip().lower()
+    if un_kind and re.fullmatch(r'[a-z0-9_-]+', un_kind):
+        tokens.add(f'un-{un_kind}')
+    type_name = (element.get('type') or '').strip().lower()
+    if type_name and re.fullmatch(r'[a-z0-9_-]+', type_name):
+        tokens.add(f'type-{type_name}')
+    return sorted(tokens)
+
+
 def convert_collapse(
     element: Any,
     stats: Counter[str],
@@ -186,6 +238,60 @@ def convert_collapse(
     return details
 
 
+def convert_phrase_section(
+    element: Any,
+    stats: Counter[str],
+    include_images: bool,
+    referenced_images: set[str],
+    section_kind: str,
+) -> Any:
+    heading_class = 'idioms_heading' if section_kind == 'idioms' else 'unbox'
+    heading = next(
+        (
+            child
+            for child in element
+            if heading_class in set((child.get('class') or '').split())
+        ),
+        None,
+    )
+    if heading is None:
+        return None
+    heading_content = element_content(
+        heading,
+        stats,
+        include_images,
+        referenced_images,
+    )
+    body_content = element_content_without(
+        element,
+        heading,
+        stats,
+        include_images,
+        referenced_images,
+    )
+    if heading_content is None or body_content is None:
+        return None
+    stats[f'{section_kind}_sections'] += 1
+    return {
+        'tag': 'details',
+        'data': {'oald': f'phrase-section {section_kind}'},
+        'content': [
+            {
+                'tag': 'summary',
+                'data': {
+                    'oald': f'phrase_heading {heading_class}',
+                },
+                'content': heading_content,
+            },
+            {
+                'tag': 'div',
+                'data': {'oald': 'phrase_body'},
+                'content': body_content,
+            },
+        ],
+    }
+
+
 def convert_element(element: Any, stats: Counter[str], include_images: bool,
                     referenced_images: set[str]) -> Any:
     tag = str(element.tag).lower() if isinstance(element.tag, str) else ''
@@ -207,6 +313,26 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
                 'content': f'{list_name} · {level}',
                 'data': {'oald': f'badge oxford-list level-{level.lower()}'},
             }
+    if 'idioms' in classes:
+        phrase_section = convert_phrase_section(
+            element,
+            stats,
+            include_images,
+            referenced_images,
+            'idioms',
+        )
+        if phrase_section is not None:
+            return phrase_section
+    if 'phrasal_verb_links' in classes:
+        phrase_section = convert_phrase_section(
+            element,
+            stats,
+            include_images,
+            referenced_images,
+            'phrasal_verb_links',
+        )
+        if phrase_section is not None:
+            return phrase_section
     if 'collapse' in classes:
         collapse = convert_collapse(
             element,
@@ -231,8 +357,9 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
             if alt:
                 node['alt'] = alt
                 node['title'] = alt
-            if classes:
-                node['data'] = {'oald': ' '.join(sorted(classes))}
+            image_tokens = semantic_tokens(element, classes, tag)
+            if image_tokens:
+                node['data'] = {'oald': ' '.join(image_tokens)}
             if 'fullsize' in classes:
                 node['collapsible'] = True
                 node['collapsed'] = True
@@ -248,11 +375,7 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
     if content is None:
         return None
 
-    data_tokens = sorted(classes & SEMANTIC_CLASSES)
-    if tag in CHINESE_TAGS:
-        data_tokens.append('zh')
-        if tag in {'deft', 'xt', 'unxt', 'undt', 'ubx'}:
-            data_tokens.append(tag)
+    data_tokens = semantic_tokens(element, classes, tag)
     data = {'oald': ' '.join(sorted(set(data_tokens)))} if data_tokens else None
 
     if tag == 'br':
@@ -278,9 +401,15 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
         href = element.get('href') or ''
         converted_href = internal_href(href)
         if converted_href:
-            return {'tag': 'a', 'content': content, 'href': converted_href}
+            node = {'tag': 'a', 'content': content, 'href': converted_href}
+            if data:
+                return {'tag': 'span', 'content': node, 'data': data}
+            return node
         if href.startswith(('http://', 'https://')):
-            return {'tag': 'a', 'content': content, 'href': href}
+            node = {'tag': 'a', 'content': content, 'href': href}
+            if data:
+                return {'tag': 'span', 'content': node, 'data': data}
+            return node
 
     node_tag = 'div' if tag in BLOCK_TAGS else 'span'
     node = {'tag': node_tag, 'content': content}

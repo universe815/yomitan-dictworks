@@ -5,6 +5,12 @@ not make proprietary source data redistributable.
 
 ## 2026-07-30
 
+- Refined both OALD editions as `2026.07.30.3`: restored 40+ additional
+  high-value source classes and custom tags; distinguished OALD, AI, and Leon
+  Chinese sources; color-coded all 18 supplemental module kinds; added native
+  folding for Idioms and Phrasal Verbs; and recreated richer layouts for
+  British/American usage, verb forms, word families, collocations, grammar,
+  Wordfinder, and related-entry metadata.
 - Rebuilt both OALD editions as `2026.07.30.2`: restored whitespace lost
   around inline MDX nodes; preserved substantially more semantic structure;
   separated English examples and Chinese translations; added distinct
