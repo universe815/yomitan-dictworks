@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.30.3` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.30.3` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.30.4` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.30.4` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -48,7 +48,7 @@ pnpm oald:build
 python scripts/qa_oald.py generated/oald-structured.ndjson
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
-  --revision 2026.07.30.3
+  --revision 2026.07.30.4
 ```
 
 ## Build the illustrated edition
@@ -68,7 +68,7 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.07.30.3 `
+  --revision 2026.07.30.4 `
   --expect-images 622
 ```
 

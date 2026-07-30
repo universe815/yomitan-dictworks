@@ -63,6 +63,30 @@ def main() -> None:
             raise ValueError('index format is not Yomitan v3')
         if index.get('isUpdatable') is not True:
             raise ValueError('index is not marked updatable')
+        if 'styles.css' not in archive_names:
+            raise ValueError('archive contains no styles.css')
+        styles = archive.read('styles.css').decode('utf-8')
+        if '[data-sc-oald' not in styles:
+            raise ValueError(
+                'styles.css lacks Yomitan data-sc-oald selectors'
+            )
+        if '[data-oald' in styles:
+            raise ValueError(
+                'styles.css contains non-rendering data-oald selectors'
+            )
+        for required_selector in (
+            '[data-sc-oald~="headword"]',
+            '[data-sc-oald~="badge"]',
+            '[data-sc-oald~="iteration"]',
+            '[data-sc-oald~="deft"]',
+            '[data-sc-oald~="examples"]',
+            '[data-sc-oald~="collapse"]',
+            '[data-sc-oald~="idioms"]',
+        ):
+            if required_selector not in styles:
+                raise ValueError(
+                    f'styles.css lacks required selector {required_selector}'
+                )
 
         term_banks = sorted(
             name
@@ -161,6 +185,7 @@ def main() -> None:
         'structuredDefinitions': counters['structured_definitions'],
         'details': counters['tag_details'],
         'summaries': counters['tag_summary'],
+        'stylesUseYomitanDataPrefix': True,
         'imageReferences': len(image_references),
         'packagedImages': args.expect_images,
     }

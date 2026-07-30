@@ -5,6 +5,10 @@ not make proprietary source data redistributable.
 
 ## 2026-07-30
 
+- Fixed both OALD editions as `2026.07.30.4`: changed all dictionary-style
+  selectors to Yomitan's rendered `data-sc-oald` attributes, aligned the
+  standalone preview with the real renderer, and added archive QA that rejects
+  the non-rendering `data-oald` form.
 - Refined both OALD editions as `2026.07.30.3`: restored 40+ additional
   high-value source classes and custom tags; distinguished OALD, AI, and Leon
   Chinese sources; color-coded all 18 supplemental module kinds; added native
