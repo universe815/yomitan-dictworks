@@ -5,6 +5,14 @@ not make proprietary source data redistributable.
 
 ## 2026-07-30
 
+- Rebuilt both OALD editions as `2026.07.30.2`: restored whitespace lost
+  around inline MDX nodes; preserved substantially more semantic structure;
+  separated English examples and Chinese translations; added distinct
+  headword, pronunciation, sense, topic, idiom, and CEFR styling; and changed
+  long supplemental sections into native Yomitan `details` panels.
+- Added representative OALD spacing/structure QA, standalone visual previews,
+  and fast archive-wide checks for term rows, collapsible sections, CRCs, and
+  the complete 622-image reference set.
 - Migrated all four active editions to versioned GitHub Release automatic
   downloads in `2026.07.30.1`, while retaining the same public Google Drive
   files for manual downloads and archival copies.

@@ -38,14 +38,29 @@ def main() -> None:
         action="store_true",
         help="Print planned copies without changing the Drive folder.",
     )
+    parser.add_argument(
+        "--dictionary-id",
+        action="append",
+        dest="dictionary_ids",
+        help="Sync only the selected catalog edition; repeat as needed.",
+    )
     args = parser.parse_args()
 
     source_dir = args.source_dir.expanduser().resolve()
     drive_root = args.drive_root.expanduser().resolve()
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    selected_ids = set(args.dictionary_ids or [])
+    catalog_ids = {entry["id"] for entry in catalog["dictionaries"]}
+    unknown_ids = sorted(selected_ids - catalog_ids)
+    if unknown_ids:
+        raise ValueError(
+            f"unknown dictionary IDs: {', '.join(unknown_ids)}"
+        )
     results = []
 
     for entry in catalog["dictionaries"]:
+        if selected_ids and entry["id"] not in selected_ids:
+            continue
         distribution = entry["distribution"]
         if distribution["status"] != "public":
             continue
