@@ -94,6 +94,11 @@ def main() -> None:
     parser.add_argument('--styles', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--term', action='append', dest='terms')
+    parser.add_argument(
+        '--expand-all',
+        action='store_true',
+        help='Open every details section for visual QA.',
+    )
     args = parser.parse_args()
 
     requested = set(args.terms or [])
@@ -166,6 +171,7 @@ body {{
 </head>
 <body>
 {cards}
+{'<script>document.querySelectorAll("details").forEach((detail) => { detail.open = true; });</script>' if args.expand_all else ''}
 </body>
 </html>
 '''

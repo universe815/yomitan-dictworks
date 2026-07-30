@@ -4,17 +4,21 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.30.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.30.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.30.3` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.30.3` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
 - English–Chinese structured entries and lookup redirects;
 - restored inline spacing around collocations, labels, and translations;
-- distinct headword, pronunciation, sense, definition, example, topic, and idiom
-  hierarchy with dictionary-scoped light/dark styling;
-- collapsible extra examples, synonym notes, wordfinder, verb forms, and
-  collocations, with Word Origin expanded by default;
+- distinct headword, pronunciation, sense, definition, example, topic, idiom,
+  and phrasal-verb hierarchy with dictionary-scoped light/dark styling;
+- separate visual source markers for original OALD, AI, and Leon Chinese text;
+- color-coded native folding for all 18 source module kinds, including extra
+  examples, synonyms, Wordfinder, verb forms, collocations, word families,
+  British/American usage, grammar, language banks, culture, and Word Origin;
+- native folding for Idioms and Phrasal Verbs, with Word Origin expanded by
+  default;
 - optional complete illustration packaging;
 - separate local MDD audio server to avoid a multi-gigabyte term archive.
 
@@ -44,7 +48,7 @@ pnpm oald:build
 python scripts/qa_oald.py generated/oald-structured.ndjson
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
-  --revision 2026.07.30.2
+  --revision 2026.07.30.3
 ```
 
 ## Build the illustrated edition
@@ -64,7 +68,7 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.07.30.2 `
+  --revision 2026.07.30.3 `
   --expect-images 622
 ```
 
