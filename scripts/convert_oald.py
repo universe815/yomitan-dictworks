@@ -11,17 +11,25 @@ from mdict_utils.base.readmdict import MDX
 
 
 WHITESPACE_RE = re.compile(r'\s+')
+OXFORD_SYMBOL_RE = re.compile(r'^ox(?P<list>[35])ksym_(?P<level>[abc][12])$')
 SKIP_TAGS = {'script', 'style', 'link', 'meta'}
 BLOCK_TAGS = {'html', 'body', 'oaldpe', 'div', 'aside', 'section', 'article', 'p',
               'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
 TABLE_TAGS = {'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th'}
 LIST_TAGS = {'ol', 'ul', 'li'}
 SEMANTIC_CLASSES = {
-    'entry', 'webtop', 'headword', 'pos', 'phonetics', 'phon', 'grammar',
-    'labels', 'def', 'deft', 'x', 'xt', 'unx', 'unxt', 'cf', 'shcut',
-    'idioms_heading', 'idm', 'phrasalverb', 'box_title', 'topic_name',
-    'topic_cefr', 'xh', 'gloss', 'examples', 'sense', 'collapse', 'unbox',
-    'patterns', 'verb_forms_table', 'prefix', 'iteration', 'xrefs', 'topic-g',
+    'entry', 'top-container', 'top-g', 'webtop', 'symbols', 'opal_symbol',
+    'headword', 'pos', 'phonetics', 'phons_br', 'phons_n_am', 'phon',
+    'jumplinks', 'jumplink', 'grammar', 'labels', 'senses_multiple',
+    'senses_single', 'shcut-g', 'shcut', 'sense', 'sensetop', 'iteration',
+    'variants', 'v-g', 'v', 'def', 'deft', 'examples', 'x', 'xt', 'unx',
+    'unxt', 'cl', 'gloss', 'cf', 'xrefs', 'prefix', 'xr-g', 'xh', 'sep',
+    'collapse', 'unbox', 'box_title', 'body', 'closed', 'p', 'deflist',
+    'defpara', 'eb', 'ei', 'bulletsep', 'un', 'patterns', 'bullet', 'li',
+    'collocs_list', 'topic-g', 'topic', 'topic_name', 'topic_cefr', 'idioms',
+    'idioms_heading', 'idm-g', 'idm', 'phrasalverb', 'phrasal_verb_links',
+    'verb_forms_table', 'verb_form', 'vf_prefix', 'verb_phons', 'inflections',
+    'use', 'xref', 'single',
 }
 CHINESE_TAGS = {'chn', 'deft', 'xt', 'unxt', 'undt', 'ubx', 'labelx',
                 'unboxx', 'shcut', 'oald', 'ai', 'leon'}
@@ -29,11 +37,25 @@ ITALIC_CLASSES = {'ei'}
 BOLD_CLASSES = {'eb'}
 
 
-def normalize_text(value: str | None) -> str | None:
+def normalize_text(
+    value: str | None,
+    *,
+    preserve_edges: bool = False,
+) -> str | None:
     if not value:
         return None
-    normalized = WHITESPACE_RE.sub(' ', value.replace('\u200b', '')).strip()
-    return normalized or None
+    cleaned = value.replace('\u200b', '')
+    leading_space = cleaned[0].isspace()
+    trailing_space = cleaned[-1].isspace()
+    normalized = WHITESPACE_RE.sub(' ', cleaned).strip()
+    if not normalized:
+        return ' ' if preserve_edges and (leading_space or trailing_space) else None
+    if preserve_edges:
+        if leading_space:
+            normalized = f' {normalized}'
+        if trailing_space:
+            normalized = f'{normalized} '
+    return normalized
 
 
 def content_value(parts: list[Any]) -> Any:
@@ -46,14 +68,41 @@ def content_value(parts: list[Any]) -> Any:
 def element_content(element: Any, stats: Counter[str], include_images: bool,
                     referenced_images: set[str]) -> Any:
     parts: list[Any] = []
-    text = normalize_text(element.text)
+    text = normalize_text(element.text, preserve_edges=True)
     if text:
         parts.append(text)
     for child in element:
         converted = convert_element(child, stats, include_images, referenced_images)
         if converted is not None:
             parts.append(converted)
-        tail = normalize_text(child.tail)
+        tail = normalize_text(child.tail, preserve_edges=True)
+        if tail:
+            parts.append(tail)
+    return content_value(parts)
+
+
+def element_content_without(
+    element: Any,
+    excluded_child: Any,
+    stats: Counter[str],
+    include_images: bool,
+    referenced_images: set[str],
+) -> Any:
+    parts: list[Any] = []
+    text = normalize_text(element.text, preserve_edges=True)
+    if text:
+        parts.append(text)
+    for child in element:
+        if child is not excluded_child:
+            converted = convert_element(
+                child,
+                stats,
+                include_images,
+                referenced_images,
+            )
+            if converted is not None:
+                parts.append(converted)
+        tail = normalize_text(child.tail, preserve_edges=True)
         if tail:
             parts.append(tail)
     return content_value(parts)
@@ -68,6 +117,75 @@ def internal_href(source_href: str) -> str | None:
     return f'?query={quote(target)}'
 
 
+def convert_collapse(
+    element: Any,
+    stats: Counter[str],
+    include_images: bool,
+    referenced_images: set[str],
+) -> Any:
+    wrapper = next(
+        (
+            child
+            for child in element
+            if 'unbox' in set((child.get('class') or '').split())
+        ),
+        None,
+    )
+    if wrapper is None:
+        return None
+    title = next(
+        (
+            child
+            for child in wrapper
+            if 'box_title' in set((child.get('class') or '').split())
+        ),
+        None,
+    )
+    if title is None:
+        return None
+
+    title_content = element_content(
+        title,
+        stats,
+        include_images,
+        referenced_images,
+    )
+    body_content = element_content_without(
+        wrapper,
+        title,
+        stats,
+        include_images,
+        referenced_images,
+    )
+    if title_content is None or body_content is None:
+        return None
+
+    section_kind = (wrapper.get('unbox') or 'section').strip().lower()
+    section_kind = re.sub(r'[^a-z0-9_-]+', '-', section_kind).strip('-')
+    if not section_kind:
+        section_kind = 'section'
+    details: dict[str, Any] = {
+        'tag': 'details',
+        'data': {'oald': f'collapse collapse-{section_kind}'},
+        'content': [
+            {
+                'tag': 'summary',
+                'data': {'oald': 'box_title'},
+                'content': title_content,
+            },
+            {
+                'tag': 'div',
+                'data': {'oald': 'collapse_body'},
+                'content': body_content,
+            },
+        ],
+    }
+    if section_kind == 'wordorigin':
+        details['open'] = True
+    stats['collapsible_sections'] += 1
+    return details
+
+
 def convert_element(element: Any, stats: Counter[str], include_images: bool,
                     referenced_images: set[str]) -> Any:
     tag = str(element.tag).lower() if isinstance(element.tag, str) else ''
@@ -78,6 +196,26 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
     if tag == 'a' and ('sound' in classes or (element.get('href') or '').startswith('sound://')):
         stats['audio_links_removed'] += 1
         return None
+    for class_name in classes:
+        symbol_match = OXFORD_SYMBOL_RE.fullmatch(class_name)
+        if symbol_match is not None:
+            list_name = f"Oxford {symbol_match.group('list')}000"
+            level = symbol_match.group('level').upper()
+            stats['frequency_badges_preserved'] += 1
+            return {
+                'tag': 'span',
+                'content': f'{list_name} · {level}',
+                'data': {'oald': f'badge oxford-list level-{level.lower()}'},
+            }
+    if 'collapse' in classes:
+        collapse = convert_collapse(
+            element,
+            stats,
+            include_images,
+            referenced_images,
+        )
+        if collapse is not None:
+            return collapse
     if tag == 'img':
         alt = normalize_text(element.get('alt') or element.get('title'))
         resource = unquote(element.get('data-src') or element.get('src') or '')
@@ -128,6 +266,8 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
                 node['rowSpan'] = int(element.get('rowspan'))
         if data:
             node['data'] = data
+        if tag in CHINESE_TAGS:
+            node['lang'] = 'zh'
         return node
     if tag in LIST_TAGS:
         node = {'tag': tag, 'content': content}
@@ -146,6 +286,11 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
     node = {'tag': node_tag, 'content': content}
     if data:
         node['data'] = data
+    title = normalize_text(element.get('title'))
+    if title:
+        node['title'] = title
+    if tag in CHINESE_TAGS:
+        node['lang'] = 'zh'
     if tag in {'b', 'strong'} or classes & BOLD_CLASSES:
         node['style'] = {'fontWeight': 'bold'}
     elif tag in {'i', 'em'} or classes & ITALIC_CLASSES:
@@ -181,10 +326,21 @@ def main() -> None:
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--limit-direct', type=int)
+    parser.add_argument(
+        '--term',
+        action='append',
+        dest='terms',
+        help='Only convert the exact headword; repeat to select multiple terms.',
+    )
     parser.add_argument('--include-images', action='store_true')
     args = parser.parse_args()
 
     mdx = MDX(str(args.mdx), '', False, None)
+    requested_terms = {
+        term.strip().casefold()
+        for term in (args.terms or [])
+        if term.strip()
+    }
     stats: Counter[str] = Counter()
     direct_sequences: dict[str, int] = {}
     redirects: dict[str, str] = {}
@@ -203,6 +359,9 @@ def main() -> None:
                 continue
             if not meaningful_entry(key, source):
                 stats['non_dictionary_html_skipped'] += 1
+                continue
+            if requested_terms and key.casefold() not in requested_terms:
+                stats['unselected_direct_skipped'] += 1
                 continue
             if args.limit_direct is not None and stats['direct_written'] >= args.limit_direct:
                 continue
@@ -232,7 +391,7 @@ def main() -> None:
             output.write(json.dumps(record, ensure_ascii=False, separators=(',', ':')) + '\n')
             stats['direct_written'] += 1
 
-        if args.limit_direct is None:
+        if args.limit_direct is None and not requested_terms:
             for alias, target in redirects.items():
                 if not alias or alias.startswith('@') or alias in direct_sequences:
                     stats['redirects_skipped'] += 1
@@ -258,6 +417,11 @@ def main() -> None:
         'unique_redirect_keys': len(redirects),
         'unique_images_referenced': len(referenced_images),
         'images_referenced': sorted(referenced_images),
+        'terms_requested': sorted(requested_terms),
+        'terms_missing': sorted(requested_terms - {
+            term.casefold()
+            for term in direct_sequences
+        }),
         'output_bytes': args.output.stat().st_size,
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)

@@ -117,7 +117,11 @@ python scripts/repack_update_archive.py `
 ```powershell
 python scripts/sync_google_drive_archives.py `
   --source-dir "<dictionary-output-path>" `
-  --drive-root "<google-drive-yomitan-path>"
+  --drive-root "<google-drive-yomitan-path>" `
+  --dictionary-id "<catalog-id>"
 ```
+
+重复 `--dictionary-id` 可在一次发布中只同步若干已重新构建的 edition；
+省略时同步 catalog 中全部公开词典。
 
 本地 HTTP 服务仅保留给维护者做发布前路由测试，不属于公开更新链路。

@@ -1,20 +1,643 @@
-[data-oald~="entry"] { margin-bottom: 0.8em; }
-[data-oald~="webtop"] { border-bottom: 1px solid #d7dce2; margin-bottom: 0.5em; padding-bottom: 0.25em; }
-[data-oald~="headword"] { color: #0072cf; font-size: 1.35em; font-weight: bold; }
-[data-oald~="pos"] { color: #b45f06; font-style: italic; font-weight: bold; margin-left: 0.5em; }
-[data-oald~="phon"] { color: #555; margin-left: 0.4em; }
-[data-oald~="grammar"], [data-oald~="labels"] { color: #765; font-style: italic; }
-[data-oald~="shcut"], [data-oald~="idioms_heading"], [data-oald~="box_title"], [data-oald~="patterns"] { color: #007a6c; font-weight: bold; margin-top: 0.7em; }
-[data-oald~="def"] { font-weight: bold; }
-[data-oald~="zh"] { color: #18794e; }
-[data-oald~="deft"], [data-oald~="xt"], [data-oald~="unxt"], [data-oald~="undt"], [data-oald~="ubx"] { display: block; margin-left: 0.5em; }
-[data-oald~="cf"] { color: #7a3e9d; font-weight: bold; }
-[data-oald~="examples"] { margin-bottom: 0.5em; margin-top: 0.25em; }
-[data-oald~="x"], [data-oald~="unx"] { color: #334; }
-[data-oald~="sense"] { margin-bottom: 0.65em; }
-[data-oald~="iteration"] { color: #0072cf; font-weight: bold; margin-right: 0.35em; }
-[data-oald~="topic_name"], [data-oald~="topic_cefr"] { color: #666; font-size: 0.9em; }
-[data-oald~="image-placeholder"] { color: #888; font-style: italic; }
-[data-oald~="redirect"] { color: #666; }
-table { border-collapse: collapse; margin: 0.4em 0; }
-td, th { border: 1px solid #ccd2d8; padding: 0.2em 0.4em; }
+[data-oald~="entry"] {
+  --oald-blue: #176fae;
+  --oald-blue-deep: #125782;
+  --oald-blue-soft: #eef7fd;
+  --oald-cyan: #11869b;
+  --oald-green: #18754d;
+  --oald-green-soft: #eff9f3;
+  --oald-orange: #a55219;
+  --oald-red: #c52b53;
+  --oald-purple: #7451a6;
+  --oald-ink: #24313d;
+  --oald-muted: #667684;
+  --oald-line: #d9e3ea;
+  --oald-panel: #f7fafc;
+  color: var(--oald-ink);
+  font-family: "Segoe UI", "Noto Sans", "Noto Sans SC", "Microsoft YaHei",
+    sans-serif;
+  font-size: 0.98em;
+  line-height: 1.62;
+  margin: 0 0 1.2em;
+  overflow-wrap: anywhere;
+}
+
+[data-oald~="entry"] * {
+  box-sizing: border-box;
+}
+
+[data-oald~="top-container"] {
+  display: block;
+  margin: 0 0 0.9em;
+}
+
+[data-oald~="webtop"] {
+  align-items: baseline;
+  background: linear-gradient(135deg, var(--oald-blue-soft), #f8fcff);
+  border: 1px solid #cfe2ef;
+  border-left: 0.32em solid var(--oald-blue);
+  border-radius: 0.55em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 0.65em;
+  padding: 0.7em 0.85em 0.75em;
+}
+
+[data-oald~="headword"] {
+  color: var(--oald-blue-deep);
+  display: inline;
+  font-family: Cambria, Georgia, "Noto Serif", "Noto Serif SC", serif;
+  font-size: 1.58em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+[data-oald~="pos"] {
+  color: var(--oald-orange);
+  font-family: Cambria, Georgia, serif;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 650;
+}
+
+[data-oald~="symbols"] {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+}
+
+[data-oald~="badge"],
+[data-oald~="opal_symbol"] {
+  background: #e7f4fb;
+  border: 1px solid #b8dbea;
+  border-radius: 999px;
+  color: var(--oald-blue-deep);
+  display: inline-flex;
+  font-family: "Segoe UI", "Noto Sans", sans-serif;
+  font-size: 0.72em;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1.35;
+  padding: 0.12em 0.52em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+[data-oald~="opal_symbol"] {
+  background: #f1edfb;
+  border-color: #d6c9ef;
+  color: var(--oald-purple);
+}
+
+[data-oald~="phonetics"] {
+  align-items: center;
+  display: flex;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+  gap: 0.35em 0.8em;
+  margin-top: 0.18em;
+}
+
+[data-oald~="phons_br"],
+[data-oald~="phons_n_am"] {
+  align-items: center;
+  color: #3d4c58;
+  display: inline-flex;
+  gap: 0.32em;
+}
+
+[data-oald~="phons_br"]::before,
+[data-oald~="phons_n_am"]::before {
+  border-radius: 0.3em;
+  color: white;
+  font-family: "Segoe UI", "Noto Sans SC", sans-serif;
+  font-size: 0.68em;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 0 0.42em;
+}
+
+[data-oald~="phons_br"]::before {
+  background: var(--oald-blue);
+  content: "英";
+}
+
+[data-oald~="phons_n_am"]::before {
+  background: var(--oald-red);
+  content: "美";
+}
+
+[data-oald~="phon"] {
+  font-family: "Lucida Sans Unicode", "Segoe UI", sans-serif;
+  font-size: 0.96em;
+  white-space: nowrap;
+}
+
+[data-oald~="jumplinks"] {
+  margin-left: auto;
+}
+
+[data-oald~="jumplink"] {
+  border: 1px solid #9bcbd8;
+  border-radius: 999px;
+  color: var(--oald-cyan);
+  display: inline-block;
+  font-size: 0.78em;
+  font-weight: 700;
+  padding: 0.08em 0.58em;
+}
+
+[data-oald~="senses_multiple"],
+[data-oald~="senses_single"] {
+  display: block;
+  list-style: none;
+  margin: 0.35em 0 0.8em;
+  padding: 0;
+}
+
+[data-oald~="shcut-g"] {
+  display: block;
+  margin: 0.95em 0 0.35em;
+}
+
+[data-oald~="shcut"] {
+  background: linear-gradient(90deg, #e9f5fb, transparent);
+  border-left: 0.26em solid var(--oald-cyan);
+  border-radius: 0 0.35em 0.35em 0;
+  color: var(--oald-blue-deep);
+  display: block;
+  font-size: 0.88em;
+  font-weight: 750;
+  letter-spacing: 0.015em;
+  padding: 0.3em 0.65em;
+  text-transform: uppercase;
+}
+
+[data-oald~="shcut"] [data-oald~="zh"] {
+  color: var(--oald-green);
+  font-size: 0.92em;
+  font-weight: 650;
+  margin-left: 0.55em;
+  text-transform: none;
+}
+
+[data-oald~="sense"] {
+  background: rgba(247, 250, 252, 0.72);
+  border: 1px solid transparent;
+  border-bottom-color: var(--oald-line);
+  border-radius: 0.45em;
+  display: block;
+  list-style: none;
+  margin: 0.18em 0 0.38em;
+  min-width: 0;
+  padding: 0.65em 0.65em 0.72em 2.75em;
+  position: relative;
+}
+
+[data-oald~="sense"]:hover {
+  border-color: #cbdde8;
+}
+
+[data-oald~="iteration"] {
+  align-items: center;
+  background: var(--oald-red);
+  border-radius: 999px;
+  color: white;
+  display: inline-flex;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 0.76em;
+  font-style: normal;
+  font-weight: 750;
+  height: 1.75em;
+  justify-content: center;
+  left: 0.62em;
+  line-height: 1;
+  min-width: 1.75em;
+  padding: 0 0.3em;
+  position: absolute;
+  top: 0.78em;
+}
+
+[data-oald~="iteration"][data-oald~="single"] {
+  background: transparent;
+  color: var(--oald-red);
+  font-size: 1em;
+  height: auto;
+  min-width: 1.35em;
+  padding: 0;
+  top: 0.62em;
+}
+
+[data-oald~="sensetop"] {
+  display: inline;
+}
+
+[data-oald~="variants"] {
+  color: var(--oald-muted);
+  display: inline;
+  font-size: 0.93em;
+}
+
+[data-oald~="v"],
+[data-oald~="cf"] {
+  color: var(--oald-purple);
+  font-weight: 700;
+}
+
+[data-oald~="grammar"],
+[data-oald~="labels"] {
+  background: #fff5e9;
+  border: 1px solid #f0d4b4;
+  border-radius: 0.32em;
+  color: var(--oald-orange);
+  display: inline-block;
+  font-size: 0.79em;
+  font-style: normal;
+  font-weight: 650;
+  line-height: 1.35;
+  margin: 0 0.35em 0.2em 0;
+  padding: 0.08em 0.4em;
+}
+
+[data-oald~="labels"] [data-oald~="zh"] {
+  margin-left: 0.35em;
+}
+
+[data-oald~="def"] {
+  color: var(--oald-ink);
+  font-family: Cambria, Georgia, "Noto Serif", "Noto Serif SC", serif;
+  font-size: 1.02em;
+  font-weight: 650;
+}
+
+[data-oald~="deft"] {
+  border-left: 0.18em solid #70b78f;
+  color: var(--oald-green);
+  display: block;
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.97em;
+  font-weight: 600;
+  margin: 0.3em 0 0.25em;
+  padding-left: 0.58em;
+}
+
+[data-oald~="gloss"] {
+  color: var(--oald-muted);
+  font-size: 0.91em;
+  font-weight: 400;
+}
+
+[data-oald~="cl"] {
+  color: var(--oald-blue-deep);
+  font-weight: 700;
+}
+
+[data-oald~="examples"] {
+  display: block;
+  list-style: none;
+  margin: 0.48em 0 0.15em;
+  padding: 0;
+}
+
+[data-oald~="examples"] > li {
+  border-top: 1px dotted #dce4e9;
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0.36em 0.2em 0.38em 1.25em;
+  position: relative;
+}
+
+[data-oald~="examples"] > li::before {
+  color: var(--oald-cyan);
+  content: "◆";
+  font-size: 0.56em;
+  left: 0.12em;
+  position: absolute;
+  top: 0.86em;
+}
+
+[data-oald~="x"],
+[data-oald~="unx"] {
+  color: #3f4c57;
+  display: block;
+  font-family: Cambria, Georgia, "Noto Serif", serif;
+}
+
+[data-oald~="xt"],
+[data-oald~="unxt"] {
+  color: var(--oald-green);
+  display: block;
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.94em;
+  font-style: normal;
+  margin-top: 0.08em;
+}
+
+[data-oald~="xrefs"] {
+  display: block;
+  font-size: 0.88em;
+  margin: 0.5em 0 0.2em;
+}
+
+[data-oald~="xrefs"] [data-oald~="prefix"] {
+  background: var(--oald-blue);
+  border-radius: 0.28em;
+  color: white;
+  display: inline-block;
+  font-size: 0.74em;
+  font-weight: 750;
+  letter-spacing: 0.025em;
+  margin-right: 0.35em;
+  padding: 0.06em 0.42em;
+  text-transform: uppercase;
+}
+
+[data-oald~="xh"],
+[data-oald~="xref"] {
+  color: var(--oald-blue);
+  font-weight: 650;
+}
+
+[data-oald~="sep"] {
+  color: var(--oald-muted);
+  margin-right: 0.16em;
+}
+
+[data-oald~="collapse"] {
+  background: var(--oald-panel);
+  border: 1px solid var(--oald-line);
+  border-left: 0.24em solid #8bbfd5;
+  border-radius: 0.42em;
+  display: block;
+  margin: 0.55em 0;
+  overflow: hidden;
+}
+
+[data-oald~="box_title"] {
+  color: var(--oald-blue-deep);
+  cursor: pointer;
+  display: block;
+  font-size: 0.88em;
+  font-weight: 750;
+  list-style-position: inside;
+  padding: 0.38em 0.62em;
+}
+
+[data-oald~="collapse"][open] > [data-oald~="box_title"] {
+  background: #eaf4f9;
+  border-bottom: 1px solid var(--oald-line);
+}
+
+[data-oald~="box_title"] [data-oald~="zh"] {
+  color: var(--oald-green);
+  font-size: 0.92em;
+  font-weight: 600;
+  margin-left: 0.38em;
+}
+
+[data-oald~="closed"] {
+  color: var(--oald-muted);
+  font-size: 0.9em;
+  margin-left: 0.45em;
+}
+
+[data-oald~="collapse_body"] {
+  display: block;
+  padding: 0.55em 0.72em 0.65em;
+}
+
+[data-oald~="collapse_body"] > [data-oald~="body"],
+[data-oald~="body"],
+[data-oald~="p"],
+[data-oald~="deflist"],
+[data-oald~="defpara"] {
+  display: block;
+}
+
+[data-oald~="defpara"] {
+  border-left: 0.18em solid #d9c8ec;
+  margin: 0.45em 0;
+  padding-left: 0.62em;
+}
+
+[data-oald~="unbox"] {
+  color: var(--oald-purple);
+  display: block;
+  font-size: 0.9em;
+  font-weight: 750;
+  margin: 0.35em 0 0.12em;
+}
+
+[data-oald~="undt"],
+[data-oald~="ubx"] {
+  color: var(--oald-green);
+  display: block;
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.94em;
+  font-weight: 500;
+  margin-top: 0.12em;
+}
+
+[data-oald~="patterns"] {
+  color: var(--oald-purple);
+  display: block;
+  font-weight: 750;
+  margin: 0.7em 0 0.25em;
+}
+
+[data-oald~="bullet"],
+[data-oald~="collocs_list"] {
+  display: block;
+  margin: 0.2em 0 0.45em;
+  padding-left: 1.35em;
+}
+
+[data-oald~="collocs_list"] {
+  column-gap: 1.8em;
+  columns: 2 11em;
+}
+
+[data-oald~="topic-g"] {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82em;
+  gap: 0.24em;
+  margin: 0.45em 0 0.25em;
+}
+
+[data-oald~="topic-g"] > [data-oald~="prefix"] {
+  background: var(--oald-cyan);
+  border-radius: 0.28em;
+  color: white;
+  font-size: 0.78em;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  padding: 0.06em 0.42em;
+  text-transform: uppercase;
+}
+
+[data-oald~="topic_name"] {
+  color: var(--oald-blue);
+  font-weight: 650;
+}
+
+[data-oald~="topic_cefr"] {
+  align-items: center;
+  background: #273d67;
+  border-radius: 0.28em;
+  color: white;
+  display: inline-flex;
+  font-size: 0.72em;
+  font-weight: 750;
+  height: 1.5em;
+  justify-content: center;
+  margin-left: 0.3em;
+  min-width: 1.8em;
+  padding: 0 0.28em;
+  text-transform: uppercase;
+}
+
+[data-oald~="idioms"] {
+  border-top: 0.16em solid #bcd9e8;
+  display: block;
+  margin-top: 1.2em;
+  padding-top: 0.75em;
+}
+
+[data-oald~="idioms_heading"] {
+  color: var(--oald-blue-deep);
+  display: block;
+  font-family: Cambria, Georgia, serif;
+  font-size: 1.35em;
+  font-weight: 750;
+  margin-bottom: 0.55em;
+}
+
+[data-oald~="idm-g"] {
+  display: block;
+  margin: 0.7em 0;
+}
+
+[data-oald~="idm-g"] [data-oald~="webtop"] {
+  background: var(--oald-green-soft);
+  border-color: #cae5d5;
+  border-left-color: var(--oald-green);
+  padding: 0.48em 0.68em;
+}
+
+[data-oald~="idm"] {
+  color: var(--oald-green);
+  font-family: Cambria, Georgia, "Noto Serif", serif;
+  font-size: 1.08em;
+  font-weight: 750;
+}
+
+[data-oald~="verb_forms_table"] {
+  border-collapse: collapse;
+  display: table;
+  font-size: 0.88em;
+  margin: 0.35em 0;
+  width: 100%;
+}
+
+[data-oald~="verb_forms_table"] td,
+[data-oald~="verb_forms_table"] th {
+  border: 1px solid var(--oald-line);
+  padding: 0.28em 0.45em;
+  text-align: left;
+}
+
+[data-oald~="vf_prefix"] {
+  color: var(--oald-muted);
+  display: block;
+  font-size: 0.82em;
+}
+
+[data-oald~="image-placeholder"] {
+  color: var(--oald-muted);
+  font-style: italic;
+}
+
+[data-oald~="entry"] img {
+  border-radius: 0.4em;
+  display: block;
+  height: auto;
+  margin: 0.65em auto;
+  max-width: 100%;
+}
+
+[data-oald~="redirect"] {
+  color: var(--oald-muted);
+}
+
+[data-oald~="redirect"] a,
+[data-oald~="entry"] a {
+  color: var(--oald-blue);
+  text-decoration: none;
+}
+
+@media (max-width: 560px) {
+  [data-oald~="entry"] {
+    font-size: 0.96em;
+  }
+
+  [data-oald~="sense"] {
+    padding-left: 2.45em;
+  }
+
+  [data-oald~="iteration"] {
+    left: 0.45em;
+  }
+
+  [data-oald~="collocs_list"] {
+    columns: 1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-oald~="entry"] {
+    --oald-blue: #68b9ef;
+    --oald-blue-deep: #8dcbf2;
+    --oald-blue-soft: #172b38;
+    --oald-cyan: #63c5d5;
+    --oald-green: #75d3a1;
+    --oald-green-soft: #183126;
+    --oald-orange: #efad77;
+    --oald-red: #e66382;
+    --oald-purple: #c2a1eb;
+    --oald-ink: #e7edf1;
+    --oald-muted: #aab8c2;
+    --oald-line: #3a4a55;
+    --oald-panel: #202a31;
+  }
+
+  [data-oald~="webtop"] {
+    background: linear-gradient(135deg, #172b38, #202a31);
+    border-color: #35556a;
+  }
+
+  [data-oald~="sense"] {
+    background: rgba(32, 42, 49, 0.72);
+  }
+
+  [data-oald~="grammar"],
+  [data-oald~="labels"] {
+    background: #3b2c21;
+    border-color: #6a4c35;
+  }
+
+  [data-oald~="x"],
+  [data-oald~="unx"],
+  [data-oald~="phons_br"],
+  [data-oald~="phons_n_am"] {
+    color: #d5dde3;
+  }
+
+  [data-oald~="collapse"][open] > [data-oald~="box_title"] {
+    background: #263944;
+  }
+}

@@ -4,13 +4,17 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.30.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.30.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.30.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.30.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
 - English–Chinese structured entries and lookup redirects;
-- original entry hierarchy and dictionary-scoped styling;
+- restored inline spacing around collocations, labels, and translations;
+- distinct headword, pronunciation, sense, definition, example, topic, and idiom
+  hierarchy with dictionary-scoped light/dark styling;
+- collapsible extra examples, synonym notes, wordfinder, verb forms, and
+  collocations, with Word Origin expanded by default;
 - optional complete illustration packaging;
 - separate local MDD audio server to avoid a multi-gigabyte term archive.
 
@@ -36,6 +40,11 @@ python scripts/convert_oald.py `
   --report generated/oald-report.json
 
 pnpm oald:build
+
+python scripts/qa_oald.py generated/oald-structured.ndjson
+python scripts/qa_oald_archive.py `
+  dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
+  --revision 2026.07.30.2
 ```
 
 ## Build the illustrated edition
@@ -52,6 +61,11 @@ python scripts/convert_oald.py `
   --include-images
 
 pnpm oald:build:rich
+
+python scripts/qa_oald_archive.py `
+  dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
+  --revision 2026.07.30.2 `
+  --expect-images 622
 ```
 
 The current rich builder preserves structured entries, redirects, and PNG/JPEG/SVG
