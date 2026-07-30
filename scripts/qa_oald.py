@@ -95,9 +95,7 @@ FORBIDDEN_JOINED_TEXT = (
     'thelanguage barrier',
 )
 
-CONFIG_TERM = 'OALD Yomitan 设置'
 SPECIAL_TERMS = {
-    CONFIG_TERM,
     'OALD Idioms · language',
     'OALD Idioms · plague',
 }
@@ -201,11 +199,8 @@ def main() -> None:
             if isinstance(node, dict) and node.get('tag') == 'a'
         }
         expected_idiom_href = f'?query={quote(f"OALD Idioms · {term}")}'
-        expected_config_href = f'?query={quote(CONFIG_TERM)}'
         if expected_idiom_href not in anchors:
             failures.append(f'{term}: Idioms query link is missing')
-        if expected_config_href not in anchors:
-            failures.append(f'{term}: O10 configuration link is missing')
         badge_texts = [
             ''.join(
                 child
@@ -255,23 +250,6 @@ def main() -> None:
             for node in nodes
         ):
             failures.append(f'{auxiliary_term}: Idioms section is not open')
-
-    config_record = records.get(CONFIG_TERM)
-    if config_record is None:
-        failures.append(f'{CONFIG_TERM}: configuration entry is missing')
-    else:
-        nodes = list(walk(config_record.get('definition', {}).get('content')))
-        tokens = Counter(
-            token
-            for node in nodes
-            if isinstance(node, dict)
-            for token in node.get('data', {}).get('oald', '').split()
-        )
-        for required in ('config-entry', 'config-header', 'o10-logo', 'config-panel'):
-            if tokens[required] < 1:
-                failures.append(f'{CONFIG_TERM}: missing {required}')
-        if tokens['config-panel'] < 4:
-            failures.append(f'{CONFIG_TERM}: configuration panels are incomplete')
 
     if failures:
         raise ValueError('\n'.join(failures))

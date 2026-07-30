@@ -30,9 +30,7 @@ ALLOWED_TAGS = {
     'ul',
 }
 
-CONFIG_TERM = 'OALD Yomitan 设置'
 REQUIRED_SPECIAL_TERMS = {
-    CONFIG_TERM,
     'OALD Idioms · language',
     'OALD Idioms · plague',
     'OALD Phrasal Verbs · take',
@@ -92,10 +90,7 @@ def main() -> None:
             '[data-sc-oald~="collapse"]',
             '[data-sc-oald~="idioms"]',
             '[data-sc-oald~="entry-actions"]',
-            '[data-sc-oald~="o10-link"]',
             '[data-sc-oald~="auxiliary-entry"]',
-            '[data-sc-oald~="config-entry"]',
-            '[data-sc-oald~="config-panel"]',
         ):
             if required_selector not in styles:
                 raise ValueError(

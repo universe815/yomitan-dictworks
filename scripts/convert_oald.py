@@ -68,7 +68,6 @@ CHINESE_TAGS = {
 }
 ITALIC_CLASSES = {'ei'}
 BOLD_CLASSES = {'eb'}
-CONFIG_TERM = 'OALD Yomitan 设置'
 PHRASE_SECTION_LABELS = {
     'idioms': 'Idioms',
     'phrasal_verb_links': 'Phrasal Verbs',
@@ -233,9 +232,8 @@ def wire_entry_navigation(
                 f'jumplink phrase-query-link {section_kind}-query-link',
             )
         )
-    navigation.append(
-        query_link('O10', CONFIG_TERM, 'jumplink o10-link')
-    )
+    if not navigation:
+        return
     navigation_node = {
         'tag': 'span',
         'data': {'oald': 'jumplinks entry-actions'},
@@ -286,100 +284,6 @@ def auxiliary_phrase_content(
                 ],
             },
             *expanded_sections,
-        ],
-    }
-
-
-def config_content() -> dict[str, Any]:
-    def panel(title: str, body: list[Any], *, open_panel: bool = False) -> dict[str, Any]:
-        node: dict[str, Any] = {
-            'tag': 'details',
-            'data': {'oald': 'config-panel'},
-            'content': [
-                {
-                    'tag': 'summary',
-                    'data': {'oald': 'config-panel-title'},
-                    'content': title,
-                },
-                {
-                    'tag': 'div',
-                    'data': {'oald': 'config-panel-body'},
-                    'content': body,
-                },
-            ],
-        }
-        if open_panel:
-            node['open'] = True
-        return node
-
-    return {
-        'tag': 'div',
-        'data': {'oald': 'entry config-entry'},
-        'content': [
-            {
-                'tag': 'div',
-                'data': {'oald': 'config-header'},
-                'content': [
-                    {
-                        'tag': 'span',
-                        'data': {'oald': 'o10-logo'},
-                        'content': 'O10',
-                    },
-                    {
-                        'tag': 'span',
-                        'data': {'oald': 'config-title'},
-                        'content': 'OALD · Yomitan 配置说明',
-                    },
-                ],
-            },
-            {
-                'tag': 'div',
-                'data': {'oald': 'config-notice'},
-                'content': (
-                    'Yomitan 词典内容不能运行原版 JavaScript、表单或持久化开关；'
-                    '本页保留能够在 Yomitan 中实际使用的设置与操作说明。'
-                ),
-            },
-            panel(
-                '显示与颜色',
-                [
-                    '请在 Yomitan 中启用词典样式；主题、字号、弹窗宽度和缩放由 '
-                    'Yomitan 的外观设置控制。本词典已分别配色显示主词、词性、'
-                    '英美音、义项、中文释义、例句、搭配、词源和用法模块。'
-                ],
-                open_panel=True,
-            ),
-            panel(
-                '中文来源',
-                [
-                    'OALD、AI 与 Leon 中文内容使用来源徽章区分。Yomitan 不允许'
-                    '词条内部保存“显示/隐藏某一来源”的开关，因此不提供无效按钮。'
-                ],
-            ),
-            panel(
-                '发音与口音',
-                [
-                    '在 Yomitan 的音频设置中调整音频来源和优先顺序。此转换版的'
-                    '数 GB 原词典音频由本地音频伴侣提供；英音和美音在词条中以'
-                    '“英”“美”徽章区分。'
-                ],
-            ),
-            panel(
-                '折叠与导航',
-                [
-                    'Synonyms、Wordfinder、Extra Examples、Collocations、'
-                    'Word Origin 等模块使用 Yomitan 原生折叠。顶部 Idioms 和 '
-                    'Phrasal Verbs 会打开当前单词对应的专用结果。'
-                ],
-            ),
-            panel(
-                '原版中无法移植的功能',
-                [
-                    '欧路相关笔记、在线抓取、词条内 TTS 开关、动态口音切换、'
-                    'JavaScript 配置面板和按词性即时过滤不能由 Yomitan 词典包'
-                    '直接实现，应使用 Yomitan 自身设置或本地音频服务。'
-                ],
-            ),
         ],
     }
 
@@ -792,27 +696,6 @@ def main() -> None:
                     + '\n'
                 )
                 stats[f'{section_kind}_query_entries_written'] += 1
-
-        config_sequence = direct_sequences.setdefault(CONFIG_TERM, next_sequence)
-        if config_sequence == next_sequence:
-            next_sequence += 1
-        config_record = {
-            'term': CONFIG_TERM,
-            'sequence': config_sequence,
-            'definition': {
-                'type': 'structured-content',
-                'content': config_content(),
-            },
-        }
-        output.write(
-            json.dumps(
-                config_record,
-                ensure_ascii=False,
-                separators=(',', ':'),
-            )
-            + '\n'
-        )
-        stats['config_entries_written'] += 1
 
         if args.limit_direct is None and not requested_terms:
             for alias, target in redirects.items():

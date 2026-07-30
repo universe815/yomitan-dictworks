@@ -5,6 +5,11 @@ not make proprietary source data redistributable.
 
 ## 2026-07-30
 
+- Enhanced both OALD editions as `2026.07.30.6`: removed the static `O10`
+  pseudo-settings entry; added a documented local MDD audio companion with
+  separately selectable OALD UK/US sources; and added accent-filtered Yomitan
+  JSON endpoints that coexist with the existing port-5050 Japanese audio
+  service.
 - Enhanced both OALD editions as `2026.07.30.5`: shortened Oxford frequency
   markers to compact `🔑 A1–C2` badges; replaced inert Idioms and Phrasal Verbs
   jump controls with working Yomitan query links and dedicated expanded phrase

@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.30.5` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.30.5` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.30.6` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.30.6` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -17,14 +17,14 @@
 - compact `🔑 A1–C2` CEFR badges that keep the headword visually dominant;
 - working Idioms and Phrasal Verbs query links that open the current word's
   dedicated, expanded phrase result;
-- an `O10` link to a native, static Yomitan configuration and capability guide;
 - color-coded native folding for all 18 source module kinds, including extra
   examples, synonyms, Wordfinder, verb forms, collocations, word families,
   British/American usage, grammar, language banks, culture, and Word Origin;
 - native folding for Idioms and Phrasal Verbs, with Word Origin expanded by
   default;
 - optional complete illustration packaging;
-- separate local MDD audio server to avoid a multi-gigabyte term archive.
+- separate local MDD audio server with selectable OALD UK/US sources, avoiding
+  a multi-gigabyte term archive.
 
 ## Links and updates
 
@@ -39,6 +39,9 @@
 归档；`2026.07.30.1` 及之后版本分别通过 GitHub Release 资产自动更新，
 不需要启动本机服务。
 
+词典正文不需要本机服务；只有使用 OALD 原版英音 / 美音时需要启动
+[本地音频伴侣](../../../../docs/oald-audio.md)。
+
 ## Build the text edition
 
 ```powershell
@@ -52,7 +55,7 @@ pnpm oald:build
 python scripts/qa_oald.py generated/oald-structured.ndjson
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
-  --revision 2026.07.30.5
+  --revision 2026.07.30.6
 ```
 
 ## Build the illustrated edition
@@ -72,13 +75,15 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.07.30.5 `
+  --revision 2026.07.30.6 `
   --expect-images 622
 ```
 
 The current rich builder preserves structured entries, redirects, and PNG/JPEG/SVG
 illustrations. Audio is intentionally served separately to avoid embedding several
-gigabytes in the term dictionary:
+gigabytes in the term dictionary. See the complete
+[UK/US setup guide](../../../../docs/oald-audio.md); the core build and test
+commands are:
 
 ```powershell
 python scripts/build_oald_audio_index.py `
@@ -90,7 +95,9 @@ python scripts/oald_audio_server.py `
   --index generated/oald-audio-index.json `
   --mdd "<path-to-your-first-audio.mdd>" `
   --mdd "<path-to-your-second-audio.mdd>" `
-  --self-test example
+  --self-test language `
+  --require-accent UK `
+  --require-accent US
 ```
 
 The source product and media are third-party content. Keep all source files,
