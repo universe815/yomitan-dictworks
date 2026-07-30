@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import re
 import urllib.request
@@ -34,6 +35,7 @@ def request(
 
 def verify_zip_tail(
     dictionary_id: str,
+    channel: str,
     url: str,
     *,
     expected_bytes: int,
@@ -50,14 +52,14 @@ def verify_zip_tail(
     ) as response:
         if response.status != 206:
             raise ValueError(
-                f"{dictionary_id}: download server ignored the bounded byte range "
+                f"{dictionary_id} {channel}: download server ignored the bounded byte range "
                 f"(returned {response.status})"
             )
         content_range = response.headers.get("Content-Range", "")
         match = CONTENT_RANGE.fullmatch(content_range)
         if match is None:
             raise ValueError(
-                f"{dictionary_id}: invalid Content-Range {content_range!r}"
+                f"{dictionary_id} {channel}: invalid Content-Range {content_range!r}"
             )
         actual_start, actual_end, actual_total = map(int, match.groups())
         if (actual_start, actual_end, actual_total) != (
@@ -66,29 +68,121 @@ def verify_zip_tail(
             expected_bytes,
         ):
             raise ValueError(
-                f"{dictionary_id}: ranged download size differs from catalog"
+                f"{dictionary_id} {channel}: ranged download size differs from catalog"
             )
         tail = response.read(ZIP_TAIL_BYTES + 1)
 
     expected_tail_bytes = end - start + 1
     if len(tail) != expected_tail_bytes:
         raise ValueError(
-            f"{dictionary_id}: ranged download returned {len(tail)} bytes, "
+            f"{dictionary_id} {channel}: ranged download returned {len(tail)} bytes, "
             f"expected {expected_tail_bytes}"
         )
 
     eocd_offset = tail.rfind(ZIP_EOCD_SIGNATURE)
     if eocd_offset < 0 or len(tail) - eocd_offset < ZIP_EOCD_MIN_BYTES:
-        raise ValueError(f"{dictionary_id}: ZIP end-of-central-directory not found")
+        raise ValueError(
+            f"{dictionary_id} {channel}: ZIP end-of-central-directory not found"
+        )
     comment_length = int.from_bytes(
         tail[eocd_offset + 20 : eocd_offset + 22],
         byteorder="little",
     )
     if eocd_offset + ZIP_EOCD_MIN_BYTES + comment_length != len(tail):
         raise ValueError(
-            f"{dictionary_id}: ZIP end-of-central-directory is truncated or misplaced"
+            f"{dictionary_id} {channel}: ZIP end-of-central-directory is "
+            "truncated or misplaced"
         )
     return len(tail)
+
+
+def verify_full_hash(
+    dictionary_id: str,
+    channel: str,
+    url: str,
+    *,
+    expected_bytes: int,
+    expected_sha256: str,
+    timeout: float,
+) -> str:
+    digest = hashlib.sha256()
+    downloaded_bytes = 0
+    with request(url, method="GET", timeout=timeout) as response:
+        if response.status != 200:
+            raise ValueError(
+                f"{dictionary_id} {channel}: full download returned "
+                f"{response.status}"
+            )
+        while chunk := response.read(1024 * 1024):
+            downloaded_bytes += len(chunk)
+            digest.update(chunk)
+    if downloaded_bytes != expected_bytes:
+        raise ValueError(
+            f"{dictionary_id} {channel}: full download size differs from catalog"
+        )
+    actual_sha256 = digest.hexdigest().upper()
+    if actual_sha256 != expected_sha256:
+        raise ValueError(
+            f"{dictionary_id} {channel}: SHA-256 differs from catalog"
+        )
+    return actual_sha256
+
+
+def verify_download(
+    dictionary_id: str,
+    channel: str,
+    url: str,
+    *,
+    expected_bytes: int,
+    expected_sha256: str,
+    timeout: float,
+    full_hash: bool,
+) -> dict[str, object]:
+    with request(url, method="HEAD", timeout=timeout) as response:
+        content_length = int(response.headers.get("Content-Length", "-1"))
+        content_type = response.headers.get("Content-Type", "")
+        if response.status != 200:
+            raise ValueError(
+                f"{dictionary_id} {channel}: download returned {response.status}"
+            )
+        if expected_bytes != content_length:
+            raise ValueError(
+                f"{dictionary_id} {channel}: public byte size differs from catalog"
+            )
+        if content_type.split(";", 1)[0] not in {
+            "application/octet-stream",
+            "application/zip",
+        }:
+            raise ValueError(
+                f"{dictionary_id} {channel}: unexpected download content type "
+                f"{content_type!r}"
+            )
+
+    zip_tail_bytes = verify_zip_tail(
+        dictionary_id,
+        channel,
+        url,
+        expected_bytes=expected_bytes,
+        timeout=timeout,
+    )
+    result: dict[str, object] = {
+        "url": url,
+        "status": 200,
+        "bytes": content_length,
+        "zipTailBytesChecked": zip_tail_bytes,
+        "zipTailValid": True,
+    }
+    if full_hash:
+        result["sha256"] = verify_full_hash(
+            dictionary_id,
+            channel,
+            url,
+            expected_bytes=expected_bytes,
+            expected_sha256=expected_sha256,
+            timeout=timeout,
+        )
+        result["sha256Valid"] = True
+    return result
 
 
 def main() -> None:
@@ -100,6 +194,14 @@ def main() -> None:
         "--local-manifests",
         action="store_true",
         help="Check working-tree manifests before they are merged to the public URLs.",
+    )
+    parser.add_argument(
+        "--full-hash",
+        action="store_true",
+        help=(
+            "Download both the Release and Google Drive ZIPs and verify SHA-256. "
+            "Use this before merging a dictionary update."
+        ),
     )
     args = parser.parse_args()
 
@@ -114,33 +216,28 @@ def main() -> None:
 
         checked_folders.add(distribution["driveFolderUrl"])
         expected_bytes = distribution["bytes"]
-
-        with request(
-            distribution["downloadUrl"],
-            method="HEAD",
-            timeout=args.timeout,
-        ) as response:
-            content_length = int(response.headers.get("Content-Length", "-1"))
-            content_type = response.headers.get("Content-Type", "")
-            if response.status != 200:
-                raise ValueError(
-                    f"{entry['id']}: download returned {response.status}"
-                )
-            if expected_bytes != content_length:
-                raise ValueError(f"{entry['id']}: public byte size differs from catalog")
-            if content_type.split(";", 1)[0] not in {
-                "application/octet-stream",
-                "application/zip",
-            }:
-                raise ValueError(
-                    f"{entry['id']}: unexpected download content type {content_type!r}"
-                )
-
-        zip_tail_bytes = verify_zip_tail(
+        expected_sha256 = distribution["sha256"]
+        release_result = verify_download(
             entry["id"],
+            "release",
             distribution["downloadUrl"],
             expected_bytes=expected_bytes,
+            expected_sha256=expected_sha256,
             timeout=args.timeout,
+            full_hash=args.full_hash,
+        )
+        drive_download_url = (
+            "https://drive.usercontent.google.com/download"
+            f"?id={distribution['driveFileId']}&export=download&confirm=t"
+        )
+        drive_result = verify_download(
+            entry["id"],
+            "drive",
+            drive_download_url,
+            expected_bytes=expected_bytes,
+            expected_sha256=expected_sha256,
+            timeout=args.timeout,
+            full_hash=args.full_hash,
         )
 
         if args.local_manifests:
@@ -168,10 +265,12 @@ def main() -> None:
             {
                 "id": entry["id"],
                 "revision": entry["revision"],
-                "downloadStatus": 200,
-                "bytes": content_length,
-                "zipTailBytesChecked": zip_tail_bytes,
-                "zipTailValid": True,
+                "channelsMatch": True,
+                "release": release_result,
+                "googleDrive": {
+                    "fileUrl": distribution["driveFileUrl"],
+                    **drive_result,
+                },
             }
         )
 
