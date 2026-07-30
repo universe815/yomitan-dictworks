@@ -1,6 +1,13 @@
 name: Verify public dictionary links
 
 on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-public-links.yml"
+      - "catalog/dictionaries.json"
+      - "config/**"
+      - "manifests/**"
+      - "scripts/check_public_links.py"
   schedule:
     - cron: "23 3 * * 0"
   workflow_dispatch:
@@ -11,6 +18,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -20,5 +28,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify public manifests and downloads
-        run: python scripts/check_public_links.py
+      - name: Verify pull request manifests and both download channels
+        if: github.event_name == 'pull_request'
+        run: >-
+          python scripts/check_public_links.py
+          --local-manifests
+          --full-hash
+          --timeout 120
+
+      - name: Verify published manifests and both download channels
+        if: github.event_name != 'pull_request'
+        run: >-
+          python scripts/check_public_links.py
+          --full-hash
+          --timeout 120

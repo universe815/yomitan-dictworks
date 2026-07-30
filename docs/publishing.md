@@ -40,6 +40,10 @@ ZIP 仍使用中文。
 
 必须按以下顺序发布，避免清单先更新、ZIP 尚未就绪：
 
+Google Drive 与 GitHub Release 是同一次发布的两个必要通道。两端必须保存
+同一个最终 ZIP，并与 catalog 中的 `bytes` 和 `sha256` 一致；任一端尚未
+同步完成时，不得提交或合并新版清单。
+
 1. 修改转换器或源数据，并增加对应 config、catalog 与文档中的 `revision`。
 2. 重新构建 ZIP并运行专项 QA、Yomitan schema 校验与：
 
@@ -77,10 +81,15 @@ ZIP 仍使用中文。
    python -m compileall -q scripts
    python scripts/check_repository.py
    python scripts/check_catalog.py
-   python scripts/check_public_links.py
+   python scripts/check_public_links.py `
+     --local-manifests `
+     --full-hash `
+     --timeout 120
    ```
 
-9. 提交并合并配置、目录、清单和文档；不要提交 ZIP。
+9. 等待 PR 的 **Verify public dictionary links** 检查通过；它会重新下载
+   Drive 与 Release 两份 ZIP 并核对完整 SHA-256。通过后再合并配置、目录、
+   清单和文档；不要提交 ZIP。
 10. 使用另一套 Yomitan 配置执行一次真实的 **Check for Updates**。
 
 如果正文和资源没有改变，只迁移或修正更新元数据，可以从已经通过 QA 的

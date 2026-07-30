@@ -27,3 +27,7 @@ revision、构建命令、文件大小、SHA-256、Google Drive 归档信息和 
 `status: public` 只描述技术可访问性，不等同于版权许可。`rightsStatement`
 必须如实显示；标记为 `licensed` 时还必须提供 `contentLicense` 和
 `rightsEvidence`。
+
+每次发布必须让 Google Drive 归档包和 GitHub Release 更新包同时匹配
+catalog 的 `bytes` 与 `sha256`。PR 和每周定时工作流都会完整下载两端文件；
+任一通道缺失、过期或摘要不一致都会失败。
