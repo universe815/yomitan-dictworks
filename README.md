@@ -40,8 +40,8 @@
 
 | 词典 | 类型 | 说明 | 获取 | 自动更新 |
 |---|---|---|---|---|
-| [OALDPE En-Cn 2025.02.14（正文版）](english/term/en-zh/oald/) | 英中学习词典 | 完整正文与检索别名；按类型配色呈现义项、翻译、例句、习语、短语动词、搭配、词族、辨析和可展开用法栏目，不打包插图和音频 | [下载 ZIP](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing) | [更新清单](manifests/oald-en-zh/index.json) |
-| [OALDPE En-Cn 2025.02.14（完整插图版）](english/term/en-zh/oald/) | 英中学习词典 / 图文 | 同版式的完整正文、检索别名、特色栏目与 622 张原版插图；音频由本地伴侣提供 | [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing) | [更新清单](manifests/oald-en-zh-illustrated/index.json) |
+| [OALDPE En-Cn 2025.02.14（正文版）](english/term/en-zh/oald/) | 英中学习词典 | 完整正文与检索别名；紧凑 CEFR 徽章、可查询的 Idioms / Phrasal Verbs 入口、O10 配置说明，以及按类型配色的义项、翻译、例句、搭配、词族、辨析和可展开栏目；不打包插图和音频 | [下载 ZIP](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing) | [更新清单](manifests/oald-en-zh/index.json) |
+| [OALDPE En-Cn 2025.02.14（完整插图版）](english/term/en-zh/oald/) | 英中学习词典 / 图文 | 同版式的完整正文、检索别名、导航与特色栏目，并含 622 张原版插图；音频由本地伴侣提供 | [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing) | [更新清单](manifests/oald-en-zh-illustrated/index.json) |
 
 [浏览英语分类目录](english/)
 

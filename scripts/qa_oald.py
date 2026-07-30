@@ -3,6 +3,7 @@ import json
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterator
+from urllib.parse import quote
 
 
 REQUIRED_TOKENS = {
@@ -94,6 +95,13 @@ FORBIDDEN_JOINED_TEXT = (
     'thelanguage barrier',
 )
 
+CONFIG_TERM = 'OALD Yomitan 设置'
+SPECIAL_TERMS = {
+    CONFIG_TERM,
+    'OALD Idioms · language',
+    'OALD Idioms · plague',
+}
+
 
 def walk(value: Any) -> Iterator[Any]:
     if isinstance(value, str):
@@ -113,6 +121,7 @@ def main() -> None:
     parser.add_argument('input', type=Path)
     args = parser.parse_args()
 
+    wanted_terms = set(REQUIRED_TOKENS) | SPECIAL_TERMS
     records: dict[str, dict[str, Any]] = {}
     with args.input.open(encoding='utf-8') as source:
         for line_number, line in enumerate(source, start=1):
@@ -120,9 +129,9 @@ def main() -> None:
                 continue
             record = json.loads(line)
             term = record.get('term')
-            if term in REQUIRED_TOKENS and 'definition' in record:
+            if term in wanted_terms and 'definition' in record:
                 records.setdefault(term, record)
-            if len(records) == len(REQUIRED_TOKENS):
+            if len(records) == len(wanted_terms):
                 break
             if not isinstance(record, dict):
                 raise ValueError(f'line {line_number}: record is not an object')
@@ -186,6 +195,33 @@ def main() -> None:
             failures.append(
                 f'{term}: {len(invalid_zh_nodes)} Chinese nodes lack lang=zh'
             )
+        anchors = {
+            node.get('href')
+            for node in nodes
+            if isinstance(node, dict) and node.get('tag') == 'a'
+        }
+        expected_idiom_href = f'?query={quote(f"OALD Idioms · {term}")}'
+        expected_config_href = f'?query={quote(CONFIG_TERM)}'
+        if expected_idiom_href not in anchors:
+            failures.append(f'{term}: Idioms query link is missing')
+        if expected_config_href not in anchors:
+            failures.append(f'{term}: O10 configuration link is missing')
+        badge_texts = [
+            ''.join(
+                child
+                for child in walk(node.get('content'))
+                if isinstance(child, str)
+            )
+            for node in nodes
+            if isinstance(node, dict)
+            and 'oxford-list' in node.get('data', {}).get('oald', '').split()
+        ]
+        if term == 'language' and not any(
+            text.startswith('🔑 ') for text in badge_texts
+        ):
+            failures.append(f'{term}: compact key CEFR badge is missing')
+        if any('Oxford 3000' in text or 'Oxford 5000' in text for text in badge_texts):
+            failures.append(f'{term}: verbose Oxford badge remains')
 
         report[term] = {
             'details': tags['details'],
@@ -193,7 +229,49 @@ def main() -> None:
             'examples': tokens['examples'],
             'englishTranslations': tokens['xt'] + tokens['unxt'],
             'chineseNodes': tokens['zh'],
+            'queryLinks': len(anchors),
         }
+
+    for term in ('language', 'plague'):
+        auxiliary_term = f'OALD Idioms · {term}'
+        record = records.get(auxiliary_term)
+        if record is None:
+            failures.append(f'{auxiliary_term}: auxiliary entry is missing')
+            continue
+        nodes = list(walk(record.get('definition', {}).get('content')))
+        tokens = Counter(
+            token
+            for node in nodes
+            if isinstance(node, dict)
+            for token in node.get('data', {}).get('oald', '').split()
+        )
+        if not {'auxiliary-entry', 'phrase-result', 'idioms'} <= tokens.keys():
+            failures.append(f'{auxiliary_term}: auxiliary structure is incomplete')
+        if not any(
+            isinstance(node, dict)
+            and node.get('tag') == 'details'
+            and node.get('open') is True
+            and 'idioms' in node.get('data', {}).get('oald', '').split()
+            for node in nodes
+        ):
+            failures.append(f'{auxiliary_term}: Idioms section is not open')
+
+    config_record = records.get(CONFIG_TERM)
+    if config_record is None:
+        failures.append(f'{CONFIG_TERM}: configuration entry is missing')
+    else:
+        nodes = list(walk(config_record.get('definition', {}).get('content')))
+        tokens = Counter(
+            token
+            for node in nodes
+            if isinstance(node, dict)
+            for token in node.get('data', {}).get('oald', '').split()
+        )
+        for required in ('config-entry', 'config-header', 'o10-logo', 'config-panel'):
+            if tokens[required] < 1:
+                failures.append(f'{CONFIG_TERM}: missing {required}')
+        if tokens['config-panel'] < 4:
+            failures.append(f'{CONFIG_TERM}: configuration panels are incomplete')
 
     if failures:
         raise ValueError('\n'.join(failures))

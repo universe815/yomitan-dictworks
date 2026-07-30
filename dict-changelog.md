@@ -5,6 +5,11 @@ not make proprietary source data redistributable.
 
 ## 2026-07-30
 
+- Enhanced both OALD editions as `2026.07.30.5`: shortened Oxford frequency
+  markers to compact `🔑 A1–C2` badges; replaced inert Idioms and Phrasal Verbs
+  jump controls with working Yomitan query links and dedicated expanded phrase
+  entries; added an `O10` Yomitan configuration/capability guide; and extended
+  representative and archive-wide navigation QA.
 - Fixed both OALD editions as `2026.07.30.4`: changed all dictionary-style
   selectors to Yomitan's rendered `data-sc-oald` attributes, aligned the
   standalone preview with the real renderer, and added archive QA that rejects

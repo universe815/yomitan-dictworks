@@ -1,4 +1,5 @@
 import argparse
+import copy
 import json
 import re
 from collections import Counter
@@ -67,6 +68,11 @@ CHINESE_TAGS = {
 }
 ITALIC_CLASSES = {'ei'}
 BOLD_CLASSES = {'eb'}
+CONFIG_TERM = 'OALD Yomitan 设置'
+PHRASE_SECTION_LABELS = {
+    'idioms': 'Idioms',
+    'phrasal_verb_links': 'Phrasal Verbs',
+}
 
 
 def normalize_text(
@@ -147,6 +153,235 @@ def internal_href(source_href: str) -> str | None:
     if not target or target.startswith('@'):
         return None
     return f'?query={quote(target)}'
+
+
+def data_tokens(value: Any) -> set[str]:
+    if not isinstance(value, dict):
+        return set()
+    data = value.get('data')
+    if not isinstance(data, dict):
+        return set()
+    marker = data.get('oald')
+    return set(marker.split()) if isinstance(marker, str) else set()
+
+
+def find_first_token(value: Any, token: str) -> dict[str, Any] | None:
+    if isinstance(value, dict):
+        if token in data_tokens(value):
+            return value
+        return find_first_token(value.get('content'), token)
+    if isinstance(value, list):
+        for item in value:
+            found = find_first_token(item, token)
+            if found is not None:
+                return found
+    return None
+
+
+def phrase_sections(value: Any) -> dict[str, list[dict[str, Any]]]:
+    sections: dict[str, list[dict[str, Any]]] = {}
+
+    def visit(node: Any) -> None:
+        if isinstance(node, dict):
+            tokens = data_tokens(node)
+            if 'phrase-section' in tokens:
+                for section_kind in PHRASE_SECTION_LABELS:
+                    if section_kind in tokens:
+                        sections.setdefault(section_kind, []).append(node)
+            visit(node.get('content'))
+        elif isinstance(node, list):
+            for child in node:
+                visit(child)
+
+    visit(value)
+    return sections
+
+
+def phrase_query_term(term: str, section_kind: str) -> str:
+    label = PHRASE_SECTION_LABELS[section_kind]
+    return f'OALD {label} · {term}'
+
+
+def query_link(label: str, target: str, marker: str) -> dict[str, Any]:
+    return {
+        'tag': 'span',
+        'data': {'oald': marker},
+        'content': {
+            'tag': 'a',
+            'href': f'?query={quote(target)}',
+            'content': label,
+        },
+    }
+
+
+def wire_entry_navigation(
+    structured: Any,
+    term: str,
+    sections: dict[str, list[dict[str, Any]]],
+) -> None:
+    webtop = find_first_token(structured, 'webtop')
+    if webtop is None:
+        return
+    navigation: list[Any] = []
+    for section_kind, label in PHRASE_SECTION_LABELS.items():
+        if section_kind not in sections:
+            continue
+        navigation.append(
+            query_link(
+                label,
+                phrase_query_term(term, section_kind),
+                f'jumplink phrase-query-link {section_kind}-query-link',
+            )
+        )
+    navigation.append(
+        query_link('O10', CONFIG_TERM, 'jumplink o10-link')
+    )
+    navigation_node = {
+        'tag': 'span',
+        'data': {'oald': 'jumplinks entry-actions'},
+        'content': navigation,
+    }
+
+    content = webtop.get('content')
+    items = content if isinstance(content, list) else [content]
+    replaced = False
+    for index, item in enumerate(items):
+        if 'jumplinks' in data_tokens(item):
+            items[index] = navigation_node
+            replaced = True
+            break
+    if not replaced:
+        items.append(navigation_node)
+    webtop['content'] = content_value(items)
+
+
+def auxiliary_phrase_content(
+    term: str,
+    section_kind: str,
+    sections: list[dict[str, Any]],
+) -> dict[str, Any]:
+    label = PHRASE_SECTION_LABELS[section_kind]
+    expanded_sections = copy.deepcopy(sections)
+    for section in expanded_sections:
+        section['open'] = True
+    return {
+        'tag': 'div',
+        'data': {'oald': 'entry auxiliary-entry phrase-result'},
+        'content': [
+            {
+                'tag': 'div',
+                'data': {'oald': 'auxiliary-header'},
+                'content': [
+                    {
+                        'tag': 'span',
+                        'data': {'oald': 'headword'},
+                        'content': term,
+                    },
+                    ' · ',
+                    {
+                        'tag': 'span',
+                        'data': {'oald': 'auxiliary-kind'},
+                        'content': label,
+                    },
+                ],
+            },
+            *expanded_sections,
+        ],
+    }
+
+
+def config_content() -> dict[str, Any]:
+    def panel(title: str, body: list[Any], *, open_panel: bool = False) -> dict[str, Any]:
+        node: dict[str, Any] = {
+            'tag': 'details',
+            'data': {'oald': 'config-panel'},
+            'content': [
+                {
+                    'tag': 'summary',
+                    'data': {'oald': 'config-panel-title'},
+                    'content': title,
+                },
+                {
+                    'tag': 'div',
+                    'data': {'oald': 'config-panel-body'},
+                    'content': body,
+                },
+            ],
+        }
+        if open_panel:
+            node['open'] = True
+        return node
+
+    return {
+        'tag': 'div',
+        'data': {'oald': 'entry config-entry'},
+        'content': [
+            {
+                'tag': 'div',
+                'data': {'oald': 'config-header'},
+                'content': [
+                    {
+                        'tag': 'span',
+                        'data': {'oald': 'o10-logo'},
+                        'content': 'O10',
+                    },
+                    {
+                        'tag': 'span',
+                        'data': {'oald': 'config-title'},
+                        'content': 'OALD · Yomitan 配置说明',
+                    },
+                ],
+            },
+            {
+                'tag': 'div',
+                'data': {'oald': 'config-notice'},
+                'content': (
+                    'Yomitan 词典内容不能运行原版 JavaScript、表单或持久化开关；'
+                    '本页保留能够在 Yomitan 中实际使用的设置与操作说明。'
+                ),
+            },
+            panel(
+                '显示与颜色',
+                [
+                    '请在 Yomitan 中启用词典样式；主题、字号、弹窗宽度和缩放由 '
+                    'Yomitan 的外观设置控制。本词典已分别配色显示主词、词性、'
+                    '英美音、义项、中文释义、例句、搭配、词源和用法模块。'
+                ],
+                open_panel=True,
+            ),
+            panel(
+                '中文来源',
+                [
+                    'OALD、AI 与 Leon 中文内容使用来源徽章区分。Yomitan 不允许'
+                    '词条内部保存“显示/隐藏某一来源”的开关，因此不提供无效按钮。'
+                ],
+            ),
+            panel(
+                '发音与口音',
+                [
+                    '在 Yomitan 的音频设置中调整音频来源和优先顺序。此转换版的'
+                    '数 GB 原词典音频由本地音频伴侣提供；英音和美音在词条中以'
+                    '“英”“美”徽章区分。'
+                ],
+            ),
+            panel(
+                '折叠与导航',
+                [
+                    'Synonyms、Wordfinder、Extra Examples、Collocations、'
+                    'Word Origin 等模块使用 Yomitan 原生折叠。顶部 Idioms 和 '
+                    'Phrasal Verbs 会打开当前单词对应的专用结果。'
+                ],
+            ),
+            panel(
+                '原版中无法移植的功能',
+                [
+                    '欧路相关笔记、在线抓取、词条内 TTS 开关、动态口音切换、'
+                    'JavaScript 配置面板和按词性即时过滤不能由 Yomitan 词典包'
+                    '直接实现，应使用 Yomitan 自身设置或本地音频服务。'
+                ],
+            ),
+        ],
+    }
 
 
 def semantic_tokens(element: Any, classes: set[str], tag: str) -> list[str]:
@@ -305,13 +540,18 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
     for class_name in classes:
         symbol_match = OXFORD_SYMBOL_RE.fullmatch(class_name)
         if symbol_match is not None:
-            list_name = f"Oxford {symbol_match.group('list')}000"
+            list_number = symbol_match.group('list')
             level = symbol_match.group('level').upper()
             stats['frequency_badges_preserved'] += 1
             return {
                 'tag': 'span',
-                'content': f'{list_name} · {level}',
-                'data': {'oald': f'badge oxford-list level-{level.lower()}'},
+                'content': f'🔑 {level}',
+                'data': {
+                    'oald': (
+                        f'badge oxford-list list-{list_number}000 '
+                        f'level-{level.lower()}'
+                    )
+                },
             }
     if 'idioms' in classes:
         phrase_section = convert_phrase_section(
@@ -509,6 +749,9 @@ def main() -> None:
                 stats['empty_after_conversion'] += 1
                 continue
 
+            sections = phrase_sections(structured)
+            wire_entry_navigation(structured, key, sections)
+
             sequence = direct_sequences.setdefault(key, next_sequence)
             if sequence == next_sequence:
                 next_sequence += 1
@@ -519,6 +762,57 @@ def main() -> None:
             }
             output.write(json.dumps(record, ensure_ascii=False, separators=(',', ':')) + '\n')
             stats['direct_written'] += 1
+
+            for section_kind, section_values in sections.items():
+                auxiliary_term = phrase_query_term(key, section_kind)
+                auxiliary_sequence = direct_sequences.setdefault(
+                    auxiliary_term,
+                    next_sequence,
+                )
+                if auxiliary_sequence == next_sequence:
+                    next_sequence += 1
+                auxiliary_record = {
+                    'term': auxiliary_term,
+                    'sequence': auxiliary_sequence,
+                    'definition': {
+                        'type': 'structured-content',
+                        'content': auxiliary_phrase_content(
+                            key,
+                            section_kind,
+                            section_values,
+                        ),
+                    },
+                }
+                output.write(
+                    json.dumps(
+                        auxiliary_record,
+                        ensure_ascii=False,
+                        separators=(',', ':'),
+                    )
+                    + '\n'
+                )
+                stats[f'{section_kind}_query_entries_written'] += 1
+
+        config_sequence = direct_sequences.setdefault(CONFIG_TERM, next_sequence)
+        if config_sequence == next_sequence:
+            next_sequence += 1
+        config_record = {
+            'term': CONFIG_TERM,
+            'sequence': config_sequence,
+            'definition': {
+                'type': 'structured-content',
+                'content': config_content(),
+            },
+        }
+        output.write(
+            json.dumps(
+                config_record,
+                ensure_ascii=False,
+                separators=(',', ':'),
+            )
+            + '\n'
+        )
+        stats['config_entries_written'] += 1
 
         if args.limit_direct is None and not requested_terms:
             for alias, target in redirects.items():

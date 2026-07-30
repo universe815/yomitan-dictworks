@@ -4,6 +4,7 @@ import zipfile
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterator
+from urllib.parse import quote
 
 
 ALLOWED_TAGS = {
@@ -27,6 +28,14 @@ ALLOWED_TAGS = {
     'thead',
     'tr',
     'ul',
+}
+
+CONFIG_TERM = 'OALD Yomitan 设置'
+REQUIRED_SPECIAL_TERMS = {
+    CONFIG_TERM,
+    'OALD Idioms · language',
+    'OALD Idioms · plague',
+    'OALD Phrasal Verbs · take',
 }
 
 
@@ -82,6 +91,11 @@ def main() -> None:
             '[data-sc-oald~="examples"]',
             '[data-sc-oald~="collapse"]',
             '[data-sc-oald~="idioms"]',
+            '[data-sc-oald~="entry-actions"]',
+            '[data-sc-oald~="o10-link"]',
+            '[data-sc-oald~="auxiliary-entry"]',
+            '[data-sc-oald~="config-entry"]',
+            '[data-sc-oald~="config-panel"]',
         ):
             if required_selector not in styles:
                 raise ValueError(
@@ -95,6 +109,12 @@ def main() -> None:
         )
         if not term_banks:
             raise ValueError('archive contains no term banks')
+        found_special_terms: set[str] = set()
+        required_links = {
+            f'?query={quote(term)}'
+            for term in REQUIRED_SPECIAL_TERMS
+        }
+        found_required_links: set[str] = set()
         for member in term_banks:
             rows = json.loads(archive.read(member))
             if not isinstance(rows, list):
@@ -107,6 +127,8 @@ def main() -> None:
                     raise ValueError(
                         f'{member} row {row_number}: invalid headword'
                     )
+                if row[0] in REQUIRED_SPECIAL_TERMS:
+                    found_special_terms.add(row[0])
                 if not isinstance(row[5], list) or not row[5]:
                     raise ValueError(
                         f'{member} row {row_number}: definitions are empty'
@@ -148,6 +170,10 @@ def main() -> None:
                                 raise ValueError(
                                     f'{member} row {row_number}: invalid details'
                                 )
+                        if tag == 'a':
+                            href = node.get('href')
+                            if href in required_links:
+                                found_required_links.add(href)
                         if tag == 'img':
                             path = node.get('path')
                             if not isinstance(path, str) or not path:
@@ -156,6 +182,20 @@ def main() -> None:
                                 )
                             image_references.add(path)
 
+        missing_special_terms = sorted(
+            REQUIRED_SPECIAL_TERMS - found_special_terms
+        )
+        if missing_special_terms:
+            raise ValueError(
+                'missing OALD navigation entries: '
+                + ', '.join(missing_special_terms)
+            )
+        missing_required_links = sorted(required_links - found_required_links)
+        if missing_required_links:
+            raise ValueError(
+                'missing OALD navigation links: '
+                + ', '.join(missing_required_links)
+            )
         missing_images = sorted(image_references - archive_names)
         if missing_images:
             raise ValueError(
@@ -185,6 +225,8 @@ def main() -> None:
         'structuredDefinitions': counters['structured_definitions'],
         'details': counters['tag_details'],
         'summaries': counters['tag_summary'],
+        'navigationEntries': len(found_special_terms),
+        'navigationLinks': len(found_required_links),
         'stylesUseYomitanDataPrefix': True,
         'imageReferences': len(image_references),
         'packagedImages': args.expect_images,
