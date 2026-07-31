@@ -5,6 +5,13 @@ not make proprietary source data redistributable.
 
 ## 2026-07-31
 
+- Fixed both OALD editions as `2026.07.31.2`: corrected the explicit dark-theme
+  selectors for Yomitan's nested per-dictionary CSS scope, and changed every
+  Idioms rocket to reopen an OALD-only, visually identical entry-top target
+  instead of the combined result for the ordinary headword.
+- Fixed 《新日汉拟声拟态词词典》 as `2026.07.31.2`: corrected the same nested
+  dictionary-scope interaction so its explicit Yomitan dark palette is
+  actually applied.
 - Updated both OALD editions to `2026.07.31.1`: made the complete palette respond
   to Yomitan's explicit `data-theme="dark"` setting instead of relying only on
   the operating-system color scheme, raised dark-mode contrast, and added a
