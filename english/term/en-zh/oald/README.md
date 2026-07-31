@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.31.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.31.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.07.31.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.07.31.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -19,7 +19,8 @@
 - compact `🔑 A1–C2` CEFR badges that keep the headword visually dominant;
 - working Idioms and Phrasal Verbs query links that open the current word's
   dedicated, expanded phrase result;
-- a rocket return control on Idioms headings that opens the parent headword;
+- a rocket return control on Idioms headings that opens only the current OALD
+  entry at its top, without mixing in other dictionaries for the same headword;
 - color-coded native folding for all 18 source module kinds, including extra
   examples, synonyms, Wordfinder, verb forms, collocations, word families,
   British/American usage, grammar, language banks, culture, and Word Origin;
@@ -58,7 +59,7 @@ pnpm oald:build
 python scripts/qa_oald.py generated/oald-structured.ndjson
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
-  --revision 2026.07.31.1
+  --revision 2026.07.31.2
 ```
 
 ## Build the illustrated edition
@@ -78,7 +79,7 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.07.31.1 `
+  --revision 2026.07.31.2 `
   --expect-images 622
 ```
 

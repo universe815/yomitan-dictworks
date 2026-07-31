@@ -95,6 +95,10 @@ def main() -> None:
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--term', action='append', dest='terms')
     parser.add_argument(
+        '--dictionary-title',
+        default='OALDPE En-Cn 2025.02.14（完整插图版）',
+    )
+    parser.add_argument(
         '--expand-all',
         action='store_true',
         help='Open every details section for visual QA.',
@@ -127,11 +131,13 @@ def main() -> None:
     if missing:
         raise ValueError(f"preview terms not found: {', '.join(missing)}")
     styles = args.styles.read_text(encoding='utf-8')
+    dictionary_title = args.dictionary_title
     cards = '\n'.join(
         (
-            '<article class="dictionary-result">'
+            '<article class="dictionary-result" '
+            f'data-dictionary="{html.escape(dictionary_title, quote=True)}">'
             '<div class="dictionary-label">'
-            f'{index}. OALDPE En-Cn · {html.escape(term)}'
+            f'{index}. {html.escape(dictionary_title)} · {html.escape(term)}'
             '</div>'
             f'{render_node(content)}'
             '</article>'
@@ -171,7 +177,9 @@ body {{
   margin: 0 0 12px;
   padding: 5px 9px;
 }}
+[data-dictionary="{html.escape(dictionary_title, quote=True)}"] {{
 {styles}
+}}
 </style>
 </head>
 <body>
