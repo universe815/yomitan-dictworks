@@ -150,6 +150,74 @@
   padding-top: 0.5em;
 }
 
+/*
+ * Yomitan's manually selected dark theme uses data-theme="dark" and does
+ * not necessarily match the operating-system prefers-color-scheme value.
+ */
+:root[data-theme="dark"] [data-sc-onomato~="entry"] {
+  color: #e6ebef;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="header"] {
+  border-bottom-color: #4d5861;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="headword"] {
+  color: #ff7d7d;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="category"] {
+  background: #303941;
+  border-color: #53606a;
+  color: #dce3e8;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="variant-badge"],
+:root[data-theme="dark"] [data-sc-onomato~="word-group"] a {
+  background: #472b2f;
+  border-color: #78484f;
+  color: #ffb0b0;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="sense-number"],
+:root[data-theme="dark"] [data-sc-onomato~="meaning"],
+:root[data-theme="dark"] [data-sc-onomato~="subentry-headword"] {
+  color: #edf1f4;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="example"] {
+  border-left-color: #697680;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="example-ja"] {
+  color: #72bdff;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="example-zh"] {
+  color: #cbd3d9;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="example-zh"]::before,
+:root[data-theme="dark"] [data-sc-onomato~="subentries-label"],
+:root[data-theme="dark"] [data-sc-onomato~="group-label"] {
+  color: #9eabb4;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="subentries"],
+:root[data-theme="dark"] [data-sc-onomato~="parent-link"] {
+  border-top-color: #53606a;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="word-group"] {
+  border-top-color: #46515a;
+}
+
+:root[data-theme="dark"] [data-sc-onomato~="word-group"] a:hover {
+  background: #d94f5a;
+  border-color: #d94f5a;
+  color: #ffffff;
+}
+
 @media (prefers-color-scheme: dark) {
   [data-sc-onomato~="header"] {
     border-bottom-color: #4b4b4b;

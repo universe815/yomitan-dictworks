@@ -89,6 +89,7 @@ def main() -> None:
             '[data-sc-oald~="examples"]',
             '[data-sc-oald~="collapse"]',
             '[data-sc-oald~="idioms"]',
+            '[data-sc-oald~="phrase-back"]',
             '[data-sc-oald~="entry-actions"]',
             '[data-sc-oald~="auxiliary-entry"]',
         ):
@@ -96,6 +97,10 @@ def main() -> None:
                 raise ValueError(
                     f'styles.css lacks required selector {required_selector}'
                 )
+        if ':root[data-theme="dark"] [data-sc-oald~="entry"]' not in styles:
+            raise ValueError(
+                'styles.css does not react to Yomitan data-theme="dark"'
+            )
 
         term_banks = sorted(
             name

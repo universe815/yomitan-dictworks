@@ -99,6 +99,11 @@ def main() -> None:
         action='store_true',
         help='Open every details section for visual QA.',
     )
+    parser.add_argument(
+        '--dark',
+        action='store_true',
+        help='Render using Yomitan data-theme="dark".',
+    )
     args = parser.parse_args()
 
     requested = set(args.terms or [])
@@ -134,23 +139,23 @@ def main() -> None:
         for index, (term, content) in enumerate(entries, start=1)
     )
     document = f'''<!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN"{' data-theme="dark"' if args.dark else ''}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OALD Yomitan layout preview</title>
 <style>
-html {{ background: #eef1f4; }}
+html {{ background: {'#181c20' if args.dark else '#eef1f4'}; }}
 body {{
-  color: #202a31;
+  color: {'#d4d4d4' if args.dark else '#202a31'};
   font-family: "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   margin: 0 auto;
   max-width: 780px;
   padding: 24px 14px 80px;
 }}
 .dictionary-result {{
-  background: white;
-  border: 1px solid #d9dfe5;
+  background: {'#202428' if args.dark else 'white'};
+  border: 1px solid {'#3b444b' if args.dark else '#d9dfe5'};
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(31, 48, 61, 0.08);
   margin: 0 0 24px;

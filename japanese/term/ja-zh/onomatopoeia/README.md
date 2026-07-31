@@ -7,7 +7,7 @@
 | Direction | Japanese → Chinese |
 | Type | Specialized term dictionary |
 | Edition | Second edition |
-| Revision | `2026.07.30.1` |
+| Revision | `2026.07.31.1` |
 | Build | Ready |
 | Update mode | GitHub Release |
 | Archive | `新日汉拟声拟态词词典-第2版-Yomitan.zip` |
@@ -16,6 +16,8 @@
 
 - original visual hierarchy and colored headwords;
 - semantic categories and Japanese–Chinese example styling;
+- a Yomitan-aware dark palette with readable meanings, translations, labels,
+  separators, and related-word chips;
 - word-group and related-form links;
 - subentries promoted to independently searchable terms;
 - dictionary-scoped CSS.
