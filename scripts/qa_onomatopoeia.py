@@ -58,6 +58,8 @@ with zipfile.ZipFile(args.zip) as archive:
         errors.append("styles.css 缺少 data-sc-onomato 选择器")
     if "[data-onomato" in styles:
         errors.append("styles.css 包含错误的 data-onomato 选择器")
+    if ':root[data-theme="dark"] [data-sc-onomato~="entry"]' not in styles:
+        errors.append('styles.css 未响应 Yomitan data-theme="dark"')
     for required_style in ["#c90000", "#0056b3", 'content: "／"', '"word-group"] a']:
         if required_style not in styles:
             errors.append(f"styles.css 缺少原版特色规则：{required_style}")

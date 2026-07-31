@@ -253,6 +253,35 @@ def wire_entry_navigation(
     webtop['content'] = content_value(items)
 
 
+def wire_phrase_back_navigation(
+    sections: dict[str, list[dict[str, Any]]],
+    term: str,
+) -> None:
+    """Add a Yomitan-safe return link to each idiom section.
+
+    Structured content links cannot target an HTML fragment, so the original
+    OALD rocket is represented by an internal query for the parent headword.
+    This works in both the full entry and the separately searchable Idioms
+    result.
+    """
+    for section in sections.get('idioms', []):
+        heading = find_first_token(section, 'phrase_heading')
+        if heading is None:
+            continue
+        content = heading.get('content')
+        items = content if isinstance(content, list) else [content]
+        if any('phrase-back' in data_tokens(item) for item in items):
+            continue
+        items.append(
+            query_link(
+                '🚀',
+                term,
+                'phrase-back',
+            )
+        )
+        heading['content'] = content_value(items)
+
+
 def auxiliary_phrase_content(
     term: str,
     section_kind: str,
@@ -655,6 +684,7 @@ def main() -> None:
 
             sections = phrase_sections(structured)
             wire_entry_navigation(structured, key, sections)
+            wire_phrase_back_navigation(sections, key)
 
             sequence = direct_sequences.setdefault(key, next_sequence)
             if sequence == next_sequence:

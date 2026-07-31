@@ -1121,7 +1121,9 @@
 }
 
 [data-sc-oald~="phrase_heading"] {
+  align-items: center;
   cursor: pointer;
+  display: flex;
   font-family: Cambria, Georgia, serif;
   font-size: 1.28em;
   font-weight: 750;
@@ -1152,6 +1154,29 @@
 
 [data-sc-oald~="phrase-section"][open] > [data-sc-oald~="phrase_heading"]::before {
   content: "−";
+}
+
+[data-sc-oald~="phrase-back"] {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+  font-size: 0.72em;
+  justify-content: center;
+  margin-left: auto;
+}
+
+[data-sc-oald~="phrase-back"] > a {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  display: inline-flex;
+  line-height: 1;
+  padding: 0.34em;
+  text-decoration: none;
+}
+
+[data-sc-oald~="phrase-back"] > a:hover {
+  background: color-mix(in srgb, var(--oald-teal) 14%, transparent);
 }
 
 [data-sc-oald~="phrase_body"] {
@@ -1224,6 +1249,72 @@
     margin-left: 0;
     margin-top: 0.12em;
   }
+}
+
+/*
+ * Yomitan's explicit theme setting is independent of the operating-system
+ * color scheme. It is exposed as data-theme="dark" on the document root.
+ */
+:root[data-theme="dark"] [data-sc-oald~="entry"] {
+  --oald-blue: #70c4f5;
+  --oald-blue-deep: #9bd5f7;
+  --oald-blue-soft: #172d3a;
+  --oald-cyan: #6bd0df;
+  --oald-green: #83dcae;
+  --oald-green-soft: #193429;
+  --oald-orange: #f3b47f;
+  --oald-gold: #e8be66;
+  --oald-gold-soft: #37301f;
+  --oald-red: #ef7390;
+  --oald-red-soft: #3c222c;
+  --oald-purple: #cbb0f1;
+  --oald-purple-soft: #312841;
+  --oald-teal: #72d7c8;
+  --oald-teal-soft: #193734;
+  --oald-ink: #edf2f5;
+  --oald-muted: #b5c1c9;
+  --oald-line: #44545f;
+  --oald-panel: #222d34;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="webtop"] {
+  background: linear-gradient(135deg, #172d3a, #222d34);
+  border-color: #3c6075;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="sense"] {
+  background: rgba(34, 45, 52, 0.94);
+}
+
+:root[data-theme="dark"] [data-sc-oald~="sense"]:hover {
+  border-color: #527083;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="grammar"],
+:root[data-theme="dark"] [data-sc-oald~="labels"] {
+  background: #3d2d21;
+  border-color: #76553b;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="x"],
+:root[data-theme="dark"] [data-sc-oald~="unx"],
+:root[data-theme="dark"] [data-sc-oald~="phons_br"],
+:root[data-theme="dark"] [data-sc-oald~="phons_n_am"] {
+  color: #dce4e9;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="collapse"][open]
+  > [data-sc-oald~="box_title"] {
+  background: #293d48;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="jumplink"]:hover,
+:root[data-theme="dark"] [data-sc-oald~="phrase-back"] > a:hover {
+  background: #29404a;
+}
+
+:root[data-theme="dark"] [data-sc-oald~="auxiliary-entry"] {
+  background: linear-gradient(145deg, #222d34, #2d2937);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -3,6 +3,18 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-07-31
+
+- Updated both OALD editions to `2026.07.31.1`: made the complete palette respond
+  to Yomitan's explicit `data-theme="dark"` setting instead of relying only on
+  the operating-system color scheme, raised dark-mode contrast, and added a
+  rocket control on every Idioms heading that returns to the parent headword.
+- Updated 《新日汉拟声拟态词词典》 to `2026.07.31.1` with a Yomitan-aware
+  dark palette for meanings, Japanese and Chinese examples, labels, separators,
+  related-word chips, and hover states.
+- Corrected the onomatopoeia Google Drive archive path in the machine catalog to
+  match the existing stable shared file.
+
 ## 2026-07-30
 
 - Enhanced both OALD editions as `2026.07.30.6`: removed the static `O10`

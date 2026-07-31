@@ -23,6 +23,7 @@ REQUIRED_TOKENS = {
         'idm',
         'phrase-section',
         'phrase_heading',
+        'phrase-back',
         'phrase_body',
         'senses_single',
         'source-oald',
@@ -50,6 +51,7 @@ REQUIRED_TOKENS = {
         'idm',
         'phrase-section',
         'phrase_heading',
+        'phrase-back',
         'phrase_body',
         'verb_forms_table',
         'senses_single',
@@ -199,8 +201,11 @@ def main() -> None:
             if isinstance(node, dict) and node.get('tag') == 'a'
         }
         expected_idiom_href = f'?query={quote(f"OALD Idioms · {term}")}'
+        expected_back_href = f'?query={quote(term)}'
         if expected_idiom_href not in anchors:
             failures.append(f'{term}: Idioms query link is missing')
+        if expected_back_href not in anchors:
+            failures.append(f'{term}: Idioms return-to-headword link is missing')
         badge_texts = [
             ''.join(
                 child
@@ -250,6 +255,15 @@ def main() -> None:
             for node in nodes
         ):
             failures.append(f'{auxiliary_term}: Idioms section is not open')
+        anchors = {
+            node.get('href')
+            for node in nodes
+            if isinstance(node, dict) and node.get('tag') == 'a'
+        }
+        if f'?query={quote(term)}' not in anchors:
+            failures.append(
+                f'{auxiliary_term}: return-to-headword link is missing'
+            )
 
     if failures:
         raise ValueError('\n'.join(failures))
