@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 import zipfile
 from collections import Counter
 from pathlib import Path
@@ -77,6 +78,7 @@ def main() -> None:
         if 'styles.css' not in archive_names:
             raise ValueError('archive contains no styles.css')
         styles = archive.read('styles.css').decode('utf-8')
+        theme_styles = re.sub(r'/\*.*?\*/', '', styles, flags=re.DOTALL)
         if '[data-sc-oald' not in styles:
             raise ValueError(
                 'styles.css lacks Yomitan data-sc-oald selectors'
@@ -101,15 +103,11 @@ def main() -> None:
                 raise ValueError(
                     f'styles.css lacks required selector {required_selector}'
                 )
-        if ':root[data-theme="dark"] & [data-sc-oald~="entry"]' not in styles:
-            raise ValueError(
-                'styles.css does not escape Yomitan dictionary scoping for dark mode'
-            )
-        if ':root[data-theme="dark"]' not in styles or '[data-sc-oald~="shcut"]' not in styles:
-            raise ValueError('styles.css lacks explicit dark-mode category selectors')
-        if 'html[data-theme="dark"]' not in styles or '.dark' not in styles:
-            raise ValueError('styles.css lacks flat host dark-mode selectors')
-        if '@media (prefers-color-scheme: dark)' not in styles:
+        if 'var(--text-color' not in theme_styles or 'var(--background-color' not in theme_styles:
+            raise ValueError('styles.css does not consume host theme variables')
+        if any(token in theme_styles for token in ('html[data-theme', 'body[data-theme', ':root[data-theme', ' & [data-sc-oald')):
+            raise ValueError('styles.css contains non-portable root/theme selectors')
+        if '@media (prefers-color-scheme: dark)' not in theme_styles:
             raise ValueError('styles.css lacks prefers-color-scheme fallback')
 
         term_banks = sorted(

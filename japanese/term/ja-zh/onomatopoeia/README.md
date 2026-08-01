@@ -7,7 +7,7 @@
 | Direction | Japanese → Chinese |
 | Type | Specialized term dictionary |
 | Edition | Second edition |
-| Revision | `2026.08.01.1` |
+| Revision | `2026.08.01.2` |
 | Build | Ready |
 | Update mode | GitHub Release |
 | Archive | `新日汉拟声拟态词词典-第2版-Yomitan.zip` |

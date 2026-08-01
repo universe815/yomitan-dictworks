@@ -1,4 +1,11 @@
 [data-sc-onomato~="entry"] {
+  --onomato-bg: var(--background-color, #ffffff);
+  --onomato-bg-light: var(--background-color-light, var(--onomato-bg));
+  --onomato-text: var(--text-color, #333333);
+  --onomato-muted: var(--text-color-light2, #666666);
+  --onomato-line: var(--text-color-light4, #dddddd);
+  --onomato-link: var(--link-color, #0056b3);
+  --onomato-accent: var(--danger-color, #c90000);
   color: var(--text-color, inherit);
   font-family: "Helvetica Neue", Helvetica, Arial, "Yu Gothic", "Noto Sans CJK JP", sans-serif;
   line-height: 1.6;
@@ -7,7 +14,7 @@
 
 [data-sc-onomato~="header"] {
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--onomato-line);
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
@@ -16,7 +23,7 @@
 }
 
 [data-sc-onomato~="headword"] {
-  color: #c90000;
+  color: var(--onomato-accent);
   font-size: 1.4em;
   font-weight: 700;
 }
@@ -30,15 +37,15 @@
 }
 
 [data-sc-onomato~="category"] {
-  background: #f4f4f4;
-  border: 1px solid #dddddd;
-  color: #555555;
+  background: var(--onomato-bg-light);
+  border: 1px solid var(--onomato-line);
+  color: var(--onomato-muted);
 }
 
 [data-sc-onomato~="variant-badge"] {
-  background: #fff1f1;
-  border: 1px solid #ffcccc;
-  color: #a80000;
+  background: color-mix(in srgb, var(--onomato-bg) 88%, var(--onomato-accent) 12%);
+  border: 1px solid color-mix(in srgb, var(--onomato-accent) 30%, var(--onomato-bg));
+  color: var(--onomato-accent);
 }
 
 [data-sc-onomato~="sense"] {
@@ -49,12 +56,12 @@
 }
 
 [data-sc-onomato~="sense-number"] {
-  color: #333333;
+  color: var(--onomato-text);
   font-weight: 700;
 }
 
 [data-sc-onomato~="meaning"] {
-  color: #333333;
+  color: var(--onomato-text);
   margin-bottom: 0.3em;
 }
 
@@ -64,33 +71,33 @@
 }
 
 [data-sc-onomato~="example"] {
-  border-left: 2px solid #cccccc;
+  border-left: 2px solid var(--onomato-line);
   margin-bottom: 0.55em;
   padding-left: 0.8em;
 }
 
 [data-sc-onomato~="example-ja"] {
-  color: #0056b3;
+  color: var(--onomato-link);
 }
 
 [data-sc-onomato~="example-zh"] {
-  color: #666666;
+  color: var(--onomato-muted);
 }
 
 [data-sc-onomato~="example-zh"]::before {
-  color: #999999;
+  color: var(--onomato-muted);
   content: "／";
   margin-right: 0.2em;
 }
 
 [data-sc-onomato~="subentries"] {
-  border-top: 1px dashed #dddddd;
+  border-top: 1px dashed var(--onomato-line);
   margin-top: 0.9em;
   padding-top: 0.65em;
 }
 
 [data-sc-onomato~="subentries-label"] {
-  color: #888888;
+  color: var(--onomato-muted);
   font-size: 0.82em;
   font-weight: 700;
 }
@@ -100,19 +107,19 @@
 }
 
 [data-sc-onomato~="subentry-headword"] {
-  color: #222222;
+  color: var(--onomato-text);
   font-size: 1.08em;
   font-weight: 700;
 }
 
 [data-sc-onomato~="subentry-headword"]::before {
-  color: #d9534f;
+  color: var(--onomato-accent);
   content: "◯ ";
 }
 
 [data-sc-onomato~="word-group"] {
   align-items: center;
-  border-top: 2px solid #f0f0f0;
+  border-top: 2px solid var(--onomato-line);
   display: flex;
   flex-wrap: wrap;
   gap: 0.6em;
@@ -121,16 +128,16 @@
 }
 
 [data-sc-onomato~="group-label"] {
-  color: #888888;
+  color: var(--onomato-muted);
   font-size: 0.9em;
   font-weight: 700;
 }
 
 [data-sc-onomato~="word-group"] a {
-  background: #fff1f1;
-  border: 1px solid #ffcccc;
+  background: color-mix(in srgb, var(--onomato-bg) 88%, var(--onomato-accent) 12%);
+  border: 1px solid color-mix(in srgb, var(--onomato-accent) 30%, var(--onomato-bg));
   border-radius: 20px;
-  color: #c90000;
+  color: var(--onomato-accent);
   font-size: 0.9em;
   font-weight: 500;
   padding: 0.18em 0.7em;
@@ -139,13 +146,13 @@
 }
 
 [data-sc-onomato~="word-group"] a:hover {
-  background: #c90000;
-  border-color: #c90000;
+  background: var(--onomato-accent);
+  border-color: var(--onomato-accent);
   color: #ffffff;
 }
 
 [data-sc-onomato~="parent-link"] {
-  border-top: 1px dashed #dddddd;
+  border-top: 1px dashed var(--onomato-line);
   margin-top: 0.7em;
   padding-top: 0.5em;
 }
@@ -154,6 +161,7 @@
  * Yomitan's manually selected dark theme uses data-theme="dark" and does
  * not necessarily match the operating-system prefers-color-scheme value.
  */
+/*
 :root[data-theme="dark"] & [data-sc-onomato~="entry"] {
   color: #e6ebef;
 }
@@ -217,7 +225,80 @@
   border-color: #d94f5a;
   color: #ffffff;
 }
+*/
 
+/*
+ * Theme portability contract.  Use inherited reader variables rather than
+ * html/body theme selectors; Hibiki scopes dictionary CSS under a wrapper.
+ */
+[data-sc-onomato~="entry"] {
+  color: var(--text-color, var(--onomato-text));
+  background: transparent;
+}
+
+[data-sc-onomato~="header"] {
+  border-bottom-color: var(--onomato-line);
+}
+
+[data-sc-onomato~="headword"] {
+  color: var(--onomato-accent);
+}
+
+[data-sc-onomato~="category"] {
+  background: var(--onomato-bg-light);
+  border-color: var(--onomato-line);
+  color: var(--onomato-muted);
+}
+
+[data-sc-onomato~="variant-badge"],
+[data-sc-onomato~="word-group"] a {
+  background: color-mix(in srgb, var(--onomato-bg) 88%, var(--onomato-accent) 12%);
+  border-color: color-mix(in srgb, var(--onomato-accent) 30%, var(--onomato-bg));
+  color: var(--onomato-accent);
+}
+
+[data-sc-onomato~="sense-number"],
+[data-sc-onomato~="meaning"],
+[data-sc-onomato~="subentry-headword"] {
+  color: var(--onomato-text);
+}
+
+[data-sc-onomato~="example"] {
+  border-left-color: var(--onomato-line);
+}
+
+[data-sc-onomato~="example-ja"] {
+  color: var(--onomato-link);
+}
+
+[data-sc-onomato~="example-zh"],
+[data-sc-onomato~="example-zh"]::before,
+[data-sc-onomato~="subentries-label"],
+[data-sc-onomato~="group-label"] {
+  color: var(--onomato-muted);
+}
+
+[data-sc-onomato~="subentries"],
+[data-sc-onomato~="parent-link"],
+[data-sc-onomato~="word-group"] {
+  border-color: var(--onomato-line);
+}
+
+[data-sc-onomato~="word-group"] a:hover {
+  background: var(--onomato-accent);
+  border-color: var(--onomato-accent);
+  color: var(--onomato-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-sc-onomato~="entry"] {
+    --onomato-bg: var(--background-color, #202124);
+    --onomato-bg-light: var(--background-color-light, var(--onomato-bg));
+    --onomato-text: var(--text-color, #e6ebef);
+  }
+}
+
+/*
 @media (prefers-color-scheme: dark) {
   [data-sc-onomato~="entry"] {
     color: #e6ebef;
@@ -272,7 +353,7 @@
   }
 }
 
-/* Flat dark-theme selectors for readers which import styles.css directly. */
+Flat dark-theme selectors (superseded by inherited host variables).
 :is(
   html[data-theme="dark"],
   body[data-theme="dark"],
@@ -735,3 +816,4 @@
   border-color: #d94f5a;
   color: #ffffff;
 }
+*/

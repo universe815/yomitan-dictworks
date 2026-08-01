@@ -1,29 +1,38 @@
 [data-sc-oald~="entry"] {
+  /*
+   * Yomitan and third-party readers expose their theme through inherited
+   * variables.  Keep the fallback palette for standalone browser previews,
+   * but make the host variables the source of truth so dictionary CSS also
+   * works when a reader scopes selectors under [data-dictionary].
+   */
+  --oald-host-bg: var(--background-color, #ffffff);
+  --oald-host-bg-light: var(--background-color-light, var(--oald-host-bg));
+  --oald-host-text: var(--text-color, #24313d);
   --oald-blue: #176fae;
   --oald-blue-deep: #125782;
-  --oald-blue-soft: #eef7fd;
+  --oald-blue-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #176fae 12%);
   --oald-cyan: #11869b;
-  --oald-cyan-soft: #edf9fb;
+  --oald-cyan-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #11869b 12%);
   --oald-green: #18754d;
-  --oald-green-soft: #eff9f3;
+  --oald-green-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #18754d 12%);
   --oald-orange: #a55219;
-  --oald-orange-soft: #fff5e9;
+  --oald-orange-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #a55219 12%);
   --oald-gold: #a76d08;
-  --oald-gold-soft: #fff8e7;
+  --oald-gold-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #a76d08 12%);
   --oald-red: #c52b53;
-  --oald-red-soft: #fff0f4;
+  --oald-red-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #c52b53 12%);
   --oald-purple: #7451a6;
-  --oald-purple-soft: #f6f1fc;
+  --oald-purple-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #7451a6 12%);
   --oald-teal: #087b71;
-  --oald-teal-soft: #edf9f7;
-  --oald-ink: #24313d;
-  --oald-muted: #667684;
-  --oald-line: #d9e3ea;
-  --oald-panel: #f7fafc;
-  --oald-webtop-end: #f8fcff;
-  --oald-shcut-soft: #e9f5fb;
-  --oald-grammar-line: #f0d4b4;
-  --oald-collapse-open: #eaf4f9;
+  --oald-teal-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #087b71 12%);
+  --oald-ink: var(--oald-host-text);
+  --oald-muted: var(--text-color-light2, color-mix(in srgb, var(--oald-host-text) 62%, var(--oald-host-bg)));
+  --oald-line: var(--text-color-light4, color-mix(in srgb, var(--oald-host-text) 18%, var(--oald-host-bg)));
+  --oald-panel: var(--oald-host-bg-light);
+  --oald-webtop-end: var(--oald-host-bg);
+  --oald-shcut-soft: color-mix(in srgb, var(--oald-host-bg) 84%, #11869b 16%);
+  --oald-grammar-line: color-mix(in srgb, var(--oald-orange) 32%, var(--oald-host-bg));
+  --oald-collapse-open: color-mix(in srgb, var(--oald-section-soft, var(--oald-blue-soft)) 72%, var(--oald-host-bg));
   color: var(--oald-ink);
   font-family: "Segoe UI", "Noto Sans", "Noto Sans SC", "Microsoft YaHei",
     sans-serif;
@@ -45,7 +54,7 @@
 [data-sc-oald~="webtop"] {
   align-items: baseline;
   background: linear-gradient(135deg, var(--oald-blue-soft), var(--oald-webtop-end));
-  border: 1px solid #cfe2ef;
+  border: 1px solid color-mix(in srgb, var(--oald-blue) 24%, var(--oald-host-bg));
   border-left: 0.32em solid var(--oald-blue);
   border-radius: 0.55em;
   display: flex;
@@ -81,8 +90,8 @@
 
 [data-sc-oald~="badge"],
 [data-sc-oald~="opal_symbol"] {
-  background: #e7f4fb;
-  border: 1px solid #b8dbea;
+  background: var(--oald-blue-soft);
+  border: 1px solid color-mix(in srgb, var(--oald-blue) 28%, var(--oald-host-bg));
   border-radius: 999px;
   color: var(--oald-blue-deep);
   display: inline-flex;
@@ -106,8 +115,8 @@
 }
 
 [data-sc-oald~="opal_symbol"] {
-  background: #f1edfb;
-  border-color: #d6c9ef;
+  background: var(--oald-purple-soft);
+  border-color: color-mix(in srgb, var(--oald-purple) 28%, var(--oald-host-bg));
   color: var(--oald-purple);
 }
 
@@ -123,7 +132,7 @@
 [data-sc-oald~="phons_br"],
 [data-sc-oald~="phons_n_am"] {
   align-items: center;
-  color: #3d4c58;
+  color: var(--oald-ink);
   display: inline-flex;
   gap: 0.32em;
 }
@@ -164,7 +173,7 @@
 }
 
 [data-sc-oald~="jumplink"] {
-  border: 1px solid #9bcbd8;
+  border: 1px solid color-mix(in srgb, var(--oald-cyan) 48%, var(--oald-host-bg));
   border-radius: 999px;
   color: var(--oald-cyan);
   display: inline-block;
@@ -179,7 +188,7 @@
 }
 
 [data-sc-oald~="jumplink"]:hover {
-  background: #e5f5f8;
+  background: var(--oald-cyan-soft);
   border-color: var(--oald-cyan);
 }
 
@@ -218,7 +227,7 @@
 }
 
 [data-sc-oald~="sense"] {
-  background: rgba(247, 250, 252, 0.72);
+  background: color-mix(in srgb, var(--oald-panel) 94%, transparent);
   border: 1px solid transparent;
   border-bottom-color: var(--oald-line);
   border-radius: 0.45em;
@@ -231,7 +240,7 @@
 }
 
 [data-sc-oald~="sense"]:hover {
-  border-color: #cbdde8;
+  border-color: color-mix(in srgb, var(--oald-blue) 32%, var(--oald-host-bg));
 }
 
 [data-sc-oald~="iteration"] {
@@ -355,7 +364,7 @@
 
 [data-sc-oald~="x"],
 [data-sc-oald~="unx"] {
-  color: #3f4c57;
+  color: var(--oald-ink);
   display: block;
   font-family: Cambria, Georgia, "Noto Serif", serif;
 }
@@ -646,7 +655,7 @@
 [data-sc-oald~="use"] {
   background: color-mix(in srgb, var(--oald-panel) 88%, var(--oald-blue-soft));
   border-radius: 0.32em;
-  color: #596a76;
+  color: var(--oald-muted);
   display: inline-block;
   margin: 0 0.28em 0.22em 0;
   padding: 0.08em 0.42em;
@@ -1209,7 +1218,7 @@
 }
 
 [data-sc-oald~="auxiliary-entry"] {
-  background: linear-gradient(180deg, #f8fcff, transparent);
+  background: linear-gradient(180deg, var(--oald-webtop-end), transparent);
   border: 1px solid var(--oald-line);
   border-radius: 0.6em;
   padding: 0.8em;
@@ -1261,6 +1270,7 @@
  * Yomitan's explicit theme setting is independent of the operating-system
  * color scheme. It is exposed as data-theme="dark" on the document root.
  */
+/*
 :root[data-theme="dark"] & [data-sc-oald~="entry"] {
   --oald-blue: #70c4f5;
   --oald-blue-deep: #9bd5f7;
@@ -1428,16 +1438,7 @@
   }
 }
 
-/*
- * Host-agnostic dark-mode fallback.
- *
- * Yomitan scopes dictionary CSS under [data-dictionary] and therefore uses
- * the nested selectors above. Other readers import styles.css directly and
- * usually expose either data-theme="dark" or a .dark class on html/body.
- * Keep a flat selector set here so the same archive also works in those
- * readers. The prefers-color-scheme block above remains the final fallback
- * for readers which do not expose a theme attribute.
- */
+Host-agnostic dark-mode fallback (superseded by inherited host variables).
 :is(
   html[data-theme="dark"],
   body[data-theme="dark"],
@@ -2078,4 +2079,95 @@
 )
   [data-sc-oald~="phrase-back"] > a:hover {
   background: #29404a;
+}
+*/
+
+/*
+ * Theme portability contract.
+ * Hibiki (and several other readers) scopes dictionary selectors under a
+ * dictionary wrapper.  Ancestor selectors such as html[data-theme] cannot
+ * reach the real document root after that transformation, so all core
+ * surfaces deliberately inherit Yomitan's theme variables instead.
+ */
+[data-sc-oald~="entry"] {
+  color: var(--text-color, #24313d);
+  background: transparent;
+}
+
+[data-sc-oald~="webtop"],
+[data-sc-oald~="sense"],
+[data-sc-oald~="collapse"],
+[data-sc-oald~="auxiliary-entry"],
+[data-sc-oald~="un"],
+[data-sc-oald~="blockquote"] {
+  color: var(--text-color, #24313d);
+}
+
+[data-sc-oald~="webtop"] {
+  background: linear-gradient(135deg, var(--oald-blue-soft), var(--oald-webtop-end));
+  border-color: color-mix(in srgb, var(--oald-blue) 24%, var(--oald-host-bg));
+}
+
+[data-sc-oald~="sense"],
+[data-sc-oald~="collapse"],
+[data-sc-oald~="auxiliary-entry"],
+[data-sc-oald~="un"],
+[data-sc-oald~="blockquote"] {
+  background: var(--oald-panel);
+  border-color: var(--oald-line);
+}
+
+[data-sc-oald~="sense"] {
+  background: color-mix(in srgb, var(--oald-panel) 94%, transparent);
+}
+
+[data-sc-oald~="collapse"][open] > [data-sc-oald~="box_title"],
+[data-sc-oald~="box_title"] {
+  background: var(--oald-section-soft, var(--oald-blue-soft));
+}
+
+[data-sc-oald~="grammar"],
+[data-sc-oald~="labels"] {
+  background: var(--oald-orange-soft);
+  border-color: var(--oald-grammar-line);
+}
+
+[data-sc-oald~="shcut"] {
+  background: linear-gradient(90deg, var(--oald-shcut-soft), transparent);
+}
+
+[data-sc-oald~="examples"] > li {
+  background: linear-gradient(90deg, var(--oald-blue-soft), transparent);
+  border-top-color: var(--oald-line);
+}
+
+[data-sc-oald~="badge"],
+[data-sc-oald~="opal_symbol"] {
+  background: var(--oald-blue-soft);
+  border-color: color-mix(in srgb, var(--oald-blue) 28%, var(--oald-host-bg));
+}
+
+[data-sc-oald~="opal_symbol"] {
+  background: var(--oald-purple-soft);
+  border-color: color-mix(in srgb, var(--oald-purple) 28%, var(--oald-host-bg));
+}
+
+[data-sc-oald~="idm-g"] [data-sc-oald~="webtop"],
+[data-sc-oald~="idioms"] {
+  background: linear-gradient(180deg, var(--oald-teal-soft), transparent);
+  border-color: color-mix(in srgb, var(--oald-teal) 24%, var(--oald-host-bg));
+}
+
+[data-sc-oald~="phrasal_verb_links"],
+[data-sc-oald~="pv-g"] {
+  background: linear-gradient(180deg, var(--oald-purple-soft), transparent);
+  border-color: color-mix(in srgb, var(--oald-purple) 24%, var(--oald-host-bg));
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-sc-oald~="entry"] {
+    --oald-host-bg: var(--background-color, #202a31);
+    --oald-host-bg-light: var(--background-color-light, var(--oald-host-bg));
+    --oald-host-text: var(--text-color, #e7edf1);
+  }
 }

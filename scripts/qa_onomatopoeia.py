@@ -2,6 +2,7 @@ import argparse
 import collections
 import hashlib
 import json
+import re
 import zipfile
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -54,13 +55,16 @@ with zipfile.ZipFile(args.zip) as archive:
     names = set(archive.namelist())
     index = json.loads(archive.read("index.json"))
     styles = archive.read("styles.css").decode("utf-8")
+    theme_styles = re.sub(r'/\*.*?\*/', '', styles, flags=re.DOTALL)
     if "[data-sc-onomato" not in styles:
         errors.append("styles.css 缺少 data-sc-onomato 选择器")
     if "[data-onomato" in styles:
         errors.append("styles.css 包含错误的 data-onomato 选择器")
-    if ':root[data-theme="dark"] & [data-sc-onomato~="entry"]' not in styles:
-        errors.append('styles.css 未正确跳出 Yomitan 词典作用域以响应深色主题')
-    for required_style in ["#c90000", "#0056b3", 'content: "／"', '"word-group"] a']:
+    if "var(--text-color" not in theme_styles or "var(--background-color" not in theme_styles:
+        errors.append("styles.css 未使用宿主主题变量")
+    if any(token in theme_styles for token in ("html[data-theme", "body[data-theme", ":root[data-theme", " & [data-sc-onomato")):
+        errors.append("styles.css 包含不兼容词典作用域的根节点主题选择器")
+    for required_style in ['content: "／"', '"word-group"] a']:
         if required_style not in styles:
             errors.append(f"styles.css 缺少原版特色规则：{required_style}")
     for name in sorted(

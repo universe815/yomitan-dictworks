@@ -5,6 +5,12 @@ not make proprietary source data redistributable.
 
 ## 2026-08-01
 
+- Updated both OALD editions and 《新日汉拟声拟态词词典》 to `2026.08.01.2`.
+  Theme colors now consume inherited Yomitan variables (`--text-color`,
+  `--background-color`, and related fallbacks), so dark mode works in Yomitan,
+  Hibiki, and other scoped readers without relying on `html`/`body` selectors.
+  Added a Hibiki CSS-scope regression check and rebuilt all three archives.
+
 - Fixed both OALD editions as `2026.08.01.1`: added flat dark-theme selectors
   for non-Yomitan readers, including `data-theme="dark"`, `data-mode="dark"`,
   and `.dark`/`.dark-mode`/`.theme-dark`, covered closed and open folding
