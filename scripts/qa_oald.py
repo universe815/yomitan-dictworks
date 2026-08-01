@@ -100,8 +100,6 @@ FORBIDDEN_JOINED_TEXT = (
 SPECIAL_TERMS = {
     'OALD Idioms · language',
     'OALD Idioms · plague',
-    'language\u2060',
-    'plague\u2060',
 }
 
 
@@ -203,7 +201,7 @@ def main() -> None:
             if isinstance(node, dict) and node.get('tag') == 'a'
         }
         expected_idiom_href = f'?query={quote(f"OALD Idioms · {term}")}'
-        expected_back_href = f'?query={quote(f"{term}\u2060")}'
+        expected_back_href = f'?query={quote(term)}'
         if expected_idiom_href not in anchors:
             failures.append(f'{term}: Idioms query link is missing')
         if expected_back_href not in anchors:
@@ -262,37 +260,10 @@ def main() -> None:
             for node in nodes
             if isinstance(node, dict) and node.get('tag') == 'a'
         }
-        if f'?query={quote(f"{term}\u2060")}' not in anchors:
+        if f'?query={quote(term)}' not in anchors:
             failures.append(
                 f'{auxiliary_term}: return-to-headword link is missing'
             )
-
-        navigation_term = f'{term}\u2060'
-        navigation_record = records.get(navigation_term)
-        if navigation_record is None:
-            failures.append(f'{term}: OALD-only entry-top target is missing')
-            continue
-        navigation_nodes = list(
-            walk(navigation_record.get('definition', {}).get('content'))
-        )
-        navigation_tokens = Counter(
-            token
-            for node in navigation_nodes
-            if isinstance(node, dict)
-            for token in node.get('data', {}).get('oald', '').split()
-        )
-        if not {'navigation-entry', 'webtop', 'sense', 'idioms'} <= navigation_tokens.keys():
-            failures.append(f'{term}: OALD-only entry-top target is incomplete')
-        original_text = ''.join(
-            node
-            for node in walk(records[term].get('definition', {}).get('content'))
-            if isinstance(node, str)
-        )
-        navigation_text = ''.join(
-            node for node in navigation_nodes if isinstance(node, str)
-        )
-        if navigation_text != original_text:
-            failures.append(f'{term}: entry-top target differs from the OALD entry')
 
     if failures:
         raise ValueError('\n'.join(failures))

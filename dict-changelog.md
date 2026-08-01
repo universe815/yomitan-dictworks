@@ -3,15 +3,18 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
-## 2026-07-31
+## 2026-08-01
 
-- Fixed both OALD editions as `2026.07.31.2`: corrected the explicit dark-theme
-  selectors for Yomitan's nested per-dictionary CSS scope, and changed every
-  Idioms rocket to reopen an OALD-only, visually identical entry-top target
-  instead of the combined result for the ordinary headword.
-- Fixed 《新日汉拟声拟态词词典》 as `2026.07.31.2`: corrected the same nested
-  dictionary-scope interaction so its explicit Yomitan dark palette is
-  actually applied.
+- Fixed both OALD editions as `2026.08.01.1`: added flat dark-theme selectors
+  for non-Yomitan readers, including `data-theme="dark"`, `data-mode="dark"`,
+  and `.dark`/`.dark-mode`/`.theme-dark`, covered closed and open folding
+  panels, category strips, grammar labels, auxiliary cards, and the remaining
+  light surfaces, and removed the invisible duplicate-term rocket target.
+- Fixed 《新日汉拟声拟态词词典》 as `2026.08.01.1`: added the same flat
+  host-theme fallback so the complete palette works outside Yomitan too.
+- Changed the OALD Idioms rocket to a same-display query for the ordinary
+  headword. Yomitan dictionary data cannot contain fragment anchors or click
+  handlers, so a true in-place scroll is not expressible in a portable ZIP.
 - Updated both OALD editions to `2026.07.31.1`: made the complete palette respond
   to Yomitan's explicit `data-theme="dark"` setting instead of relying only on
   the operating-system color scheme, raised dark-mode contrast, and added a

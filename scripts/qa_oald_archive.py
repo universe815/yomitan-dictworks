@@ -35,9 +35,9 @@ REQUIRED_SPECIAL_TERMS = {
     'OALD Idioms · plague',
     'OALD Phrasal Verbs · take',
 }
-REQUIRED_ENTRY_TOP_TERMS = {
-    'language\u2060',
-    'plague\u2060',
+REQUIRED_PHRASE_BACK_TERMS = {
+    'language',
+    'plague',
 }
 
 
@@ -105,6 +105,12 @@ def main() -> None:
             raise ValueError(
                 'styles.css does not escape Yomitan dictionary scoping for dark mode'
             )
+        if ':root[data-theme="dark"]' not in styles or '[data-sc-oald~="shcut"]' not in styles:
+            raise ValueError('styles.css lacks explicit dark-mode category selectors')
+        if 'html[data-theme="dark"]' not in styles or '.dark' not in styles:
+            raise ValueError('styles.css lacks flat host dark-mode selectors')
+        if '@media (prefers-color-scheme: dark)' not in styles:
+            raise ValueError('styles.css lacks prefers-color-scheme fallback')
 
         term_banks = sorted(
             name
@@ -114,13 +120,12 @@ def main() -> None:
         if not term_banks:
             raise ValueError('archive contains no term banks')
         found_special_terms: set[str] = set()
-        found_entry_top_terms: set[str] = set()
         required_links = {
             f'?query={quote(term)}'
             for term in REQUIRED_SPECIAL_TERMS
         } | {
             f'?query={quote(term)}'
-            for term in REQUIRED_ENTRY_TOP_TERMS
+            for term in REQUIRED_PHRASE_BACK_TERMS
         }
         found_required_links: set[str] = set()
         for member in term_banks:
@@ -137,8 +142,6 @@ def main() -> None:
                     )
                 if row[0] in REQUIRED_SPECIAL_TERMS:
                     found_special_terms.add(row[0])
-                if row[0] in REQUIRED_ENTRY_TOP_TERMS:
-                    found_entry_top_terms.add(row[0])
                 if not isinstance(row[5], list) or not row[5]:
                     raise ValueError(
                         f'{member} row {row_number}: definitions are empty'
@@ -200,14 +203,6 @@ def main() -> None:
                 'missing OALD navigation entries: '
                 + ', '.join(missing_special_terms)
             )
-        missing_entry_top_terms = sorted(
-            REQUIRED_ENTRY_TOP_TERMS - found_entry_top_terms
-        )
-        if missing_entry_top_terms:
-            raise ValueError(
-                'missing OALD-only entry-top targets: '
-                + ', '.join(repr(term) for term in missing_entry_top_terms)
-            )
         missing_required_links = sorted(required_links - found_required_links)
         if missing_required_links:
             raise ValueError(
@@ -243,7 +238,7 @@ def main() -> None:
         'structuredDefinitions': counters['structured_definitions'],
         'details': counters['tag_details'],
         'summaries': counters['tag_summary'],
-        'navigationEntries': len(found_special_terms) + len(found_entry_top_terms),
+        'navigationEntries': len(found_special_terms),
         'navigationLinks': len(found_required_links),
         'stylesUseYomitanDataPrefix': True,
         'imageReferences': len(image_references),
