@@ -5,6 +5,12 @@ not make proprietary source data redistributable.
 
 ## 2026-08-01
 
+- OALD only: fixed the root card background for Hibiki and other popup hosts
+  whose generic `.entry` surface overrides dictionary CSS. The OALD card now
+  prefers Hibiki's `--md-surface-container`, then Yomitan's standard theme
+  variables, while retaining the standalone fallback palette. Both OALD
+  editions are rebuilt as `2026.08.01.3`.
+
 - Updated both OALD editions and 《新日汉拟声拟态词词典》 to `2026.08.01.2`.
   Theme colors now consume inherited Yomitan variables (`--text-color`,
   `--background-color`, and related fallbacks), so dark mode works in Yomitan,

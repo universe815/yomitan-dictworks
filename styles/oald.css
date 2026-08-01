@@ -5,9 +5,15 @@
    * but make the host variables the source of truth so dictionary CSS also
    * works when a reader scopes selectors under [data-dictionary].
    */
-  --oald-host-bg: var(--background-color, #ffffff);
-  --oald-host-bg-light: var(--background-color-light, var(--oald-host-bg));
-  --oald-host-text: var(--text-color, #24313d);
+  /*
+   * Hibiki exposes Material 3 surfaces as --md-surface-container while
+   * Yomitan exposes --background-color.  Prefer the former when present so
+   * the popup's dark card survives Hibiki's generic `.entry` skin; fall back
+   * to the standard Yomitan variables everywhere else.
+   */
+  --oald-host-bg: var(--md-surface-container, var(--background-color, #ffffff));
+  --oald-host-bg-light: var(--md-surface-container-high, var(--background-color-light, var(--oald-host-bg)));
+  --oald-host-text: var(--md-on-surface, var(--text-color, #24313d));
   --oald-blue: #176fae;
   --oald-blue-deep: #125782;
   --oald-blue-soft: color-mix(in srgb, var(--oald-host-bg) 88%, #176fae 12%);
@@ -2092,6 +2098,19 @@ Host-agnostic dark-mode fallback (superseded by inherited host variables).
 [data-sc-oald~="entry"] {
   color: var(--text-color, #24313d);
   background: transparent;
+}
+
+/*
+ * Hibiki's popup stylesheet also targets `.entry` and paints the generic
+ * dictionary card.  Attribute specificity alone is equal to that class, so
+ * make the OALD root explicit and important: this is the one host surface
+ * that must follow OALD's inherited theme tokens rather than the generic
+ * popup card.  The rule remains harmless in Yomitan because the same tokens
+ * resolve to its normal dictionary background.
+ */
+[data-sc-oald~="entry"][data-sc-oald~="entry"] {
+  background: var(--oald-host-bg) !important;
+  color: var(--oald-host-text);
 }
 
 [data-sc-oald~="webtop"],
