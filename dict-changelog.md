@@ -5,6 +5,14 @@ not make proprietary source data redistributable.
 
 ## 2026-08-01
 
+- OALD only: expanded native hover explanations across the complete corpus,
+  including every observed part-of-speech combination, grammar label, Oxford
+  3000/5000 and CEFR badge, OPAL marker, regional pronunciation label, and
+  topic CEFR marker. Replaced each MDX full-size/thumbnail image pair with one
+  full-resolution resource displayed at thumbnail width, removing Yomitan's
+  stray `[Image]` disclosure and Hibiki's duplicate image. Both OALD editions
+  are rebuilt as `2026.08.01.5`; 《新日汉拟声拟态词词典》 remains unchanged.
+
 - OALD only: added native hover explanations for CEFR badges, parts of speech,
   grammar/countability labels, OPAL W/S markers, and UK/US pronunciation markers.
   Both OALD editions are rebuilt as `2026.08.01.4`; 《新日汉拟声拟态词词典》 remains unchanged.

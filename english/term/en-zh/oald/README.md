@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.08.01.4` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.08.01.4` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.08.01.5` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.08.01.5` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -29,7 +29,8 @@
   British/American usage, grammar, language banks, culture, and Word Origin;
 - native folding for Idioms and Phrasal Verbs, with Word Origin expanded by
   default;
-- optional complete illustration packaging;
+- 311 full-resolution source illustrations, shown at thumbnail size and linked
+  to the original image resource;
 - separate local MDD audio server with selectable OALD UK/US sources, avoiding
   a multi-gigabyte term archive.
 
@@ -62,7 +63,7 @@ pnpm oald:build
 python scripts/qa_oald.py generated/oald-structured.ndjson
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
-  --revision 2026.08.01.4
+  --revision 2026.08.01.5
 ```
 
 ## Build the illustrated edition
@@ -82,8 +83,8 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.08.01.4 `
-  --expect-images 622
+  --revision 2026.08.01.5 `
+  --expect-images 311
 ```
 
 The current rich builder preserves structured entries, redirects, and PNG/JPEG/SVG

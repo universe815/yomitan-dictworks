@@ -13,7 +13,7 @@ from mdict_utils.base.readmdict import MDX
 
 WHITESPACE_RE = re.compile(r'\s+')
 OXFORD_SYMBOL_RE = re.compile(
-    r'^ox(?P<list>[35])ksym(?:sub)?_(?P<level>[abc][12])$'
+    r'^ox(?P<list>[35])ksym(?:sub)?(?:_(?P<level>[abc][12])?)?$'
 )
 SKIP_TAGS = {'script', 'style', 'link', 'meta'}
 BLOCK_TAGS = {'html', 'body', 'oaldpe', 'div', 'aside', 'section', 'article', 'p',
@@ -92,31 +92,74 @@ PART_OF_SPEECH_TITLES = {
     'excl': '感叹词 (Exclamation)',
     'modal verb': '情态动词 (Modal Verb)',
     'auxiliary verb': '助动词 (Auxiliary Verb)',
-    'phrasal verb': '动词短语 (Phrasal Verb)',
+    'phrasal verb': '短语动词 (Phrasal Verb)',
+    'linking verb': '系动词 (Linking Verb)',
+    'abbreviation': '缩写 (Abbreviation)',
+    'combining form': '构词成分 (Combining Form)',
+    'short form': '简写形式 (Short Form)',
+    'prefix': '前缀 (Prefix)',
+    'suffix': '后缀 (Suffix)',
+    'number': '数词 (Number)',
+    'ordinal number': '序数词 (Ordinal Number)',
+    'symbol': '符号 (Symbol)',
+    'indefinite article': '不定冠词 (Indefinite Article)',
+    'definite article': '定冠词 (Definite Article)',
+    'infinitive marker': '不定式标记 (Infinitive Marker)',
 }
 GRAMMAR_LABEL_TITLES = {
     'countable': '可数 (Countable)',
     'uncountable': '不可数 (Uncountable)',
+    'transitive': '及物 (Transitive)',
+    'intransitive': '不及物 (Intransitive)',
     'singular': '单数 (Singular)',
     'plural': '复数 (Plural)',
     'usually singular': '通常用单数 (Usually singular)',
     'usually plural': '通常用复数 (Usually plural)',
+    'only before noun': '仅用于名词前 (Only before noun)',
     'not usually before noun': '通常不置于名词前 (Not usually before noun)',
     'usually before noun': '通常置于名词前 (Usually before noun)',
+    'not before noun': '不用于名词前 (Not before noun)',
+    'after noun': '用于名词后 (After noun)',
+    'usually passive': '通常用被动语态 (Usually passive)',
+    'often passive': '常用被动语态 (Often passive)',
+    'no passive': '不用于被动语态 (No passive)',
+    'singular or plural verb': (
+        '谓语动词可用单数或复数 (Singular or plural verb)'
+    ),
+    'countable + singular or plural verb': (
+        '可数；谓语动词可用单数或复数 '
+        '(Countable + singular or plural verb)'
+    ),
+    'uncountable + singular or plural verb': (
+        '不可数；谓语动词可用单数或复数 '
+        '(Uncountable + singular or plural verb)'
+    ),
+    'singular + singular or plural verb': (
+        '单数形式；谓语动词可用单数或复数 '
+        '(Singular + singular or plural verb)'
+    ),
 }
 
 
 def metadata_title(element: Any, classes: set[str]) -> str | None:
     """Return a bilingual native tooltip for compact OALD metadata labels."""
-    text = normalize_text(element.text)
+    text = normalize_text(''.join(element.itertext()))
     if not text:
         return None
     if 'pos' in classes:
-        return PART_OF_SPEECH_TITLES.get(text.lower(), f'词性：{text}')
+        labels = [part.strip().lower() for part in text.split(',') if part.strip()]
+        meanings = [
+            PART_OF_SPEECH_TITLES.get(label, f'{label} (Part of speech)')
+            for label in labels
+        ]
+        return f'词性：{"；".join(meanings)}'
     if 'grammar' in classes:
         raw = text.strip('[]')
         labels = [part.strip().lower() for part in raw.split(',') if part.strip()]
-        meanings = [GRAMMAR_LABEL_TITLES.get(label, label) for label in labels]
+        meanings = [
+            GRAMMAR_LABEL_TITLES.get(label, f'{label} (Grammar label)')
+            for label in labels
+        ]
         if meanings:
             return f'语法标签：{"；".join(meanings)}'
         return f'语法标签：{text}'
@@ -130,6 +173,10 @@ def metadata_title(element: Any, classes: set[str]) -> str | None:
         return '英式英语发音 (UK pronunciation)'
     if 'phons_n_am' in classes:
         return '美式英语发音 (US pronunciation)'
+    if 'phon_label' in classes:
+        return f'地区发音：{text}'
+    if 'topic_cefr' in classes and re.fullmatch(r'[a-c][12]', text.lower()):
+        return f'主题词汇 CEFR 难度：{text.upper()}'
     return None
 
 
@@ -535,21 +582,22 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
         symbol_match = OXFORD_SYMBOL_RE.fullmatch(class_name)
         if symbol_match is not None:
             list_number = symbol_match.group('list')
-            level = symbol_match.group('level').upper()
+            level_match = symbol_match.group('level')
+            level = level_match.upper() if level_match else None
             stats['frequency_badges_preserved'] += 1
+            title = f'Oxford {list_number}000 核心词汇'
+            if level is not None:
+                title = f'CEFR 难度：{level}；{title}'
+            else:
+                title = f'{title}；CEFR 等级未标注'
+            data_tokens = f'badge oxford-list list-{list_number}000'
+            if level is not None:
+                data_tokens = f'{data_tokens} level-{level.lower()}'
             return {
                 'tag': 'span',
-                'content': f'🔑 {level}',
-                'title': (
-                    f'CEFR 难度：{level}；Oxford '
-                    f'{list_number}000 核心词汇'
-                ),
-                'data': {
-                    'oald': (
-                        f'badge oxford-list list-{list_number}000 '
-                        f'level-{level.lower()}'
-                    )
-                },
+                'content': f'🔑 {level}' if level is not None else '🔑',
+                'title': title,
+                'data': {'oald': data_tokens},
             }
     if 'idioms' in classes:
         phrase_section = convert_phrase_section(
@@ -584,6 +632,14 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
         alt = normalize_text(element.get('alt') or element.get('title'))
         resource = unquote(element.get('data-src') or element.get('src') or '')
         resource = resource.replace('\\', '/').rsplit('/', 1)[-1]
+        if 'thumb' in classes:
+            # The MDX stores a 150x120 thumbnail beside every full-resolution
+            # illustration and relies on JavaScript to swap between them.
+            # Structured-content images already link to their packaged file,
+            # so retaining both resources creates duplicate images in Hibiki
+            # and an extra [Image] disclosure in Yomitan.
+            stats['image_thumbnails_removed'] += 1
+            return None
         if include_images and resource.lower().endswith(('.png', '.jpg', '.jpeg', '.svg')):
             stats['images_preserved'] += 1
             referenced_images.add(resource)
@@ -592,15 +648,20 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
                 'path': f'img/oald/{resource}',
                 'background': True,
             }
-            if alt:
+            image_tokens = set(semantic_tokens(element, classes, tag))
+            if 'fullsize' in classes:
+                # Display the original 1200px asset at the MDX thumbnail size.
+                # Opening the image still targets the full-resolution resource.
+                node['width'] = 150
+                node['sizeUnits'] = 'px'
+                node['alt'] = alt or 'OALD 词典插图'
+                node['title'] = '点击查看原始大图'
+                image_tokens.update({'dictionary-image', 'fullsize'})
+            elif alt:
                 node['alt'] = alt
                 node['title'] = alt
-            image_tokens = semantic_tokens(element, classes, tag)
             if image_tokens:
-                node['data'] = {'oald': ' '.join(image_tokens)}
-            if 'fullsize' in classes:
-                node['collapsible'] = True
-                node['collapsed'] = True
+                node['data'] = {'oald': ' '.join(sorted(image_tokens))}
             return node
         stats['images_replaced'] += 1
         return {

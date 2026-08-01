@@ -102,6 +102,16 @@ SPECIAL_TERMS = {
     'OALD Idioms · plague',
 }
 
+METADATA_TITLE_PREFIXES = {
+    'pos': '词性：',
+    'grammar': '语法标签：',
+    'opal_symbol': '牛津学术词汇 OPAL：',
+    'phons_br': '英式英语发音',
+    'phons_n_am': '美式英语发音',
+    'phon_label': '地区发音：',
+    'topic_cefr': '主题词汇 CEFR 难度：',
+}
+
 
 def walk(value: Any) -> Iterator[Any]:
     if isinstance(value, str):
@@ -123,6 +133,11 @@ def main() -> None:
 
     wanted_terms = set(REQUIRED_TOKENS) | SPECIAL_TERMS
     records: dict[str, dict[str, Any]] = {}
+    metadata_counts: Counter[str] = Counter()
+    metadata_title_failures: list[str] = []
+    image_counts: Counter[str] = Counter()
+    image_paths: set[str] = set()
+    image_failures: list[str] = []
     with args.input.open(encoding='utf-8') as source:
         for line_number, line in enumerate(source, start=1):
             if not line.strip():
@@ -131,13 +146,89 @@ def main() -> None:
             term = record.get('term')
             if term in wanted_terms and 'definition' in record:
                 records.setdefault(term, record)
-            if len(records) == len(wanted_terms):
-                break
             if not isinstance(record, dict):
                 raise ValueError(f'line {line_number}: record is not an object')
+            definition = record.get('definition')
+            if not isinstance(definition, dict):
+                continue
+            for node in walk(definition.get('content')):
+                if not isinstance(node, dict):
+                    continue
+                tokens = set(node.get('data', {}).get('oald', '').split())
+                title = node.get('title')
+                for token, prefix in METADATA_TITLE_PREFIXES.items():
+                    if token not in tokens:
+                        continue
+                    metadata_counts[token] += 1
+                    if (
+                        not isinstance(title, str)
+                        or not title.startswith(prefix)
+                    ) and len(metadata_title_failures) < 50:
+                        metadata_title_failures.append(
+                            f'{term}: {token} lacks a useful title: {title!r}'
+                        )
+                if 'oxford-list' in tokens:
+                    metadata_counts['oxford-list'] += 1
+                    if (
+                        not isinstance(title, str)
+                        or 'Oxford' not in title
+                    ) and len(metadata_title_failures) < 50:
+                        metadata_title_failures.append(
+                            f'{term}: oxford-list lacks a useful title: {title!r}'
+                        )
+                if node.get('tag') != 'img':
+                    continue
+                image_counts['total'] += 1
+                path = node.get('path', '')
+                if isinstance(path, str) and path:
+                    image_paths.add(path)
+                if isinstance(path, str) and '/thumb_' in path:
+                    image_counts['thumbnail'] += 1
+                if 'fullsize' in tokens:
+                    image_counts['fullsize'] += 1
+                    valid = (
+                        node.get('width') == 150
+                        and node.get('sizeUnits') == 'px'
+                        and node.get('collapsed') is not True
+                        and node.get('collapsible') is not True
+                        and node.get('title') == '点击查看原始大图'
+                    )
+                    if not valid and len(image_failures) < 50:
+                        image_failures.append(
+                            f'{term}: invalid full-size image node: {node!r}'
+                        )
 
     failures: list[str] = []
-    report: dict[str, Any] = {}
+    for token in (*METADATA_TITLE_PREFIXES, 'oxford-list'):
+        if metadata_counts[token] == 0:
+            failures.append(f'full corpus: metadata token is missing: {token}')
+    failures.extend(metadata_title_failures)
+    if image_counts['total']:
+        if image_counts['total'] != image_counts['fullsize']:
+            failures.append(
+                'full corpus: every image occurrence must use the single '
+                f'full-resolution node; got {image_counts["total"]} total and '
+                f'{image_counts["fullsize"]} fullsize'
+            )
+        if len(image_paths) != 311:
+            failures.append(
+                'full corpus: expected 311 unique full-resolution resources, '
+                f'got {len(image_paths)}'
+            )
+        if image_counts['thumbnail']:
+            failures.append(
+                'full corpus: redundant thumbnail image nodes remain: '
+                f'{image_counts["thumbnail"]}'
+            )
+        failures.extend(image_failures)
+
+    report: dict[str, Any] = {
+        'metadataTooltips': dict(sorted(metadata_counts.items())),
+        'images': {
+            **dict(sorted(image_counts.items())),
+            'uniquePaths': len(image_paths),
+        },
+    }
     for term in REQUIRED_TOKENS:
         record = records.get(term)
         if record is None:

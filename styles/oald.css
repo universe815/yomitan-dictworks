@@ -619,6 +619,15 @@
   max-width: 100%;
 }
 
+[data-sc-oald~="dictionary-image"],
+[data-sc-oald~="dictionary-image"] img {
+  cursor: zoom-in;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  width: min(150px, 100%);
+}
+
 [data-sc-oald~="redirect"] {
   color: var(--oald-muted);
 }
@@ -2189,7 +2198,9 @@ Host-agnostic dark-mode fallback (superseded by inherited host variables).
 [data-sc-oald~="grammar"][title],
 [data-sc-oald~="opal_symbol"][title],
 [data-sc-oald~="phons_br"][title],
-[data-sc-oald~="phons_n_am"][title] {
+[data-sc-oald~="phons_n_am"][title],
+[data-sc-oald~="phon_label"][title],
+[data-sc-oald~="topic_cefr"][title] {
   cursor: help;
 }
 
