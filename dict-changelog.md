@@ -5,6 +5,10 @@ not make proprietary source data redistributable.
 
 ## 2026-08-01
 
+- OALD only: added native hover explanations for CEFR badges, parts of speech,
+  grammar/countability labels, OPAL W/S markers, and UK/US pronunciation markers.
+  Both OALD editions are rebuilt as `2026.08.01.4`; 《新日汉拟声拟态词词典》 remains unchanged.
+
 - OALD only: fixed the root card background for Hibiki and other popup hosts
   whose generic `.entry` surface overrides dictionary CSS. The OALD card now
   prefers Hibiki's `--md-surface-container`, then Yomitan's standard theme

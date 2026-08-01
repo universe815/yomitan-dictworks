@@ -1,6 +1,6 @@
 {
   "title": "OALDPE En-Cn 2025.02.14（正文版）",
-  "revision": "2026.08.01.3",
+  "revision": "2026.08.01.4",
   "author": "Oxford University Press / Yomitan 转换维护：universe815",
   "description": "OALDPE En-Cn 2025.02.14 非官方 Yomitan 正文转换版。保留完整正文、检索别名、紧凑 CEFR 等级徽章、可查询的习语与短语动词入口，以及按类型配色的搭配、词族、同义辨析和用法模块；插图请使用完整插图版，原版英音与美音由本地音频伴侣提供。",
   "attribution": "Oxford University Press 及相关内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护，本项目与 Oxford University Press 无隶属关系。请仅在符合当地法律并拥有合法内容来源的前提下使用。",
@@ -10,5 +10,5 @@
   "stylesFile": "styles/oald.css",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-text-2026.08.01.3.zip"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-text-2026.08.01.4.zip"
 }

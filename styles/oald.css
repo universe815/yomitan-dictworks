@@ -2183,6 +2183,16 @@ Host-agnostic dark-mode fallback (superseded by inherited host variables).
   border-color: color-mix(in srgb, var(--oald-purple) 24%, var(--oald-host-bg));
 }
 
+/* Native title tooltips explain compact metadata without adding layout noise. */
+[data-sc-oald~="badge"][title],
+[data-sc-oald~="pos"][title],
+[data-sc-oald~="grammar"][title],
+[data-sc-oald~="opal_symbol"][title],
+[data-sc-oald~="phons_br"][title],
+[data-sc-oald~="phons_n_am"][title] {
+  cursor: help;
+}
+
 @media (prefers-color-scheme: dark) {
   [data-sc-oald~="entry"] {
     --oald-host-bg: var(--background-color, #202a31);

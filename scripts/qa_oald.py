@@ -222,6 +222,23 @@ def main() -> None:
             failures.append(f'{term}: compact key CEFR badge is missing')
         if any('Oxford 3000' in text or 'Oxford 5000' in text for text in badge_texts):
             failures.append(f'{term}: verbose Oxford badge remains')
+        if term == 'language':
+            titles = {
+                node.get('title', '')
+                for node in nodes
+                if isinstance(node, dict) and isinstance(node.get('title'), str)
+            }
+            for fragment in (
+                'CEFR 难度：A1',
+                '名词 (Noun)',
+                '可数 (Countable)',
+                '书面语词汇表 (Written words)',
+                '口语词汇表 (Spoken words)',
+            ):
+                if not any(fragment in title for title in titles):
+                    failures.append(
+                        f'{term}: metadata tooltip is missing: {fragment}'
+                    )
 
         report[term] = {
             'details': tags['details'],

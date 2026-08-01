@@ -77,7 +77,7 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald.json",
       "buildCommand": "pnpm oald:build",
-      "revision": "2026.08.01.3",
+      "revision": "2026.08.01.4",
       "buildStatus": "ready",
       "distribution": {
         "status": "public",
@@ -89,15 +89,15 @@
         "updateHosting": "github-release",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan.zip",
         "releaseTag": "dictionary-assets",
-        "releaseAssetName": "OALDPE-En-Cn-2025.02.14-text-2026.08.01.3.zip",
+        "releaseAssetName": "OALDPE-En-Cn-2025.02.14-text-2026.08.01.4.zip",
         "archivePath": "Downloads/[EN-ZH] OALDPE En-Cn 2025.02.14.zip",
-        "bytes": 48940998,
-        "sha256": "7A02496DE8ECEBC320417E810717C1FBFB6E2354507546828DD89CED8B58BD30",
+        "bytes": 49618847,
+        "sha256": "60B7AEBBDA52D5AA875ECD6F48A15ECB11E5944B4271E091B5B0080AF7E9F351",
         "driveFileId": "1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
         "driveFileUrl": "https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-text-2026.08.01.3.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-text-2026.08.01.4.zip"
       }
     },
     {
@@ -109,7 +109,7 @@
       "page": "english/term/en-zh/oald/README.md",
       "config": "config/oald-rich.json",
       "buildCommand": "pnpm oald:build:rich",
-      "revision": "2026.08.01.3",
+      "revision": "2026.08.01.4",
       "buildStatus": "ready",
       "distribution": {
         "status": "public",
@@ -121,15 +121,15 @@
         "updateHosting": "github-release",
         "assetName": "OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
         "releaseTag": "dictionary-assets",
-        "releaseAssetName": "OALDPE-En-Cn-2025.02.14-illustrated-2026.08.01.3.zip",
+        "releaseAssetName": "OALDPE-En-Cn-2025.02.14-illustrated-2026.08.01.4.zip",
         "archivePath": "Downloads/[EN-ZH Images] OALDPE En-Cn 2025.02.14（完整插图版）.zip",
-        "bytes": 238950436,
-        "sha256": "E8FDBC83673ADF5A3EAF753851A850B2AF9AA37A1B5AC2C98EF6C14B0360BCD6",
+        "bytes": 239628003,
+        "sha256": "6E34EF85523D55F3101DA0EEAD9C3989E1184F46C3B53AB5FEB12E699E358089",
         "driveFileId": "1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
         "driveFileUrl": "https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh-illustrated/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-illustrated-2026.08.01.3.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-illustrated-2026.08.01.4.zip"
       }
     }
   ]

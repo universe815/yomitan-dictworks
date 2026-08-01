@@ -73,6 +73,65 @@ PHRASE_SECTION_LABELS = {
     'phrasal_verb_links': 'Phrasal Verbs',
 }
 
+PART_OF_SPEECH_TITLES = {
+    'noun': '名词 (Noun)',
+    'verb': '动词 (Verb)',
+    'adjective': '形容词 (Adjective)',
+    'adj': '形容词 (Adjective)',
+    'adverb': '副词 (Adverb)',
+    'adv': '副词 (Adverb)',
+    'pronoun': '代词 (Pronoun)',
+    'pron': '代词 (Pronoun)',
+    'preposition': '介词 (Preposition)',
+    'prep': '介词 (Preposition)',
+    'conjunction': '连词 (Conjunction)',
+    'conj': '连词 (Conjunction)',
+    'determiner': '限定词 (Determiner)',
+    'det': '限定词 (Determiner)',
+    'exclamation': '感叹词 (Exclamation)',
+    'excl': '感叹词 (Exclamation)',
+    'modal verb': '情态动词 (Modal Verb)',
+    'auxiliary verb': '助动词 (Auxiliary Verb)',
+    'phrasal verb': '动词短语 (Phrasal Verb)',
+}
+GRAMMAR_LABEL_TITLES = {
+    'countable': '可数 (Countable)',
+    'uncountable': '不可数 (Uncountable)',
+    'singular': '单数 (Singular)',
+    'plural': '复数 (Plural)',
+    'usually singular': '通常用单数 (Usually singular)',
+    'usually plural': '通常用复数 (Usually plural)',
+    'not usually before noun': '通常不置于名词前 (Not usually before noun)',
+    'usually before noun': '通常置于名词前 (Usually before noun)',
+}
+
+
+def metadata_title(element: Any, classes: set[str]) -> str | None:
+    """Return a bilingual native tooltip for compact OALD metadata labels."""
+    text = normalize_text(element.text)
+    if not text:
+        return None
+    if 'pos' in classes:
+        return PART_OF_SPEECH_TITLES.get(text.lower(), f'词性：{text}')
+    if 'grammar' in classes:
+        raw = text.strip('[]')
+        labels = [part.strip().lower() for part in raw.split(',') if part.strip()]
+        meanings = [GRAMMAR_LABEL_TITLES.get(label, label) for label in labels]
+        if meanings:
+            return f'语法标签：{"；".join(meanings)}'
+        return f'语法标签：{text}'
+    if 'opal_symbol' in classes:
+        if text == 'OPAL W':
+            return '牛津学术词汇 OPAL：书面语词汇表 (Written words)'
+        if text == 'OPAL S':
+            return '牛津学术词汇 OPAL：口语词汇表 (Spoken words)'
+        return f'牛津学术词汇 OPAL：{text}'
+    if 'phons_br' in classes:
+        return '英式英语发音 (UK pronunciation)'
+    if 'phons_n_am' in classes:
+        return '美式英语发音 (US pronunciation)'
+    return None
+
 
 def normalize_text(
     value: str | None,
@@ -481,6 +540,10 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
             return {
                 'tag': 'span',
                 'content': f'🔑 {level}',
+                'title': (
+                    f'CEFR 难度：{level}；Oxford '
+                    f'{list_number}000 核心词汇'
+                ),
                 'data': {
                     'oald': (
                         f'badge oxford-list list-{list_number}000 '
@@ -591,6 +654,8 @@ def convert_element(element: Any, stats: Counter[str], include_images: bool,
     if data:
         node['data'] = data
     title = normalize_text(element.get('title'))
+    if not title:
+        title = metadata_title(element, classes)
     if title:
         node['title'] = title
     if tag in CHINESE_TAGS:
