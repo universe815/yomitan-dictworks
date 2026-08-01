@@ -4,8 +4,8 @@
 
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
-| Text | `2026.07.31.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.07.31.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Text | `2026.08.01.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
+| Complete illustrated | `2026.08.01.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -13,14 +13,17 @@
 - restored inline spacing around collocations, labels, and translations;
 - distinct headword, pronunciation, sense, definition, example, topic, idiom,
   and phrasal-verb hierarchy with dictionary-scoped light/dark styling;
-- direct support for Yomitan's explicit dark theme, independently of the
-  operating-system color scheme;
+- direct support for Yomitan's explicit dark theme plus flat `data-theme="dark"`,
+  `data-mode="dark"`, `.dark`/`.dark-mode`/`.theme-dark` host selectors and
+  the standard `prefers-color-scheme` fallback;
 - separate visual source markers for original OALD, AI, and Leon Chinese text;
 - compact `🔑 A1–C2` CEFR badges that keep the headword visually dominant;
 - working Idioms and Phrasal Verbs query links that open the current word's
   dedicated, expanded phrase result;
-- a rocket return control on Idioms headings that opens only the current OALD
-  entry at its top, without mixing in other dictionaries for the same headword;
+- a rocket return control on Idioms headings that performs a same-display query
+  for the current headword. Yomitan's portable dictionary schema does not
+  expose fragment scrolling or click handlers, so it cannot provide a true
+  in-place scroll from a ZIP alone;
 - color-coded native folding for all 18 source module kinds, including extra
   examples, synonyms, Wordfinder, verb forms, collocations, word families,
   British/American usage, grammar, language banks, culture, and Word Origin;
@@ -59,7 +62,7 @@ pnpm oald:build
 python scripts/qa_oald.py generated/oald-structured.ndjson
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan.zip `
-  --revision 2026.07.31.2
+  --revision 2026.08.01.1
 ```
 
 ## Build the illustrated edition
@@ -79,7 +82,7 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.07.31.2 `
+  --revision 2026.08.01.1 `
   --expect-images 622
 ```
 

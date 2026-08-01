@@ -72,7 +72,6 @@ PHRASE_SECTION_LABELS = {
     'idioms': 'Idioms',
     'phrasal_verb_links': 'Phrasal Verbs',
 }
-ENTRY_TOP_SUFFIX = '\u2060'
 
 
 def normalize_text(
@@ -202,16 +201,6 @@ def phrase_query_term(term: str, section_kind: str) -> str:
     return f'OALD {label} · {term}'
 
 
-def entry_top_query_term(term: str) -> str:
-    """Return an OALD-only lookup key which remains visually identical.
-
-    Yomitan structured content does not support fragment anchors. A WORD
-    JOINER suffix creates an exact, dictionary-local lookup key without adding
-    a visible label to the query or headword.
-    """
-    return f'{term}{ENTRY_TOP_SUFFIX}'
-
-
 def query_link(label: str, target: str, marker: str) -> dict[str, Any]:
     return {
         'tag': 'span',
@@ -268,12 +257,14 @@ def wire_phrase_back_navigation(
     sections: dict[str, list[dict[str, Any]]],
     term: str,
 ) -> None:
-    """Add an OALD-entry-top link to each idiom section.
+    """Add a same-display query link to each idiom section.
 
-    Structured content links cannot target an HTML fragment. The rocket
-    therefore queries an invisible-suffixed duplicate of this OALD entry,
-    which returns to this dictionary's entry top instead of the top of all
-    dictionaries for the ordinary headword.
+    Yomitan's structured-content schema accepts only HTTP(S) links and
+    internal ``?query=...`` links; fragment anchors and click handlers are not
+    available to dictionary data. The rocket therefore returns to the normal
+    headword query in the current Yomitan display instead of opening a hidden
+    duplicate term. This keeps the action in the current window and avoids
+    polluting the dictionary with invisible lookup keys.
     """
     for section in sections.get('idioms', []):
         heading = find_first_token(section, 'phrase_heading')
@@ -286,7 +277,7 @@ def wire_phrase_back_navigation(
         items.append(
             query_link(
                 '🚀',
-                entry_top_query_term(term),
+                term,
                 'phrase-back',
             )
         )
@@ -707,32 +698,6 @@ def main() -> None:
             }
             output.write(json.dumps(record, ensure_ascii=False, separators=(',', ':')) + '\n')
             stats['direct_written'] += 1
-
-            if sections.get('idioms'):
-                navigation_structured = copy.deepcopy(structured)
-                if isinstance(navigation_structured, dict):
-                    data = navigation_structured.setdefault('data', {})
-                    marker = data.get('oald', '')
-                    data['oald'] = f'{marker} navigation-entry'.strip()
-                navigation_term = entry_top_query_term(key)
-                direct_sequences.setdefault(navigation_term, sequence)
-                navigation_record = {
-                    'term': navigation_term,
-                    'sequence': sequence,
-                    'definition': {
-                        'type': 'structured-content',
-                        'content': navigation_structured,
-                    },
-                }
-                output.write(
-                    json.dumps(
-                        navigation_record,
-                        ensure_ascii=False,
-                        separators=(',', ':'),
-                    )
-                    + '\n'
-                )
-                stats['entry_top_query_entries_written'] += 1
 
             for section_kind, section_values in sections.items():
                 auxiliary_term = phrase_query_term(key, section_kind)

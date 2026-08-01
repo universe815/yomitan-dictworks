@@ -219,6 +219,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  [data-sc-onomato~="entry"] {
+    color: #e6ebef;
+  }
+
   [data-sc-onomato~="header"] {
     border-bottom-color: #4b4b4b;
   }
@@ -266,4 +270,468 @@
   [data-sc-onomato~="word-group"] {
     border-top-color: #484848;
   }
+}
+
+/* Flat dark-theme selectors for readers which import styles.css directly. */
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="entry"] {
+  color: #e6ebef;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="header"] {
+  border-bottom-color: #4d5861;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="headword"] {
+  color: #ff7d7d;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="category"] {
+  background: #303941;
+  border-color: #53606a;
+  color: #dce3e8;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="variant-badge"],
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="word-group"] a {
+  background: #472b2f;
+  border-color: #78484f;
+  color: #ffb0b0;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="sense-number"],
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="meaning"],
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="subentry-headword"] {
+  color: #edf1f4;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="example"] {
+  border-left-color: #697680;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="example-ja"] {
+  color: #72bdff;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="example-zh"] {
+  color: #cbd3d9;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="example-zh"]::before,
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="subentries-label"],
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="group-label"] {
+  color: #9eabb4;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="subentries"],
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="parent-link"] {
+  border-top-color: #53606a;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="word-group"] {
+  border-top-color: #46515a;
+}
+
+:is(
+  html[data-theme="dark"],
+  body[data-theme="dark"],
+  html.dark,
+  body.dark,
+  html.dark-mode,
+  body.dark-mode,
+  html.theme-dark,
+  body.theme-dark,
+  html.night-mode,
+  body.night-mode,
+  html.dark-theme,
+  body.dark-theme,
+  [data-theme="dark"],
+  [data-mode="dark"],
+  .dark,
+  .dark-mode,
+  .theme-dark,
+  .night-mode,
+  .dark-theme
+)
+  [data-sc-onomato~="word-group"] a:hover {
+  background: #d94f5a;
+  border-color: #d94f5a;
+  color: #ffffff;
 }
