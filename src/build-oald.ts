@@ -28,6 +28,7 @@ interface OaldConfig extends UpdateMetadata {
   stylesFile: string;
   imagesDir?: string;
   imagesManifest?: string;
+  termBankMaxSize?: number;
 }
 
 interface ConvertedRecord {
@@ -78,7 +79,18 @@ function redirectDefinition(target: string): DetailedDefinition {
 
 async function main(): Promise<void> {
   const config = await readConfig();
-  const dictionary = new Dictionary({ fileName: config.outputFile });
+  if (
+    config.termBankMaxSize !== undefined
+    && (!Number.isInteger(config.termBankMaxSize) || config.termBankMaxSize < 1)
+  ) {
+    throw new Error('termBankMaxSize 必须是正整数');
+  }
+  const dictionary = new Dictionary({
+    fileName: config.outputFile,
+    ...(config.termBankMaxSize === undefined
+      ? {}
+      : { termBankMaxSize: config.termBankMaxSize }),
+  });
   let index = new DictionaryIndex()
     .setTitle(config.title)
     .setRevision(config.revision)

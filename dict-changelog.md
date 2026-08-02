@@ -3,6 +3,14 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-08-02
+
+- OALD only: rebuilt both editions as `2026.08.02.1` with memory-safe term-bank
+  partitioning for Hoshi Reader on iOS. Each bank now contains at most 800 rows
+  and remains below 8 MiB uncompressed, avoiding the large parallel parse peak
+  caused by the previous 10,000-row banks. The 618,938 term rows and all 311
+  illustrated-edition images are unchanged.
+
 ## 2026-08-01
 
 - OALD only: expanded native hover explanations across the complete corpus,

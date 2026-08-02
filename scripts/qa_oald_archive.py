@@ -58,6 +58,8 @@ def main() -> None:
     parser.add_argument('dictionary', type=Path)
     parser.add_argument('--revision', required=True)
     parser.add_argument('--expect-images', type=int, default=0)
+    parser.add_argument('--max-bank-entries', type=int, default=800)
+    parser.add_argument('--max-bank-mib', type=float, default=8.0)
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
 
@@ -126,10 +128,26 @@ def main() -> None:
             for term in REQUIRED_PHRASE_BACK_TERMS
         }
         found_required_links: set[str] = set()
+        largest_bank_bytes = 0
+        largest_bank_entries = 0
         for member in term_banks:
+            member_info = archive.getinfo(member)
+            largest_bank_bytes = max(largest_bank_bytes, member_info.file_size)
+            if member_info.file_size > args.max_bank_mib * 1024 * 1024:
+                raise ValueError(
+                    f'{member}: uncompressed size '
+                    f'{member_info.file_size / 1024 / 1024:.2f} MiB exceeds '
+                    f'Hoshi-compatible limit {args.max_bank_mib:.2f} MiB'
+                )
             rows = json.loads(archive.read(member))
             if not isinstance(rows, list):
                 raise ValueError(f'{member}: root is not an array')
+            largest_bank_entries = max(largest_bank_entries, len(rows))
+            if len(rows) > args.max_bank_entries:
+                raise ValueError(
+                    f'{member}: {len(rows)} rows exceeds Hoshi-compatible '
+                    f'limit {args.max_bank_entries}'
+                )
             for row_number, row in enumerate(rows, start=1):
                 counters['rows'] += 1
                 if not isinstance(row, list) or len(row) != 8:
@@ -232,6 +250,9 @@ def main() -> None:
         'dictionary': str(args.dictionary),
         'revision': args.revision,
         'termBanks': len(term_banks),
+        'largestBankEntries': largest_bank_entries,
+        'largestBankMiB': round(largest_bank_bytes / 1024 / 1024, 2),
+        'hoshiCompatibleBanking': True,
         'rows': counters['rows'],
         'structuredDefinitions': counters['structured_definitions'],
         'details': counters['tag_details'],
