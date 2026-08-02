@@ -60,6 +60,7 @@ def main() -> None:
     parser.add_argument('--expect-images', type=int, default=0)
     parser.add_argument('--max-bank-entries', type=int, default=800)
     parser.add_argument('--max-bank-mib', type=float, default=8.0)
+    parser.add_argument('--require-stored-media', action='store_true')
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
 
@@ -235,6 +236,16 @@ def main() -> None:
             for name in archive_names
             if name.startswith('img/oald/') and not name.endswith('/')
         }
+        if args.require_stored_media:
+            compressed_media = sorted(
+                name for name in packaged_images
+                if archive.getinfo(name).compress_type != zipfile.ZIP_STORED
+            )
+            if compressed_media:
+                raise ValueError(
+                    'Hoshi-compatible archive contains compressed media: '
+                    + ', '.join(compressed_media[:5])
+                )
         if len(packaged_images) != args.expect_images:
             raise ValueError(
                 f'expected {args.expect_images} packaged images, '

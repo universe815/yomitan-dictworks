@@ -5,6 +5,12 @@ not make proprietary source data redistributable.
 
 ## 2026-08-02
 
+- OALD illustrated edition only: rebuilt as `2026.08.02.2` after confirming
+  that the text edition imports in Hoshi Reader on iOS. Rich term banks are now
+  limited to 200 rows, and all 311 PNG resources use ZIP STORE instead of
+  redundant DEFLATE compression. Image pixels, resolution, references, and
+  dictionary content remain unchanged.
+
 - OALD only: rebuilt both editions as `2026.08.02.1` with memory-safe term-bank
   partitioning for Hoshi Reader on iOS. Each bank now contains at most 800 rows
   and remains below 8 MiB uncompressed, avoiding the large parallel parse peak

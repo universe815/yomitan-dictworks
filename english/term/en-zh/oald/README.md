@@ -5,7 +5,7 @@
 | Edition | Revision | Build | Update mode | Archive |
 | --- | --- | --- | --- | --- |
 | Text | `2026.08.02.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan.zip` |
-| Complete illustrated | `2026.08.02.1` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
+| Complete illustrated | `2026.08.02.2` | Ready | GitHub Release | `OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip` |
 
 ## Features
 
@@ -31,9 +31,13 @@
   default;
 - 311 full-resolution source illustrations, shown at thumbnail size and linked
   to the original image resource;
-- memory-safe term-bank partitioning (at most 800 entries and 8 MiB per bank)
+- memory-safe term-bank partitioning (at most 800 entries in the text edition
+  and 200 entries in the illustrated edition)
   for compatibility with Hoshi Reader on iOS as well as Android, Hibiki, and
   Yomitan;
+- PNG resources stored without redundant ZIP recompression so Hoshi Reader can
+  import the illustrated edition without running image decompression alongside
+  its parallel term parser;
 - separate local MDD audio server with selectable OALD UK/US sources, avoiding
   a multi-gigabyte term archive.
 
@@ -86,7 +90,10 @@ pnpm oald:build:rich
 
 python scripts/qa_oald_archive.py `
   dictionary-output/OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip `
-  --revision 2026.08.02.1 `
+  --revision 2026.08.02.2 `
+  --max-bank-entries 200 `
+  --max-bank-mib 2.0 `
+  --require-stored-media `
   --expect-images 311
 ```
 

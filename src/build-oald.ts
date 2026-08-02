@@ -29,6 +29,7 @@ interface OaldConfig extends UpdateMetadata {
   imagesDir?: string;
   imagesManifest?: string;
   termBankMaxSize?: number;
+  mediaCompression?: 'STORE' | 'DEFLATE';
 }
 
 interface ConvertedRecord {
@@ -128,10 +129,16 @@ async function main(): Promise<void> {
         .sort();
     }
     for (const [index, imageName] of imageNames.entries()) {
-      await dictionary.addFile(
-        path.join(imageDirectory, imageName),
-        `img/oald/${imageName}`,
-      );
+      const imagePath = path.join(imageDirectory, imageName);
+      if (config.mediaCompression === undefined) {
+        await dictionary.addFile(imagePath, `img/oald/${imageName}`);
+      } else {
+        dictionary.zip.file(
+          `img/oald/${imageName}`,
+          await readFile(imagePath),
+          { compression: config.mediaCompression },
+        );
+      }
       if ((index + 1) % 250 === 0) {
         console.log(`已加入 ${index + 1}/${imageNames.length} 张图片…`);
       }
