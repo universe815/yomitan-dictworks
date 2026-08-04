@@ -304,6 +304,8 @@
     --onomato-bg: var(--background-color, #202124);
     --onomato-bg-light: var(--background-color-light, var(--onomato-bg));
     --onomato-text: var(--text-color, #e6ebef);
+    --onomato-muted: #cbd3d9;
+    --onomato-line: #697680;
   }
 }
 
@@ -826,3 +828,51 @@ Flat dark-theme selectors (superseded by inherited host variables).
   color: #ffffff;
 }
 */
+
+/*
+ * Anki uses the camel-case `nightMode` class.  Keep definitions and Chinese
+ * glosses bright enough for dark cards even when Anki does not expose the
+ * Yomitan theme variables.
+ */
+@media (prefers-color-scheme: dark) {
+  [data-sc-onomato~="sense-number"],
+  [data-sc-onomato~="meaning"],
+  [data-sc-onomato~="subentry-headword"] {
+    color: #f1f3f5;
+  }
+
+  [data-sc-onomato~="example-zh"] {
+    color: #d6dde3;
+    font-weight: 500;
+  }
+
+  [data-sc-onomato~="example-zh"]::before,
+  [data-sc-onomato~="subentries-label"],
+  [data-sc-onomato~="group-label"] {
+    color: #adb9c3;
+  }
+}
+
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="sense-number"],
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="meaning"],
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="subentry-headword"] {
+  color: #f1f3f5;
+}
+
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="example-zh"] {
+  color: #d6dde3;
+  font-weight: 500;
+}
+
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="example-zh"]::before,
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="subentries-label"],
+:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
+  [data-sc-onomato~="group-label"] {
+  color: #adb9c3;
+}

@@ -5,6 +5,10 @@ not make proprietary source data redistributable.
 
 ## 2026-08-04
 
+- Updated 《新日汉拟声拟态词词典 第2版》 to `2026.08.04.2`. Improved
+  definition and Chinese-gloss contrast for Anki dark cards, including
+  support for Anki's `nightMode` class.
+
 - Updated 《新日汉拟声拟态词词典 第2版》 to `2026.08.04.1`. Restored the
   original layout and visual hierarchy while improving CJK font fallbacks,
   readable sizing, line height, weights, and text rendering.

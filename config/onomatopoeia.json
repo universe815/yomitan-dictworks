@@ -1,6 +1,6 @@
 {
   "title": "新日汉拟声拟态词词典 第2版",
-  "revision": "2026.08.04.1",
+  "revision": "2026.08.04.2",
   "author": "原辞典编纂者 / Yomitan 转换维护：universe815",
   "description": "《新日汉拟声拟态词词典 第2版》非官方 Yomitan 转换版。保留红色词头、分类标签、日中例句配色、相关词形与词群跳转，并将子词条加入独立检索。",
   "attribution": "词典内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护，本项目与原出版方无隶属关系。请仅在符合当地法律并拥有合法内容来源的前提下使用。",
@@ -11,5 +11,5 @@
   "resourcesDir": "generated/onomatopoeia-resources",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/shin-nikkan-onomatopoeia/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.04.1.zip"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.04.2.zip"
 }
