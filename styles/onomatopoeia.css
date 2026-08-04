@@ -1,15 +1,18 @@
 [data-sc-onomato~="entry"] {
   --onomato-bg: var(--background-color, #ffffff);
   --onomato-bg-light: var(--background-color-light, var(--onomato-bg));
-  --onomato-text: var(--text-color, #333333);
-  --onomato-muted: var(--text-color-light2, #666666);
+  --onomato-text: var(--text-color, #2b2b2b);
+  --onomato-muted: var(--text-color-light2, #555555);
   --onomato-line: var(--text-color-light4, #dddddd);
-  --onomato-link: var(--link-color, #0056b3);
+  --onomato-link: var(--link-color, #005fae);
   --onomato-accent: var(--danger-color, #c90000);
   color: var(--text-color, inherit);
-  font-family: "Helvetica Neue", Helvetica, Arial, "Yu Gothic", "Noto Sans CJK JP", sans-serif;
-  line-height: 1.6;
+  font-family: "Noto Sans CJK SC", "Noto Sans CJK JP", "Microsoft YaHei", "Yu Gothic UI", "Yu Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.02em;
+  line-height: 1.68;
   padding: 0.25em 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 [data-sc-onomato~="header"] {
@@ -24,8 +27,9 @@
 
 [data-sc-onomato~="headword"] {
   color: var(--onomato-accent);
-  font-size: 1.4em;
+  font-size: 1.45em;
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 [data-sc-onomato~="category"],
@@ -62,6 +66,8 @@
 
 [data-sc-onomato~="meaning"] {
   color: var(--onomato-text);
+  font-size: 1.03em;
+  font-weight: 500;
   margin-bottom: 0.3em;
 }
 
@@ -78,10 +84,13 @@
 
 [data-sc-onomato~="example-ja"] {
   color: var(--onomato-link);
+  font-size: 1.02em;
+  font-weight: 500;
 }
 
 [data-sc-onomato~="example-zh"] {
   color: var(--onomato-muted);
+  font-size: 1.02em;
 }
 
 [data-sc-onomato~="example-zh"]::before {
