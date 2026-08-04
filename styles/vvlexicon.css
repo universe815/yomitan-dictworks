@@ -1,0 +1,80 @@
+[data-sc-vv~="entry"] {
+  color: var(--text-color, #263238);
+  font-family: "Yu Gothic UI", "Yu Gothic", "Noto Sans CJK JP", Meiryo, sans-serif;
+  line-height: 1.55;
+}
+
+[data-sc-vv~="header"] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .28em .55em;
+  margin-bottom: .45em;
+  padding: .3em .45em;
+  border-left: .3em solid #2585a6;
+  border-radius: .25em;
+  background: rgba(37, 133, 166, .10);
+}
+
+[data-sc-vv~="headword"] { color: #0d6386; font-size: 1.35em; font-weight: 700; }
+[data-sc-vv~="reading"] { color: #68747a; font-size: .95em; }
+[data-sc-vv~="jita"], [data-sc-vv~="structure"], [data-sc-vv~="components"] {
+  display: inline-block;
+  padding: .08em .4em;
+  border: 1px solid #a4cdd9;
+  border-radius: .7em;
+  color: #176b83;
+  font-size: .78em;
+  font-weight: 700;
+}
+
+[data-sc-vv~="sense"] {
+  margin: .55em 0;
+  padding: .42em .55em;
+  border-left: .22em solid #57a9bd;
+  border-radius: .2em;
+  background: rgba(87, 169, 189, .07);
+}
+
+[data-sc-vv~="definition"] { font-size: 1.03em; }
+[data-sc-vv~="sense-number"] { display: inline-block; min-width: 1.5em; color: #c42e62; font-weight: 700; }
+[data-sc-vv~="definition-ja"] { font-weight: 600; }
+[data-sc-vv~="definition-sc"], [data-sc-vv~="definition-tc"], [data-sc-vv~="related"], [data-sc-vv~="note"] {
+  display: block;
+  margin-top: .25em;
+  color: #167c5d;
+}
+[data-sc-vv~="definition-en"], [data-sc-vv~="definition-kr"] {
+  display: block;
+  margin-top: .15em;
+  color: #53646c;
+  font-size: .9em;
+}
+
+[data-sc-vv~="line"] { margin-top: .35em; }
+[data-sc-vv~="label"] { margin-right: .35em; color: #9b5a0c; font-weight: 700; }
+[data-sc-vv~="pattern"] { color: #6a4aa1; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .88em; }
+
+[data-sc-vv~="examples-details"] { margin-top: .5em; }
+[data-sc-vv~="examples-title"] { cursor: pointer; color: #0d7898; font-weight: 700; }
+[data-sc-vv~="examples"] { margin-top: .3em; }
+[data-sc-vv~="example"] {
+  margin: .32em 0;
+  padding: .35em .55em;
+  border-left: .2em solid #8ccbd8;
+  border-radius: .2em;
+  background: rgba(140, 203, 216, .08);
+}
+[data-sc-vv~="example-ja"] { color: #344b58; font-style: italic; }
+[data-sc-vv~="example-translation"] { margin-top: .12em; color: #197a5b; }
+[data-sc-vv~="romaji"] { color: #77858a; font-size: .82em; }
+
+@media (prefers-color-scheme: dark) {
+  [data-sc-vv~="entry"] { color: #d9e2e5; }
+  [data-sc-vv~="headword"] { color: #75c8e4; }
+  [data-sc-vv~="reading"] { color: #acbcc2; }
+  [data-sc-vv~="jita"], [data-sc-vv~="structure"], [data-sc-vv~="components"] { border-color: #356b7a; color: #9ad9ec; }
+  [data-sc-vv~="definition-sc"], [data-sc-vv~="definition-tc"], [data-sc-vv~="related"], [data-sc-vv~="note"] { color: #6bd4aa; }
+  [data-sc-vv~="definition-en"], [data-sc-vv~="definition-kr"], [data-sc-vv~="example-ja"] { color: #becbd0; }
+  [data-sc-vv~="example-translation"] { color: #6bd4aa; }
+}

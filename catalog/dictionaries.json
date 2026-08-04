@@ -131,6 +131,39 @@
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/oald-en-zh-illustrated/index.json",
         "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/OALDPE-En-Cn-2025.02.14-illustrated-2026.08.02.2.zip"
       }
+    },
+    {
+      "id": "vvlexicon",
+      "title": "複合動詞レキシコン〔NINJAL〕",
+      "sourceLanguage": "ja",
+      "targetLanguage": "zh",
+      "category": "term",
+      "page": "japanese/term/ja-zh/vvlexicon/README.md",
+      "config": "config/vvlexicon.json",
+      "buildCommand": "pnpm vvlexicon:build",
+      "revision": "2026.08.04.1",
+      "buildStatus": "ready",
+      "distribution": {
+        "status": "public",
+        "rightsStatus": "third-party",
+        "rightsStatement": "原始资料由国立国語研究所（NINJAL）提供，内容权利与使用条件以 NINJAL 官方说明为准；本仓库不主张对词典内容拥有版权，也不代表原机构。",
+        "contentLicense": null,
+        "rightsEvidence": null,
+        "hosting": "google-drive-public",
+        "updateHosting": "github-release",
+        "assetName": "複合動詞レキシコン-NINJAL-Yomitan.zip",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "VVLexicon-NINJAL-yomitan-2026.08.04.1.zip",
+        "releaseAssetLabel": "複合動詞レキシコン〔NINJAL〕",
+        "archivePath": "Downloads/[JA-ZH] 複合動詞レキシコン〔NINJAL〕.zip",
+        "bytes": 1057196,
+        "sha256": "4678AC6D39F475CF9DC0CB7353849090E8C64AD324DD08331A15B13D5E14AD0B",
+        "driveFileId": "1FYfk02zZuuuegz-OkGWgLdwM4u2WUpQs",
+        "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
+        "driveFileUrl": "https://drive.google.com/file/d/1FYfk02zZuuuegz-OkGWgLdwM4u2WUpQs/view?usp=sharing",
+        "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/vvlexicon/index.json",
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/VVLexicon-NINJAL-yomitan-2026.08.04.1.zip"
+      }
     }
   ]
 }

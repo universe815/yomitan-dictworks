@@ -1,0 +1,15 @@
+{
+  "title": "複合動詞レキシコン〔NINJAL〕",
+  "revision": "2026.08.04.1",
+  "format": 3,
+  "author": "国立国語研究所 / Yomitan 转换维护：universe815",
+  "description": "NINJAL 複合動詞レキシコン的 Yomitan 转换版。收录 2,759 条日语 V-V 复合动词，保留日文释义、简体中文/繁体中文/英文译文、句型、例句、罗马字及相关字段。",
+  "attribution": "原始资料由国立国語研究所（NINJAL）提供，内容权利与使用条件以 NINJAL 官方说明为准。非官方 Yomitan 转换由 universe815 维护，本项目与原机构无隶属关系；请仅在符合当地法律并拥有合法内容来源的前提下使用。",
+  "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/vvlexicon",
+  "sequenced": true,
+  "sourceLanguage": "ja",
+  "targetLanguage": "zh",
+  "isUpdatable": true,
+  "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/vvlexicon/index.json",
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/VVLexicon-NINJAL-yomitan-2026.08.04.1.zip"
+}

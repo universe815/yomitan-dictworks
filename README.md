@@ -30,6 +30,7 @@
 |---|---|---|---|
 | [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/) | 日中双解；保留例句、Ruby、内部链接、百科插图、外字与字体资源 | [下载 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing) | [更新清单](manifests/xsjrh-illustrated/index.json) |
 | [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/) | 拟声拟态词专项；保留原版层级、配色、分类、词群关系和独立子词条检索 | [下载 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing) | [更新清单](manifests/shin-nikkan-onomatopoeia/index.json) |
+| [複合動詞レキシコン〔NINJAL〕](japanese/term/ja-zh/vvlexicon/) | 日语 V-V 复合动词；含日文释义、简繁英译文、句型、例句、罗马字与相关字段 | [下载 ZIP](https://drive.google.com/file/d/1FYfk02zZuuuegz-OkGWgLdwM4u2WUpQs/view?usp=sharing) | [更新清单](manifests/vvlexicon/index.json) |
 
 [浏览日语分类目录](japanese/)
 
@@ -55,7 +56,7 @@
 3. 以后在同一页面点击 **Check for Updates**。词典会从 GitHub 读取最新
    revision，再从 GitHub Release 下载新版 ZIP。
 
-四个现役版本从 `2026.07.30.1` 起全部使用 GitHub Release 自动更新；
+五个现役版本从 `2026.07.30.1` 起全部使用 GitHub Release 自动更新；
 Google Drive 继续提供首次安装、手动下载和归档。更新清单只是 Yomitan
 的机器接口，首次安装仍必须导入 ZIP。
 

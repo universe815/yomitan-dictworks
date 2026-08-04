@@ -3,6 +3,15 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-08-04
+
+- Added the first public Yomitan conversion of NINJAL's V-V Compound Verb Lexicon
+  as `2026.08.04.1`. The archive contains 2,759 direct entries and 521 search
+  redirects, preserving Japanese definitions, Chinese/English translations,
+  patterns, examples, romaji, and related fields. Original-content rights and
+  usage conditions remain those of NINJAL; this repository does not claim an
+  additional content license.
+
 ## 2026-08-02
 
 - OALD illustrated edition only: rebuilt as `2026.08.02.2` after confirming
