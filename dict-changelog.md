@@ -5,6 +5,10 @@ not make proprietary source data redistributable.
 
 ## 2026-08-04
 
+- Updated 《新日汉拟声拟态词词典 第2版》 to `2026.08.04.1`. Restored the
+  original layout and visual hierarchy while improving CJK font fallbacks,
+  readable sizing, line height, weights, and text rendering.
+
 - Added the first public Yomitan conversion of NINJAL's V-V Compound Verb Lexicon
   as `2026.08.04.1`. The archive contains 2,759 direct entries and 521 search
   redirects, preserving Japanese definitions, Chinese/English translations,
