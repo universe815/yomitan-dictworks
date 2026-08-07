@@ -3,6 +3,13 @@
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 
+## 2026-08-07
+
+- Updated 《新日汉拟声拟态词词典 第2版》 to `2026.08.07.1`. Lapis dark
+  cards now consume its inherited foreground and Meikyo palette variables
+  directly, keeping meanings and Chinese glosses readable when parent theme
+  selectors are scoped away during Anki card generation.
+
 ## 2026-08-04
 
 - Updated 《新日汉拟声拟态词词典 第2版》 to `2026.08.04.2`. Improved
