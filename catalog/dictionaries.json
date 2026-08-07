@@ -44,7 +44,7 @@
       "page": "japanese/term/ja-zh/onomatopoeia/README.md",
       "config": "config/onomatopoeia.json",
       "buildCommand": "pnpm onomatopoeia:build",
-      "revision": "2026.08.04.2",
+      "revision": "2026.08.07.1",
       "buildStatus": "ready",
       "distribution": {
         "status": "public",
@@ -56,16 +56,16 @@
         "updateHosting": "github-release",
         "assetName": "新日汉拟声拟态词词典-第2版-Yomitan.zip",
         "releaseTag": "dictionary-assets",
-        "releaseAssetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.04.2.zip",
+        "releaseAssetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.07.1.zip",
         "releaseAssetLabel": "新日汉拟声拟态词词典 第2版",
         "archivePath": "Downloads/[JA-ZH] 新日汉拟声拟态词词典 第2版.zip",
-        "bytes": 733858,
-        "sha256": "4A9A59D3DC04E413B906ECA7BDD07B57DE9C46DD2182355BC7DCD71CA7B36412",
+        "bytes": 733833,
+        "sha256": "EA0A1088C34DE549E4DCB73EA28AFC1BD50BFA39165C974696C83F2A5A2CA292",
         "driveFileId": "1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy",
         "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8",
         "driveFileUrl": "https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/shin-nikkan-onomatopoeia/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.04.2.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.07.1.zip"
       }
     },
     {

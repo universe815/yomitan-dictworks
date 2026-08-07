@@ -1,11 +1,16 @@
 [data-sc-onomato~="entry"] {
-  --onomato-bg: var(--background-color, #ffffff);
-  --onomato-bg-light: var(--background-color-light, var(--onomato-bg));
-  --onomato-text: var(--text-color, #2b2b2b);
-  --onomato-muted: var(--text-color-light2, #555555);
-  --onomato-line: var(--text-color-light4, #dddddd);
-  --onomato-link: var(--link-color, #005fae);
-  --onomato-accent: var(--danger-color, #c90000);
+  /*
+   * Lapis exposes its night palette as inherited variables on
+   * `.card.nightMode`.  Consume those variables directly because dictionary
+   * CSS parent selectors may be scoped or discarded when copied into Anki.
+   */
+  --onomato-bg: var(--background-color, var(--bg-color, #ffffff));
+  --onomato-bg-light: var(--background-color-light, var(--bg-elevated, var(--onomato-bg)));
+  --onomato-text: var(--text-color, var(--fg-color, #2b2b2b));
+  --onomato-muted: var(--text-color-light2, var(--meikyo-gray, #555555));
+  --onomato-line: var(--text-color-light4, var(--fg-subtle, #dddddd));
+  --onomato-link: var(--link-color, var(--meikyo-blue, var(--heiban, #005fae)));
+  --onomato-accent: var(--danger-color, var(--meikyo-red, var(--atamadaka, #c90000)));
   color: var(--text-color, inherit);
   font-family: "Noto Sans CJK SC", "Noto Sans CJK JP", "Microsoft YaHei", "Yu Gothic UI", "Yu Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.02em;
@@ -301,11 +306,13 @@
 
 @media (prefers-color-scheme: dark) {
   [data-sc-onomato~="entry"] {
-    --onomato-bg: var(--background-color, #202124);
-    --onomato-bg-light: var(--background-color-light, var(--onomato-bg));
-    --onomato-text: var(--text-color, #e6ebef);
-    --onomato-muted: #cbd3d9;
-    --onomato-line: #697680;
+    --onomato-bg: var(--background-color, var(--bg-color, #202124));
+    --onomato-bg-light: var(--background-color-light, var(--bg-elevated, var(--onomato-bg)));
+    --onomato-text: var(--text-color, var(--fg-color, #e6ebef));
+    --onomato-muted: var(--text-color-light2, var(--meikyo-gray, #cbd3d9));
+    --onomato-line: var(--text-color-light4, var(--fg-subtle, #697680));
+    --onomato-link: var(--link-color, var(--meikyo-blue, var(--heiban, #72bdff)));
+    --onomato-accent: var(--danger-color, var(--meikyo-red, var(--atamadaka, #ff7d7d)));
   }
 }
 
@@ -828,51 +835,3 @@ Flat dark-theme selectors (superseded by inherited host variables).
   color: #ffffff;
 }
 */
-
-/*
- * Anki uses the camel-case `nightMode` class.  Keep definitions and Chinese
- * glosses bright enough for dark cards even when Anki does not expose the
- * Yomitan theme variables.
- */
-@media (prefers-color-scheme: dark) {
-  [data-sc-onomato~="sense-number"],
-  [data-sc-onomato~="meaning"],
-  [data-sc-onomato~="subentry-headword"] {
-    color: #f1f3f5;
-  }
-
-  [data-sc-onomato~="example-zh"] {
-    color: #d6dde3;
-    font-weight: 500;
-  }
-
-  [data-sc-onomato~="example-zh"]::before,
-  [data-sc-onomato~="subentries-label"],
-  [data-sc-onomato~="group-label"] {
-    color: #adb9c3;
-  }
-}
-
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="sense-number"],
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="meaning"],
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="subentry-headword"] {
-  color: #f1f3f5;
-}
-
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="example-zh"] {
-  color: #d6dde3;
-  font-weight: 500;
-}
-
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="example-zh"]::before,
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="subentries-label"],
-:is(body.nightMode, .nightMode, [data-theme="dark"], [data-mode="dark"])
-  [data-sc-onomato~="group-label"] {
-  color: #adb9c3;
-}
