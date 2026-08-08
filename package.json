@@ -17,6 +17,7 @@
     "oald:build:rich": "tsc -p tsconfig.json && node dist/build-oald.js config/oald-rich.json",
     "xsjrh:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/xsjrh.json",
     "onomatopoeia:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/onomatopoeia.json",
+    "kenkyusha-colloquial:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/kenkyusha-colloquial.json",
     "vvlexicon:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/vvlexicon.json",
     "check": "tsc -p tsconfig.json --noEmit"
   },
