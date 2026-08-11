@@ -4,6 +4,7 @@ import path from 'node:path';
 import readline from 'node:readline';
 import { Dictionary, DictionaryIndex, TermEntry } from 'yomichan-dict-builder';
 import type { DetailedDefinition, StructuredContent } from 'yomichan-dict-builder/dist/types/yomitan/termbank';
+import type { IsoLanguageCode } from 'yomichan-dict-builder/dist/types/IsoLanguageCode';
 import { applyUpdateMetadata, type UpdateMetadata } from './update-metadata';
 
 interface Config extends UpdateMetadata {
@@ -17,6 +18,10 @@ interface Config extends UpdateMetadata {
   outputFile: `${string}.zip`;
   stylesFile: string;
   resourcesDir: string;
+  sourceLanguage?: IsoLanguageCode;
+  targetLanguage?: IsoLanguageCode;
+  resourcePathPrefix?: string;
+  redirectDataKey?: string;
 }
 
 interface RecordValue {
@@ -40,11 +45,11 @@ async function walk(directory: string, prefix = ''): Promise<string[]> {
   return values;
 }
 
-function redirectDefinition(target: string): DetailedDefinition {
+function redirectDefinition(target: string, dataKey: string, language: string): DetailedDefinition {
   const content: StructuredContent = {
     tag: 'div',
-    data: { xsjrh: 'redirect' },
-    content: ['参见 ', { tag: 'a', href: `?query=${encodeURIComponent(target)}`, content: target, lang: 'ja' }],
+    data: { [dataKey]: 'redirect' },
+    content: ['参见 ', { tag: 'a', href: `?query=${encodeURIComponent(target)}`, content: target, lang: language }],
   };
   return { type: 'structured-content', content };
 }
@@ -53,6 +58,10 @@ async function main(): Promise<void> {
   const configPath = process.argv.slice(2).find((value) => value !== '--') ?? 'config/xsjrh.json';
   const config = JSON.parse(await readFile(path.resolve(root, configPath), 'utf8')) as Config;
   const dictionary = new Dictionary({ fileName: config.outputFile });
+  const sourceLanguage = config.sourceLanguage ?? 'ja';
+  const targetLanguage = config.targetLanguage ?? 'zh';
+  const resourcePathPrefix = (config.resourcePathPrefix ?? 'img/xsjrh').replace(/\/$/, '');
+  const redirectDataKey = config.redirectDataKey ?? 'xsjrh';
   let index = new DictionaryIndex()
     .setTitle(config.title)
     .setRevision(config.revision)
@@ -61,8 +70,8 @@ async function main(): Promise<void> {
     .setAttribution(config.attribution)
     .setUrl(config.url)
     .setSequenced(true)
-    .setSourceLanguage('ja')
-    .setTargetLanguage('zh');
+    .setSourceLanguage(sourceLanguage)
+    .setTargetLanguage(targetLanguage);
   index = applyUpdateMetadata(index, config);
   await dictionary.setIndex(index.build());
   await dictionary.addFile(path.resolve(root, config.stylesFile), 'styles.css');
@@ -73,7 +82,7 @@ async function main(): Promise<void> {
   for (const relative of resources) {
     const extension = path.extname(relative).toLowerCase();
     let archivePath: string | undefined;
-    if (['.png', '.jpg', '.jpeg', '.svg'].includes(extension)) archivePath = `img/xsjrh/${relative}`;
+    if (['.png', '.jpg', '.jpeg', '.svg'].includes(extension)) archivePath = `${resourcePathPrefix}/${relative}`;
     else if (['.otf', '.ttf', '.woff', '.woff2'].includes(extension)) archivePath = `fonts/${path.basename(relative)}`;
     if (!archivePath) continue;
     await dictionary.addFile(path.join(resourcesRoot, ...relative.split('/')), archivePath);
@@ -97,7 +106,7 @@ async function main(): Promise<void> {
       entry.addDetailedDefinition(record.definition);
       direct += 1;
     } else if (record.redirect) {
-      entry.addDetailedDefinition(redirectDefinition(record.redirect));
+      entry.addDetailedDefinition(redirectDefinition(record.redirect, redirectDataKey, sourceLanguage));
       redirects += 1;
     } else throw new Error(`NDJSON 第 ${count + 1} 行没有释义或跳转`);
     await dictionary.addTerm(entry.build());
