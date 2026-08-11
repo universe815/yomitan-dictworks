@@ -1,5 +1,14 @@
 # Dictionary changelog
 
+## 2026-08-11
+
+### 新世纪日汉双解大辞典（完整图文版） `2026.08.11.1`
+
+- Changed Chinese definitions and example translations to a dedicated blue
+  palette so they remain visually distinct from Japanese text.
+- Added inherited Lapis/Anki color-variable support and a high-contrast dark-mode
+  fallback for the Chinese translation color.
+
 This file records converter and dictionary-output changes. A converter change does
 not make proprietary source data redistributable.
 

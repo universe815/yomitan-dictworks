@@ -52,12 +52,25 @@ def main():
             'has_styles': 'styles.css' in names,
             'has_font': any(name.startswith('fonts/') for name in names),
         })
+        styles = archive.read('styles.css').decode('utf-8') if result['has_styles'] else ''
         for sample in ['愛', '食べる', '見る', '明日', 'あい']:
             result['samples'][sample] = sample in terms
         if missing:
             result['errors'].append(f'{len(missing)} referenced images are missing')
         if not result['has_styles']:
             result['errors'].append('styles.css is missing')
+        for required_style in [
+            '--xsjrh-ja:',
+            '--xsjrh-zh:',
+            'color: var(--xsjrh-ja);',
+            'color: var(--xsjrh-zh);',
+            '#24558a',
+            '#82bfff',
+        ]:
+            if required_style not in styles:
+                result['errors'].append(
+                    f'styles.css is missing Japanese/Chinese contrast rule: {required_style}'
+                )
         if stats['terms'] == 0:
             result['errors'].append('no terms found')
     result['passed'] = not result['errors']
