@@ -7,7 +7,7 @@
 | Direction | Japanese → Chinese |
 | Type | Term dictionary |
 | Edition | Complete illustrated edition |
-| Revision | `2026.07.30.1` |
+| Revision | `2026.08.11.1` |
 | Build | Ready |
 | Update mode | GitHub Release |
 | Archive | `新世纪日汉双解大辞典-完整图文版-Yomitan.zip` |
