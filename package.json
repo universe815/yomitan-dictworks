@@ -17,6 +17,9 @@
     "oald:build:rich": "tsc -p tsconfig.json && node dist/build-oald.js config/oald-rich.json",
     "xsjrh:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/xsjrh.json",
     "onomatopoeia:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/onomatopoeia.json",
+    "modern-adverb:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/modern-adverb.json",
+    "kenkyusha-expression-usage:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/kenkyusha-expression-usage.json",
+    "meikyo-kotowaza:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/meikyo-kotowaza.json",
     "kenkyusha-colloquial:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/kenkyusha-colloquial.json",
     "vvlexicon:build": "tsc -p tsconfig.json && node dist/build-xsjrh.js config/vvlexicon.json",
     "check": "tsc -p tsconfig.json --noEmit"

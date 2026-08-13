@@ -1,0 +1,17 @@
+{
+  "title": "研究社 日本語表現活用辞典",
+  "revision": "2026.08.13.1",
+  "author": "研究社 / Yomitan 转换维护：universe815",
+  "description": "《研究社 日本語表現活用辞典》非官方 Yomitan 转换版。保留搭配模式、例文、惯用句、复合语、名词用法及原 MDX 的假名、汉字和英文检索别名。",
+  "attribution": "原辞典内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护。仅供拥有合法来源的个人本地使用，不表示获得公开再分发授权。",
+  "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-expression-usage",
+  "inputNdjson": "generated/kenkyusha-expression-usage.ndjson",
+  "outputFile": "研究社-日本語表現活用辞典-Yomitan.zip",
+  "stylesFile": "styles/kenkyusha-expression-usage.css",
+  "resourcesDir": "generated/kenkyusha-expression-usage-resources",
+  "sourceLanguage": "ja",
+  "targetLanguage": "ja",
+  "resourcePathPrefix": "img/kexpr",
+  "redirectDataKey": "kexpr",
+  "isUpdatable": false
+}
