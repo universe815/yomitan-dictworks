@@ -1,0 +1,17 @@
+{
+  "title": "明鏡 ことわざ成句使い方辞典",
+  "revision": "2026.08.13.1",
+  "author": "北原保雄 / Yomitan 转换维护：universe815",
+  "description": "《明鏡 ことわざ成句使い方辞典》非官方 Yomitan 转换版。保留原文、Ruby、交叉参照和图像，并补入总索引、误用索引、分类索引、出典索引及成句索引。",
+  "attribution": "原辞典内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护。仅供拥有合法来源的个人本地使用，不表示获得公开再分发授权。",
+  "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/meikyo-kotowaza",
+  "inputNdjson": "generated/meikyo-kotowaza.ndjson",
+  "outputFile": "明鏡-ことわざ成句使い方辞典-Yomitan.zip",
+  "stylesFile": "styles/meikyo-kotowaza.css",
+  "resourcesDir": "generated/meikyo-kotowaza-resources",
+  "sourceLanguage": "ja",
+  "targetLanguage": "ja",
+  "resourcePathPrefix": "img/mkw",
+  "redirectDataKey": "mkw",
+  "isUpdatable": false
+}

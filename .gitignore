@@ -9,6 +9,7 @@ dictionary-output/*
 
 # Source dictionaries and extracted proprietary assets
 data/vvlexicon/
+source-input/
 *.mdx
 *.mdd
 *.zim
