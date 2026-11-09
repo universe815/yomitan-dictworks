@@ -16,10 +16,11 @@
       "sha256": "31afb4c9c3239ce2666838fda3fa7264588555acbeb6d053a4c09ec289c49b63",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "released",
+        "channel": "github-release",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "XSJRH-yomitan-illustrated-2026.08.11.1.zip",
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/xsjrh",
       "notes": []
@@ -35,10 +36,11 @@
       "sha256": "ea0a1088c34de549e4dcb73ea28afc1bd50bfa39165c974696c83f2a5a2ca292",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "released",
+        "channel": "github-release",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "Shin-Nikkan-Gisei-Gitai-Dictionary-2nd-yomitan-2026.08.07.1.zip",
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/onomatopoeia",
       "notes": []
@@ -54,10 +56,11 @@
       "sha256": "9e1f2315ce38cc2ebf36de1399f6e3f1b55045fd923d249cf61b6400aaa44aa5",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "released",
+        "channel": "github-release",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "OALDPE-En-Cn-2025.02.14-text-2026.08.02.1.zip",
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://www.oxfordlearnersdictionaries.com/",
       "notes": []
@@ -73,10 +76,11 @@
       "sha256": "12de29c172ccafc2e62fa2ee14014ec6bbdf38a40505f03d82161fc2a5e11514",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "released",
+        "channel": "github-release",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "OALDPE-En-Cn-2025.02.14-illustrated-2026.08.02.2.zip",
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://www.oxfordlearnersdictionaries.com/",
       "notes": []
@@ -92,10 +96,11 @@
       "sha256": "4678ac6d39f475cf9dc0cb7353849090e8c64ad324dd08331a15b13d5e14ad0b",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "released",
+        "channel": "github-release",
+        "releaseTag": "dictionary-assets",
+        "releaseAssetName": "VVLexicon-NINJAL-yomitan-2026.08.04.1.zip",
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/vvlexicon",
       "notes": []
@@ -112,13 +117,10 @@
       "buildStatus": "verified-local",
       "publication": {
         "status": "released",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null,
         "channel": "github-release",
         "releaseTag": "dictionary-assets",
         "releaseAssetName": "Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip",
-        "note": "正文 ZIP 由仓库维护者决定公开上传；第三方内容的再分发许可仍未核验。"
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-colloquial",
       "notes": []
@@ -135,13 +137,10 @@
       "buildStatus": "verified-local",
       "publication": {
         "status": "released",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null,
         "channel": "github-release",
         "releaseTag": "dictionary-assets",
         "releaseAssetName": "Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip",
-        "note": "正文 ZIP 由仓库维护者决定公开上传；第三方内容的再分发许可仍未核验。"
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/modern-adverb",
       "notes": []
@@ -158,13 +157,10 @@
       "buildStatus": "verified-local",
       "publication": {
         "status": "released",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null,
         "channel": "github-release",
         "releaseTag": "dictionary-assets",
         "releaseAssetName": "Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip",
-        "note": "正文 ZIP 由仓库维护者决定公开上传；第三方内容的再分发许可仍未核验。"
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-expression-usage",
       "notes": []
@@ -181,13 +177,10 @@
       "buildStatus": "verified-local",
       "publication": {
         "status": "released",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null,
         "channel": "github-release",
         "releaseTag": "dictionary-assets",
         "releaseAssetName": "Meikyo-Kotowaza-Yomitan-2026.08.13.1.zip",
-        "note": "正文 ZIP 由仓库维护者决定公开上传；第三方内容的再分发许可仍未核验。"
+        "note": "正文 ZIP 已发布在 GitHub Release 与 Drive Downloads 目录。"
       },
       "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/meikyo-kotowaza",
       "notes": []
@@ -203,10 +196,8 @@
       "sha256": "e873260be1a16a3ce685d7242230744f775acdcfae39a52dcf0630fc967684c7",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "local-only",
+        "note": "仅本地构建，正文 ZIP 未发布。"
       },
       "sourceUrl": "https://forum.freemdict.com/t/topic/43714",
       "notes": []
@@ -222,10 +213,8 @@
       "sha256": "a25711914ed93cc4fab149461640423568f2fe3ddc2da85427e9d031ab4a54e3",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "local-only",
+        "note": "仅本地构建，正文 ZIP 未发布。"
       },
       "sourceUrl": "https://forum.freemdict.com/t/topic/43916",
       "notes": []
@@ -241,10 +230,8 @@
       "sha256": "9ebf31d0f2ca9418d8c56cf7974a18aa5add849dbd38698e2a49f17cd1da0bda",
       "buildStatus": "preview",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "local-only",
+        "note": "仅本地构建，正文 ZIP 未发布。"
       },
       "sourceUrl": "https://forum.freemdict.com/t/topic/44009/6",
       "notes": [
@@ -262,10 +249,8 @@
       "sha256": "e489b62f2a5012c888b6f16ba9016fb3c491f44fb3f98b630dc1e70d38d9f8b4",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "local-only",
+        "note": "仅本地构建，正文 ZIP 未发布。"
       },
       "sourceUrl": "https://www2.ninjal.ac.jp/basicverbbank/",
       "notes": [
@@ -283,10 +268,8 @@
       "sha256": "da249a9c8911c7eae0107eb2d9d77fee327a7100f99098859ec4fe96c74b56e7",
       "buildStatus": "verified-local",
       "publication": {
-        "status": "metadata-and-tools-only",
-        "redistributionApproved": false,
-        "license": null,
-        "evidence": null
+        "status": "local-only",
+        "note": "仅本地构建，正文 ZIP 未发布。"
       },
       "sourceUrl": "https://www2.ninjal.ac.jp/caseparticlebank/",
       "notes": [

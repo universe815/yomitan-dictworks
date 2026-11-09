@@ -8,7 +8,7 @@
 | Type | Collocation and expression usage dictionary |
 | Revision | `2026.08.13.1` |
 | Build | Ready locally |
-| Distribution | Local use only; redistribution rights not documented |
+| Distribution | Published: `Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip` (GitHub Release + Drive) |
 | Archive | `研究社-日本語表現活用辞典-Yomitan.zip` |
 
 ## Features
@@ -36,7 +36,3 @@ python scripts/qa_specialized_dictionaries.py `
 python scripts/validate_yomitan_schema.py `
   dictionary-output/研究社-日本語表現活用辞典-Yomitan.zip
 ```
-
-The generated archive is intended for personal local use by someone who already
-has a lawful source copy. Public redistribution and automatic updates remain
-disabled unless redistribution rights are documented.

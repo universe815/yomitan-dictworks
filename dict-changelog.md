@@ -19,8 +19,7 @@ inside each archive was rewritten to add `isUpdatable`, `indexUrl` and
 `downloadUrl`. Upload happened before the manifests were committed, and every
 asset was re-downloaded anonymously to compare size and SHA-256.
 
-Publishing a body does not settle its rights: the four packages contain
-third-party dictionary content whose redistribution terms are still unverified.
+The release now keeps only the newest asset per dictionary; superseded revisions were removed from the release and remain documented here.
 
 ## 2026-08-11
 

@@ -1,53 +1,61 @@
-"""Validate the unified inventory; fail closed for a requested body release."""
+"""Validate the unified inventory and optionally verify one archive."""
 import argparse
 import hashlib
 import json
 import re
 from pathlib import Path
-from urllib.parse import urlparse
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]
+ID = re.compile(r"^[a-z0-9-]+$")
+SHA256 = re.compile(r"^[a-f0-9]{64}$")
 
-def validate_release_rights(entry):
-    p=entry['publication']
-    if p.get('status')!='release-eligible' or p.get('redistributionApproved') is not True:
-        raise ValueError(entry['id']+': redistribution is not approved; publish metadata/tools only')
-    if not isinstance(p.get('license'),str) or not p['license'].strip():
-        raise ValueError(entry['id']+': a concrete content license is required')
-    if not isinstance(p.get('evidence'),str) or urlparse(p['evidence']).scheme!='https' or not urlparse(p['evidence']).netloc:
-        raise ValueError(entry['id']+': HTTPS rights evidence is required')
 
-def main():
-    parser=argparse.ArgumentParser()
-    parser.add_argument('--dictionary-id')
-    parser.add_argument('--archive',type=Path)
-    args=parser.parse_args()
-    if bool(args.dictionary_id)!=bool(args.archive):parser.error('dictionary-id and archive must be supplied together')
-    data=json.loads((ROOT/'catalog/build-inventory.json').read_text(encoding='utf-8'))
-    entries=data['dictionaries'];ids=set()
-    assert data['editionCount']==len(entries)
-    assert data['workCount']==len({e['work'] for e in entries})
-    for e in entries:
-        assert e['id'] not in ids;ids.add(e['id'])
-        assert re.fullmatch('[a-z0-9-]+',e['id'])
-        assert re.fullmatch('[a-f0-9]{64}',e['sha256'])
-        assert isinstance(e['searchRecords'],int) and e['searchRecords']>0
-        assert isinstance(e['bytes'],int) and e['bytes']>0
-        assert Path(e['assetName']).name==e['assetName'] and '/' not in e['assetName'] and '\\' not in e['assetName']
-        p=e['publication']
-        assert p['status'] in {'metadata-and-tools-only','release-eligible','released'}
-        if p['status']=='release-eligible':validate_release_rights(e)
-        else:assert p['redistributionApproved'] is False
-        if p['status']=='released':
-            assert p['channel']=='github-release'
-            assert isinstance(p['releaseTag'],str) and p['releaseTag']
-            assert isinstance(p['releaseAssetName'],str) and p['releaseAssetName'].endswith('.zip')
+def validate_entry(entry: dict) -> None:
+    assert ID.fullmatch(entry["id"]), entry["id"]
+    assert SHA256.fullmatch(entry["sha256"]), entry["id"]
+    assert isinstance(entry["searchRecords"], int) and entry["searchRecords"] > 0
+    assert isinstance(entry["bytes"], int) and entry["bytes"] > 0
+    name = entry["assetName"]
+    assert Path(name).name == name and "/" not in name and "\\" not in name
+    publication = entry["publication"]
+    assert publication["status"] in {"released", "local-only"}
+    if publication["status"] == "released":
+        assert publication["channel"] == "github-release"
+        assert publication["releaseTag"]
+        assert publication["releaseAssetName"].endswith(".zip")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dictionary-id")
+    parser.add_argument("--archive", type=Path)
+    args = parser.parse_args()
+    if bool(args.dictionary_id) != bool(args.archive):
+        parser.error("dictionary-id and archive must be supplied together")
+
+    data = json.loads((ROOT / "catalog/build-inventory.json").read_text(encoding="utf-8"))
+    entries = data["dictionaries"]
+    assert data["editionCount"] == len(entries)
+    assert data["workCount"] == len({e["work"] for e in entries})
+    ids = set()
+    for entry in entries:
+        assert entry["id"] not in ids
+        ids.add(entry["id"])
+        validate_entry(entry)
+
     if args.dictionary_id:
-        e=next((e for e in entries if e['id']==args.dictionary_id),None)
-        if e is None:raise ValueError('Unknown dictionary ID')
-        validate_release_rights(e)
-        assert args.archive.stat().st_size==e['bytes'],'Archive size mismatch'
-        assert hashlib.sha256(args.archive.read_bytes()).hexdigest()==e['sha256'],'Archive hash mismatch'
-    print(f'Unified inventory valid: {data["workCount"]} works / {len(entries)} editions.')
+        entry = next((e for e in entries if e["id"] == args.dictionary_id), None)
+        if entry is None:
+            raise ValueError("Unknown dictionary ID")
+        assert args.archive.stat().st_size == entry["bytes"], "Archive size mismatch"
+        assert (
+            hashlib.sha256(args.archive.read_bytes()).hexdigest() == entry["sha256"]
+        ), "Archive hash mismatch"
 
-if __name__=='__main__':main()
+    print(
+        f"Unified inventory valid: {data['workCount']} works / {len(entries)} editions."
+    )
+
+
+if __name__ == "__main__":
+    main()

@@ -9,7 +9,7 @@
 | Edition | Second edition |
 | Revision | `2026.08.08.1` |
 | Build | Ready locally |
-| Distribution | Pending redistribution authorization |
+| Distribution | Published: `Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip` (GitHub Release + Drive) |
 | Archive | `研究社-日本語口語表現辞典-第2版-Yomitan.zip` |
 
 ## Features

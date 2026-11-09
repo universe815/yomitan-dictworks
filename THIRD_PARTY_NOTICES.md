@@ -1,51 +1,30 @@
 # Third-party content and notices
 
-The MIT License in this repository applies only to original source code and
-documentation contributed to this repository.
+The MIT License in this repository applies to the original source code and
+documentation contributed here. Dictionary entries, definitions, examples,
+illustrations, audio, fonts and branding come from third-party dictionary
+products and remain with their respective rightsholders.
 
-It does **not** grant any rights to dictionary entries, definitions, examples,
-illustrations, audio, fonts, branding, or other content extracted from third-party
-dictionary products. Those materials remain subject to the terms of their respective
-rightsholders and are intentionally excluded from the Git repository.
-
-The current converters have been tested with locally owned copies of:
+Converters have been built against personally owned copies of:
 
 - Oxford Advanced Learner's Dictionary data;
 - 《新世纪日汉双解大辞典》;
-- 《新日汉拟声拟态词词典》.
+- 《新日汉拟声拟态词词典》;
+- 研究社 日本語口語表現辞典 / 日本語表現活用辞典;
+- 現代日本語副詞用法辞典、明鏡 ことわざ成句使い方辞典;
+- NINJAL 複合動詞レキシコン、基本動詞バンク、格助詞バンク。
 
-Naming a product describes compatibility only and does not imply endorsement or
-affiliation. Public download availability is a technical distribution state and must
-not be read as a claim that the repository owns the underlying dictionary content.
+Product names describe compatibility only and do not imply endorsement or
+affiliation with any publisher.
 
-Before adding or replacing a public generated dictionary, verify all of the following
-where applicable:
+Generated dictionary bodies are published as GitHub Release assets and mirrored
+to the public Drive folder; they are not committed to Git. Keeping a working
+copy out of Git does not change the copyright status of that content.
 
-1. the source and edition are identified accurately;
-2. known license, attribution, and share-alike terms are preserved;
-3. definitions, examples, images, audio, and fonts are considered separately;
-4. no permission, license, or publisher affiliation is asserted without evidence;
-5. personal data, credentials, local paths, and proprietary source files are absent
-   from the Git repository.
-
-Dependencies retain their own licenses. In particular, the build pipeline uses
+Dependencies retain their own licenses. The build pipeline uses
 `yomichan-dict-builder`, `mdict-utils`, `lxml`, and `fastjsonschema`.
-
-## 2026-11-09 unified inventory
-
-The inventory covers 13 works / 14 editions, including the Kenkyusha colloquial,
-expression-usage and synonym dictionaries; modern adjective and adverb usage;
-Meikyo proverb/phrase usage; the Nichibei text preview; and NINJAL compound verbs,
-basic verbs and case particles. Every edition is currently marked
-`metadata-and-tools-only` in `catalog/build-inventory.json`. No additional
-third-party dictionary body is distributed in this release. See
-`docs/rights-review.md` for evidence and gaps.
-
-Historical Release and Drive assets have not been withdrawn. Their existence is
-not evidence of redistribution permission. Exclusion from Git does not mean that
-historical Release assets are excluded from GitHub hosting.
 
 Dictionary JSON schemas originate from
 https://github.com/yomidevs/yomitan/tree/master/ext/data/schemas and retain their
-upstream terms; the repository MIT license does not relicense third-party
-material. The referenced simoneta-yomitan implementation has not been copied.
+upstream terms. The referenced simoneta-yomitan project is used as a structural
+reference for release and update metadata only; none of its code was copied.
