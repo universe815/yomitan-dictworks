@@ -9,6 +9,7 @@ ALLOWED_CATEGORIES = {"term", "frequency", "grammar", "kanji"}
 ALLOWED_BUILD_STATUSES = {"planned", "ready", "retired"}
 ALLOWED_DISTRIBUTION_STATUSES = {"public", "retired"}
 ALLOWED_RIGHTS_STATUSES = {"third-party", "licensed", "public-domain"}
+ALLOWED_HOSTINGS = {"google-drive-public", "github-release"}
 LANGUAGE_CODE = re.compile(r"^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$")
 DRIVE_FILE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 RELEASE_COMPONENT = re.compile(r"^[A-Za-z0-9._-]+$")
@@ -83,15 +84,18 @@ def main() -> None:
 
         required_update_fields = ("hosting", "indexUrl", "downloadUrl")
         if status == "public":
-            required_public_fields = (
+            hosting = distribution.get("hosting")
+            if hosting not in ALLOWED_HOSTINGS:
+                raise ValueError(f"{dictionary_id}: invalid hosting: {hosting!r}")
+            required_public_fields = [
                 "rightsStatus",
                 "rightsStatement",
-                "archivePath",
-                "driveFileId",
-                "driveFolderUrl",
-                "driveFileUrl",
                 *required_update_fields,
-            )
+            ]
+            if hosting == "google-drive-public":
+                required_public_fields.extend(
+                    ("archivePath", "driveFileId", "driveFolderUrl", "driveFileUrl")
+                )
             missing = [field for field in required_public_fields if not distribution.get(field)]
             if missing:
                 raise ValueError(f"{dictionary_id}: public entry lacks {', '.join(missing)}")
@@ -116,38 +120,35 @@ def main() -> None:
                 for field in ("contentLicense", "rightsEvidence"):
                     if not distribution.get(field):
                         raise ValueError(f"{dictionary_id}: licensed entry lacks {field}")
-            if distribution.get("hosting") != "google-drive-public":
-                raise ValueError(
-                    f"{dictionary_id}: public entry must use public Google Drive hosting"
+            if hosting == "google-drive-public":
+                archive_path = distribution.get("archivePath")
+                if not isinstance(archive_path, str) or not archive_path:
+                    raise ValueError(f"{dictionary_id}: public entry lacks archivePath")
+                if Path(archive_path).is_absolute() or ".." in Path(archive_path).parts:
+                    raise ValueError(
+                        f"{dictionary_id}: archivePath must stay inside the Drive archive root"
+                    )
+                if Path(archive_path).suffix.lower() != ".zip":
+                    raise ValueError(f"{dictionary_id}: archivePath must end in .zip")
+                drive_file_id = distribution.get("driveFileId")
+                if (
+                    not isinstance(drive_file_id, str)
+                    or not DRIVE_FILE_ID.fullmatch(drive_file_id)
+                ):
+                    raise ValueError(f"{dictionary_id}: invalid driveFileId")
+                drive_folder_url = distribution.get("driveFolderUrl")
+                if (
+                    not isinstance(drive_folder_url, str)
+                    or not drive_folder_url.startswith(
+                        "https://drive.google.com/drive/folders/"
+                    )
+                ):
+                    raise ValueError(f"{dictionary_id}: invalid driveFolderUrl")
+                expected_file_url = (
+                    f"https://drive.google.com/file/d/{drive_file_id}/view?usp=sharing"
                 )
-            archive_path = distribution.get("archivePath")
-            if not isinstance(archive_path, str) or not archive_path:
-                raise ValueError(f"{dictionary_id}: public entry lacks archivePath")
-            if Path(archive_path).is_absolute() or ".." in Path(archive_path).parts:
-                raise ValueError(
-                    f"{dictionary_id}: archivePath must stay inside the Drive archive root"
-                )
-            if Path(archive_path).suffix.lower() != ".zip":
-                raise ValueError(f"{dictionary_id}: archivePath must end in .zip")
-            drive_file_id = distribution.get("driveFileId")
-            if (
-                not isinstance(drive_file_id, str)
-                or not DRIVE_FILE_ID.fullmatch(drive_file_id)
-            ):
-                raise ValueError(f"{dictionary_id}: invalid driveFileId")
-            drive_folder_url = distribution.get("driveFolderUrl")
-            if (
-                not isinstance(drive_folder_url, str)
-                or not drive_folder_url.startswith(
-                    "https://drive.google.com/drive/folders/"
-                )
-            ):
-                raise ValueError(f"{dictionary_id}: invalid driveFolderUrl")
-            expected_file_url = (
-                f"https://drive.google.com/file/d/{drive_file_id}/view?usp=sharing"
-            )
-            if distribution.get("driveFileUrl") != expected_file_url:
-                raise ValueError(f"{dictionary_id}: driveFileUrl differs from driveFileId")
+                if distribution.get("driveFileUrl") != expected_file_url:
+                    raise ValueError(f"{dictionary_id}: driveFileUrl differs from driveFileId")
             update_hosting = distribution.get("updateHosting")
             if update_hosting != "github-release":
                 raise ValueError(

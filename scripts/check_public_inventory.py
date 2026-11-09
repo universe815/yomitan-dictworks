@@ -35,9 +35,13 @@ def main():
         assert isinstance(e['bytes'],int) and e['bytes']>0
         assert Path(e['assetName']).name==e['assetName'] and '/' not in e['assetName'] and '\\' not in e['assetName']
         p=e['publication']
-        assert p['status'] in {'metadata-and-tools-only','release-eligible'}
+        assert p['status'] in {'metadata-and-tools-only','release-eligible','released'}
         if p['status']=='release-eligible':validate_release_rights(e)
         else:assert p['redistributionApproved'] is False
+        if p['status']=='released':
+            assert p['channel']=='github-release'
+            assert isinstance(p['releaseTag'],str) and p['releaseTag']
+            assert isinstance(p['releaseAssetName'],str) and p['releaseAssetName'].endswith('.zip')
     if args.dictionary_id:
         e=next((e for e in entries if e['id']==args.dictionary_id),None)
         if e is None:raise ValueError('Unknown dictionary ID')

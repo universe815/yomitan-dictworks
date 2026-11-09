@@ -1,0 +1,15 @@
+{
+  "title": "現代日本語副詞用法辞典（中文版）",
+  "revision": "2026.08.13.1",
+  "format": 3,
+  "author": "飛田良文・浅田秀子 / Yomitan 转换维护：universe815",
+  "description": "《现代日本语副词用法辞典》非官方 Yomitan 转换版。保留日中释义、分组例句、语感解析、近义比较、Ruby、参照词和页码。",
+  "attribution": "原辞典内容版权归原权利人所有。源数据来自用户合法取得的本地资料；非官方 Yomitan 转换由 universe815 维护。仅供拥有合法来源的个人本地使用，不表示获得公开再分发授权。",
+  "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/modern-adverb",
+  "sequenced": true,
+  "sourceLanguage": "ja",
+  "targetLanguage": "zh",
+  "isUpdatable": true,
+  "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/modern-adverb/index.json",
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip"
+}

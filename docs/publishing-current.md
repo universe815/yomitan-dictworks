@@ -22,4 +22,17 @@
 
 本次用户要求统一到 GitHub，新发布不再强制同步 Drive。现有 Drive 链接是历史链路，本次不安排每日抓取或自动公开任务，不为没有附件的词典建立更新清单。
 
+## GitHub-only 正文发布（2026-11-09 补充）
+
+维护者决定先公开四部已完成的日语正文包，只走 GitHub Release，不建 Drive 副本。这类条目的 `distribution` 使用 `hosting: github-release`，因此不需要 `driveFileId`、`driveFolderUrl`、`driveFileUrl`；`check_catalog.py` 只对 `hosting: google-drive-public` 的条目强制 Drive 字段。统一目录里对应条目的 `publication.status` 记为 `released`，`redistributionApproved` 仍为 `false`——**公开上传是维护者决定，不是许可结论**。
+
+发布顺序（旧 `publishing.md` 仍然适用）：
+
+1. 用 `scripts/repack_update_archive.py` 从已通过 QA 的正式 ZIP 生成新版，只替换 `index.json`，其余成员保持原顺序、CRC 与压缩方式。
+2. 以稳定 ASCII 版本化文件名上传，`gh release upload dictionary-assets "<ASSET>.zip#<中文标题>"`，不覆盖旧 revision。
+3. 匿名下载核对 Content-Length 与 SHA-256。
+4. `scripts/extract_update_index.py` 从最终 ZIP 提取 `manifests/<id>/index.json`。
+5. 更新 `catalog/dictionaries.json`、`catalog/build-inventory.json`、README 与 changelog，再提交推送；清单绝不先于资产合并。
+6. 在独立 Yomitan 配置验证导入与 **Check for updates**。
+
 已有 Release、Drive 与旧清单未撤回，许可仍需核实。没有新增正文不等于消除了历史分发风险，见 [rights-review.md](rights-review.md)。

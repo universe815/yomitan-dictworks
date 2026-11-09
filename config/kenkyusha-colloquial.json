@@ -13,5 +13,7 @@
   "targetLanguage": "ja",
   "resourcePathPrefix": "img/kqcol",
   "redirectDataKey": "kqcol",
-  "isUpdatable": false
+  "isUpdatable": true,
+  "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/kenkyusha-colloquial/index.json",
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip"
 }

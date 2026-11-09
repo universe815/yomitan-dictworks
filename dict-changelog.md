@@ -1,5 +1,27 @@
 # Dictionary changelog
 
+## 2026-11-09
+
+Published the first four finished bodies as importable Yomitan packages on the
+`dictionary-assets` Release, each with its own manifest and update metadata:
+
+- 《明鏡 ことわざ成句使い方辞典》 `2026.08.13.1` →
+  `Meikyo-Kotowaza-Yomitan-2026.08.13.1.zip`
+- 《現代日本語副詞用法辞典（中文版）》 `2026.08.13.1` →
+  `Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip`
+- 《研究社 日本語表現活用辞典》 `2026.08.13.1` →
+  `Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip`
+- 《研究社 日本語口語表現辞典［第2版］》 `2026.08.08.1` →
+  `Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip`
+
+Term banks, styles, images and page order are unchanged; only `index.json`
+inside each archive was rewritten to add `isUpdatable`, `indexUrl` and
+`downloadUrl`. Upload happened before the manifests were committed, and every
+asset was re-downloaded anonymously to compare size and SHA-256.
+
+Publishing a body does not settle its rights: the four packages contain
+third-party dictionary content whose redistribution terms are still unverified.
+
 ## 2026-08-11
 
 ### 新世纪日汉双解大辞典（完整图文版） `2026.08.11.1`

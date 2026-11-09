@@ -13,5 +13,7 @@
   "targetLanguage": "ja",
   "resourcePathPrefix": "img/kexpr",
   "redirectDataKey": "kexpr",
-  "isUpdatable": false
+  "isUpdatable": true,
+  "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/kenkyusha-expression-usage/index.json",
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip"
 }

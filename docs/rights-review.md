@@ -1,6 +1,6 @@
 # 再分发许可核验（2026-11-09）
 
-本记录说明实际找到的依据与未解决事项，不承诺“无版权风险”。当前 13 部词典、14 个版本均列为 `metadata-and-tools-only`，不是断言它们一定禁止再分发，而是尚无可核查依据支持本次公开正文。
+本记录说明实际找到的依据与未解决事项，不承诺“无版权风险”。13 部词典、14 个版本中，2026-11-09 维护者决定先公开四部已完成包的正文（明鏡成句、现代副词、研究社表达活用、研究社口语），对应条目记为 `publication.status: released`；其余十部仍为 `metadata-and-tools-only`。`released` 只说明文件已公开上传，不表示取得再分发许可，这些包随时可能因权利人异议而撤回。
 
 | 内容组 | 现有证据 | 本次处理 |
 | --- | --- | --- |
@@ -26,3 +26,16 @@
 仓库已有 `dictionary-assets` Release、公开 Drive 链接和五个旧版更新接口，旧目录含 `contentLicense: null`、`rightsEvidence: null`。旧发布行为不构成授权证据。
 
 本轮没有删除、撤回或重写这些外部资产及 Git 历史；因此尚不能声称已消除既有分发风险。需要另行核实其授权，或决定撤回历史分发。撤下当前链接也不能保证移除下载者副本或历史缓存。
+
+## 2026-11-09 正文公开发布（维护者决定）
+
+维护者要求把已完成的四部日语包直接公开在 `dictionary-assets` Release。执行结果记录如下，避免把“已上传”误读成“已授权”：
+
+| 词典 | 发布资产 | 权利状态 |
+| --- | --- | --- |
+| 明鏡 ことわざ成句使い方辞典 | `Meikyo-Kotowaza-Yomitan-2026.08.13.1.zip` | 第三方内容，许可未核验 |
+| 現代日本語副詞用法辞典（中文版） | `Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip` | 同上 |
+| 研究社 日本語表現活用辞典 | `Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip` | 同上 |
+| 研究社 日本語口語表現辞典［第2版］ | `Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip` | 同上；源版权页另有复制与再分发限制说明 |
+
+对应条目的 `redistributionApproved` 保持 `false`、`contentLicense` 与 `rightsEvidence` 保持 `null`，因此 `check_public_inventory.py --dictionary-id ... --archive ...` 对这些包仍按“许可未确认”失败——这是预期行为，不应通过填假许可证绕过。若权利人提出异议，撤下对应 Release 资产并同步删除 `manifests/<id>/index.json` 与 catalog 条目。
