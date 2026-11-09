@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-09",
+  "workCount": 13,
+  "editionCount": 14,
+  "scope": "已核对本地实际成品；旧日期副本及同内容中英文文件名不重复计数。yzk 系列格式修复与外部现成词典不计入。",
+  "dictionaries": [
+    {
+      "id": "xsjrh-illustrated",
+      "work": "新世纪日汉双解大辞典",
+      "title": "新世纪日汉双解大辞典（完整图文版）",
+      "revision": "2026.08.11.1",
+      "searchRecords": 457696,
+      "assetName": "新世纪日汉双解大辞典-完整图文版-Yomitan.zip",
+      "bytes": 39002537,
+      "sha256": "31afb4c9c3239ce2666838fda3fa7264588555acbeb6d053a4c09ec289c49b63",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/xsjrh",
+      "notes": []
+    },
+    {
+      "id": "shin-nikkan-onomatopoeia",
+      "work": "新日汉拟声拟态词词典",
+      "title": "新日汉拟声拟态词词典 第2版",
+      "revision": "2026.08.07.1",
+      "searchRecords": 2151,
+      "assetName": "新日汉拟声拟态词词典-第2版-Yomitan.zip",
+      "bytes": 733833,
+      "sha256": "ea0a1088c34de549e4dcb73ea28afc1bd50bfa39165c974696c83f2a5a2ca292",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/onomatopoeia",
+      "notes": []
+    },
+    {
+      "id": "oald-en-zh",
+      "work": "OALDPE",
+      "title": "OALDPE En-Cn 2025.02.14（正文版）",
+      "revision": "2026.08.02.1",
+      "searchRecords": 618938,
+      "assetName": "OALDPE-En-Cn-2025.02.14-yomitan.zip",
+      "bytes": 50337391,
+      "sha256": "9e1f2315ce38cc2ebf36de1399f6e3f1b55045fd923d249cf61b6400aaa44aa5",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://www.oxfordlearnersdictionaries.com/",
+      "notes": []
+    },
+    {
+      "id": "oald-en-zh-illustrated",
+      "work": "OALDPE",
+      "title": "OALDPE En-Cn 2025.02.14（完整插图版）",
+      "revision": "2026.08.02.2",
+      "searchRecords": 618938,
+      "assetName": "OALDPE-En-Cn-2025.02.14-yomitan-illustrated.zip",
+      "bytes": 240225558,
+      "sha256": "12de29c172ccafc2e62fa2ee14014ec6bbdf38a40505f03d82161fc2a5e11514",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://www.oxfordlearnersdictionaries.com/",
+      "notes": []
+    },
+    {
+      "id": "vvlexicon",
+      "work": "複合動詞レキシコン",
+      "title": "複合動詞レキシコン〔NINJAL〕",
+      "revision": "2026.08.04.1",
+      "searchRecords": 3280,
+      "assetName": "複合動詞レキシコン-NINJAL-Yomitan.zip",
+      "bytes": 1057196,
+      "sha256": "4678ac6d39f475cf9dc0cb7353849090e8c64ad324dd08331a15b13d5e14ad0b",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/vvlexicon",
+      "notes": []
+    },
+    {
+      "id": "kenkyusha-colloquial",
+      "work": "研究社 日本語口語表現辞典",
+      "title": "研究社 日本語口語表現辞典［第2版］",
+      "revision": "2026.08.08.1",
+      "searchRecords": 7162,
+      "assetName": "研究社-日本語口語表現辞典-第2版-Yomitan.zip",
+      "bytes": 1727840,
+      "sha256": "3e4872ffe2a5bbb4c3e06bba366a96070b8fd2bb938b6c5ff72d95d0d4b61b70",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-colloquial",
+      "notes": []
+    },
+    {
+      "id": "modern-adverb",
+      "work": "現代日本語副詞用法辞典",
+      "title": "現代日本語副詞用法辞典（中文版）",
+      "revision": "2026.08.13.1",
+      "searchRecords": 2222,
+      "assetName": "现代日本语副词用法辞典-Yomitan.zip",
+      "bytes": 890753,
+      "sha256": "008f4f6e00f1c521828593cfc5187e6ee2f39828f65efdef908e9f2611d5eb9f",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-zh/modern-adverb",
+      "notes": []
+    },
+    {
+      "id": "kenkyusha-expression-usage",
+      "work": "研究社 日本語表現活用辞典",
+      "title": "研究社 日本語表現活用辞典",
+      "revision": "2026.08.13.1",
+      "searchRecords": 3527,
+      "assetName": "研究社-日本語表現活用辞典-Yomitan.zip",
+      "bytes": 1151714,
+      "sha256": "c809d07554406acd845e53f20dac5a6aa668a60c065df3741bc0fe46489dfa79",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-expression-usage",
+      "notes": []
+    },
+    {
+      "id": "meikyo-kotowaza",
+      "work": "明鏡 ことわざ成句使い方辞典",
+      "title": "明鏡 ことわざ成句使い方辞典",
+      "revision": "2026.08.13.1",
+      "searchRecords": 10996,
+      "assetName": "明鏡-ことわざ成句使い方辞典-Yomitan.zip",
+      "bytes": 1665754,
+      "sha256": "4305c4b561c0c87cc0702e540089a23895e40fa42daf578b228ea043cd18e2fc",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/meikyo-kotowaza",
+      "notes": []
+    },
+    {
+      "id": "modern-adjective",
+      "work": "现代日语形容词用法词典",
+      "title": "现代日语形容词用法词典（中文版）",
+      "revision": "2026.11.09.1",
+      "searchRecords": 3203,
+      "assetName": "现代日语形容词用法词典-Yomitan.zip",
+      "bytes": 1067054,
+      "sha256": "e873260be1a16a3ce685d7242230744f775acdcfae39a52dcf0630fc967684c7",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://forum.freemdict.com/t/topic/43714",
+      "notes": []
+    },
+    {
+      "id": "ruigigo",
+      "work": "研究社 類義語使い分け辞典",
+      "title": "研究社 類義語使い分け辞典",
+      "revision": "2026.11.09.1",
+      "searchRecords": 10363,
+      "assetName": "研究社-類義語使い分け辞典-Yomitan.zip",
+      "bytes": 3123762,
+      "sha256": "a25711914ed93cc4fab149461640423568f2fe3ddc2da85427e9d031ab4a54e3",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://forum.freemdict.com/t/topic/43916",
+      "notes": []
+    },
+    {
+      "id": "nichibei",
+      "work": "最新日米口語辞典 決定版",
+      "title": "最新日米口語辞典［決定版］（文字预览版）",
+      "revision": "2026.11.09.1",
+      "searchRecords": 17552,
+      "assetName": "最新日米口語辞典-決定版-文字预览-Yomitan.zip",
+      "bytes": 2376275,
+      "sha256": "9ebf31d0f2ca9418d8c56cf7974a18aa5add849dbd38698e2a49f17cd1da0bda",
+      "buildStatus": "preview",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://forum.freemdict.com/t/topic/44009/6",
+      "notes": [
+        "文字预览版；源缺 17 个正文目标、42 条索引未收录；不含音频播放。"
+      ]
+    },
+    {
+      "id": "ninjal-verbs",
+      "work": "日本語基本動詞バンク",
+      "title": "日本語基本動詞バンク〔NINJAL・网页快照〕",
+      "revision": "2026.11.09.1",
+      "searchRecords": 1642,
+      "assetName": "日本語基本動詞バンク-NINJAL-Yomitan.zip",
+      "bytes": 2012783,
+      "sha256": "e489b62f2a5012c888b6f16ba9016fb3c491f44fb3f98b630dc1e70d38d9f8b4",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://www2.ninjal.ac.jp/basicverbbank/",
+      "notes": [
+        "754 个公开索引词头；不是官网介绍的 800 词原始数据库全集；不含音频。"
+      ]
+    },
+    {
+      "id": "ninjal-cases",
+      "work": "日本語格助詞バンク",
+      "title": "日本語格助詞バンク〔NINJAL・用例版〕",
+      "revision": "2026.11.09.1",
+      "searchRecords": 217,
+      "assetName": "日本語格助詞バンク-NINJAL-Yomitan.zip",
+      "bytes": 2215368,
+      "sha256": "da249a9c8911c7eae0107eb2d9d77fee327a7100f99098859ec4fe96c74b56e7",
+      "buildStatus": "verified-local",
+      "publication": {
+        "status": "metadata-and-tools-only",
+        "redistributionApproved": false,
+        "license": null,
+        "evidence": null
+      },
+      "sourceUrl": "https://www2.ninjal.ac.jp/caseparticlebank/",
+      "notes": [
+        "95 个语义角色组、10771 条分类用例；包含跨分组重复，普通文本去重为 7351 条。"
+      ]
+    }
+  ]
+}

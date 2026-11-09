@@ -45,6 +45,8 @@ jobs:
           python -m compileall -q scripts
           python scripts/check_repository.py
           python scripts/check_catalog.py
+          python scripts/check_public_inventory.py
+          python scripts/test_public_inventory.py
 
       - name: Build and validate the sample dictionary
         run: |

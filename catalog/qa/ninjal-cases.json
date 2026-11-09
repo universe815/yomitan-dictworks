@@ -1,0 +1,20 @@
+{
+  "example_instances": 10771,
+  "role_groups": 95,
+  "particles": 9,
+  "all_indexed_role_files_preserved": true,
+  "all_example_instances_preserved": true,
+  "source_discrepancies": 31,
+  "search_records": 217,
+  "unique_search_terms": 217,
+  "official_schema_valid": true,
+  "archive_crc_valid": true,
+  "internal_links_resolve": true,
+  "browser_import_tested": false,
+  "zip_bytes": 2215368,
+  "zip_sha256": "da249a9c8911c7eae0107eb2d9d77fee327a7100f99098859ec4fe96c74b56e7",
+  "visual_preview_rendered": true,
+  "visual_horizontal_overflow": false,
+  "visual_preview_checked": true,
+  "expanded_content_checked": true
+}

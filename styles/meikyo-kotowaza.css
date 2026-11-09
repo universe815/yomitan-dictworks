@@ -1,0 +1,131 @@
+[data-sc-mkw~="entry"] {
+  --mkw-text: var(--text-color, var(--fg-color, #202124));
+  --mkw-muted: var(--text-color-light2, var(--meikyo-gray, #5f6368));
+  --mkw-line: var(--text-color-light4, var(--fg-subtle, #c9ced3));
+  --mkw-soft: var(--background-color-light, var(--bg-elevated, #f4f6f8));
+  --mkw-accent: var(--link-color, var(--meikyo-blue, #315f9e));
+  --mkw-heading: var(--danger-color, var(--meikyo-red, #982f38));
+  color: var(--mkw-text);
+  font-family: "Noto Serif CJK JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 1.02em;
+  line-height: 1.78;
+  overflow-wrap: anywhere;
+  text-rendering: optimizeLegibility;
+}
+
+[data-sc-mkw~="netdichead"] {
+  border-bottom: 1px solid var(--mkw-line);
+  margin-bottom: 0.68em;
+  padding-bottom: 0.38em;
+}
+
+[data-sc-mkw~="headword"] {
+  color: var(--mkw-heading);
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 1.4em;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+[data-sc-mkw~="netdicbody"] {
+  color: var(--mkw-text);
+}
+
+[data-sc-mkw~="gothic"] {
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+}
+
+[data-sc-mkw~="bold"] {
+  font-weight: 750;
+}
+
+[data-sc-mkw~="label"] {
+  border: 1px solid var(--mkw-line);
+  border-radius: 0.25em;
+  color: var(--mkw-accent);
+  display: inline-block;
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 0.78em;
+  font-weight: 650;
+  line-height: 1.25;
+  margin: 0 0.25em;
+  padding: 0.05em 0.28em;
+  text-indent: 0;
+  vertical-align: 0.08em;
+}
+
+[data-sc-mkw~="label-text"] {
+  display: inline;
+}
+
+[data-sc-mkw~="indent-1"] {
+  margin-left: 1em;
+}
+
+[data-sc-mkw~="indent-2"] {
+  margin-left: 2em;
+}
+
+[data-sc-mkw~="align-right"] {
+  text-align: right;
+}
+
+[data-sc-mkw~="netdicbody"] a {
+  color: var(--mkw-accent);
+  text-decoration: none;
+}
+
+[data-sc-mkw~="netdicbody"] a:hover {
+  text-decoration: underline;
+}
+
+[data-sc-mkw~="index-info"] {
+  background: var(--mkw-soft);
+  border: 1px solid var(--mkw-line);
+  border-radius: 6px;
+  color: var(--mkw-text);
+  margin-top: 0.9em;
+  padding: 0.4em 0.65em;
+}
+
+[data-sc-mkw~="index-summary"] {
+  color: var(--mkw-accent);
+  cursor: pointer;
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-weight: 700;
+}
+
+[data-sc-mkw~="index-path"] {
+  color: var(--mkw-muted);
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 0.9em;
+  margin: 0.22em 0;
+}
+
+[data-sc-mkw~="index-kind"] {
+  color: var(--mkw-heading);
+  font-weight: 700;
+}
+
+[data-sc-mkw] ruby > rt {
+  color: var(--mkw-muted);
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 0.56em;
+  font-weight: 400;
+}
+
+[data-sc-mkw] img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-sc-mkw~="entry"] {
+    --mkw-text: var(--text-color, var(--fg-color, #eef1f4));
+    --mkw-muted: var(--text-color-light2, var(--meikyo-gray, #c5ccd3));
+    --mkw-line: var(--text-color-light4, var(--fg-subtle, #68727c));
+    --mkw-soft: var(--background-color-light, var(--bg-elevated, #292d31));
+    --mkw-accent: var(--link-color, var(--meikyo-blue, #8bc7ff));
+    --mkw-heading: var(--danger-color, var(--meikyo-red, #ff9298));
+  }
+}

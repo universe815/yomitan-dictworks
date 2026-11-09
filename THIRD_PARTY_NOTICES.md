@@ -30,3 +30,22 @@ where applicable:
 
 Dependencies retain their own licenses. In particular, the build pipeline uses
 `yomichan-dict-builder`, `mdict-utils`, `lxml`, and `fastjsonschema`.
+
+## 2026-11-09 unified inventory
+
+The inventory covers 13 works / 14 editions, including the Kenkyusha colloquial,
+expression-usage and synonym dictionaries; modern adjective and adverb usage;
+Meikyo proverb/phrase usage; the Nichibei text preview; and NINJAL compound verbs,
+basic verbs and case particles. Every edition is currently marked
+`metadata-and-tools-only` in `catalog/build-inventory.json`. No additional
+third-party dictionary body is distributed in this release. See
+`docs/rights-review.md` for evidence and gaps.
+
+Historical Release and Drive assets have not been withdrawn. Their existence is
+not evidence of redistribution permission. Exclusion from Git does not mean that
+historical Release assets are excluded from GitHub hosting.
+
+Dictionary JSON schemas originate from
+https://github.com/yomidevs/yomitan/tree/master/ext/data/schemas and retain their
+upstream terms; the repository MIT license does not relicense third-party
+material. The referenced simoneta-yomitan implementation has not been copied.

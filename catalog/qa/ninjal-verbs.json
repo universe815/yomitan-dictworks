@@ -1,0 +1,21 @@
+{
+  "senses": 2162,
+  "examples": 9199,
+  "ruby": 62648,
+  "conjugation_tables": 672,
+  "source_headword_pages": 754,
+  "all_indexed_pages_preserved": true,
+  "all_body_text_preserved": true,
+  "search_records": 1642,
+  "unique_search_terms": 1569,
+  "official_schema_valid": true,
+  "archive_crc_valid": true,
+  "internal_links_resolve": true,
+  "browser_import_tested": false,
+  "zip_bytes": 2012783,
+  "zip_sha256": "e489b62f2a5012c888b6f16ba9016fb3c491f44fb3f98b630dc1e70d38d9f8b4",
+  "visual_preview_rendered": true,
+  "visual_horizontal_overflow": false,
+  "visual_preview_checked": true,
+  "expanded_content_checked": true
+}

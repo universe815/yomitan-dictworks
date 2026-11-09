@@ -1,81 +1,51 @@
-# Yomitan 词典目录
+# Yomitan Dictworks
 
-目录呈现方式主要参考
-[W1ght/yomitan-guide](https://github.com/W1ght/yomitan-guide) 与
-[MarvNC/yomitan-dictionaries](https://github.com/MarvNC/yomitan-dictionaries)；
-转换层使用
-[MarvNC/yomichan-dict-builder](https://github.com/MarvNC/yomichan-dict-builder)。
+截至 2026-11-09，已制作并核对 **13 部词典、14 个版本**。OALD 正文版和插图版分别计数；《最新日米口語辞典》为文字预览版。
 
----
+本仓库汇总转换器、构建方法、版本、规模和 SHA-256。**本次没有新增公开词典正文 ZIP**：商业词典未提供可核验的再分发授权；三项 NINJAL 网页资料的许可范围仍待确认。来源可访问、个人已持有文件、标注原作者或放在 Release，都不等于获得公开再分发许可。
 
-## 核心入口
+- [完整机器目录](catalog/build-inventory.json)：14 个本地成品的版本、大小、哈希及发布状态。
+- [本次发布说明](docs/release-2026-11-09.md)：上传内容、已知限制及历史资产状态。
+- [版权核验记录](docs/rights-review.md)与[第三方声明](THIRD_PARTY_NOTICES.md)。
+- [本地构建](docs/local-builds.md)与[发布规范](docs/publishing-current.md)。
 
-| 资源 | 用途 | 链接 |
-|---|---|---|
-| Google Drive 公开下载目录 | 全部可直接导入 Yomitan 的完整 ZIP | [打开文件夹](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8) |
-| 词典更新记录 | 版本号、格式修复与资源变更 | [dict-changelog.md](dict-changelog.md) |
-| 机器可读目录 | 文件 ID、公开下载地址与构建配置 | [catalog/dictionaries.json](catalog/dictionaries.json) |
-| 发布流程 | 构建、验证、上传与自动更新步骤 | [docs/publishing.md](docs/publishing.md) |
-| 添加词典 | 新增公开词典的目录和质量要求 | [docs/adding-a-dictionary.md](docs/adding-a-dictionary.md) |
-| OALD 英美音 | 用现有 MDX/MDD 为 Yomitan 提供 OALD UK/US 原声音频 | [docs/oald-audio.md](docs/oald-audio.md) |
-| Yomitan | 浏览器扩展与官方格式说明 | <https://yomitan.wiki/> |
+## 已制作清单
 
----
+| 词典 / 版本 | 修订号 | 检索记录 | 状态 |
+| --- | --- | ---: | --- |
+| 新世纪日汉双解大辞典（完整图文版） | `2026.08.11.1` | 457,696 | 本地构建已核对；仅公开工具及元数据 |
+| 新日汉拟声拟态词词典 第2版 | `2026.08.07.1` | 2,151 | 本地构建已核对；仅公开工具及元数据 |
+| OALDPE En-Cn 2025.02.14（正文版） | `2026.08.02.1` | 618,938 | 本地构建已核对；仅公开工具及元数据 |
+| OALDPE En-Cn 2025.02.14（完整插图版） | `2026.08.02.2` | 618,938 | 本地构建已核对；仅公开工具及元数据 |
+| 複合動詞レキシコン〔NINJAL〕 | `2026.08.04.1` | 3,280 | 本地构建已核对；仅公开工具及元数据 |
+| 研究社 日本語口語表現辞典［第2版］ | `2026.08.08.1` | 7,162 | 本地构建已核对；仅公开工具及元数据 |
+| 現代日本語副詞用法辞典（中文版） | `2026.08.13.1` | 2,222 | 本地构建已核对；仅公开工具及元数据 |
+| 研究社 日本語表現活用辞典 | `2026.08.13.1` | 3,527 | 本地构建已核对；仅公开工具及元数据 |
+| 明鏡 ことわざ成句使い方辞典 | `2026.08.13.1` | 10,996 | 本地构建已核对；仅公开工具及元数据 |
+| 现代日语形容词用法词典（中文版） | `2026.11.09.1` | 3,203 | 本地构建已核对；仅公开工具及元数据 |
+| 研究社 類義語使い分け辞典 | `2026.11.09.1` | 10,363 | 本地构建已核对；仅公开工具及元数据 |
+| 最新日米口語辞典［決定版］（文字预览版） | `2026.11.09.1` | 17,552 | 文字预览；仅公开工具及元数据 |
+| 日本語基本動詞バンク〔NINJAL・网页快照〕 | `2026.11.09.1` | 1,642 | 本地构建已核对；仅公开工具及元数据 |
+| 日本語格助詞バンク〔NINJAL・用例版〕 | `2026.11.09.1` | 217 | 本地构建已核对；仅公开工具及元数据 |
 
-## 日语词典
+“检索记录”包括表记、读音、别名或重定向，不能直接当作独立释义数。数值来自实际成品和已核对的 QA，不表示全部内容均经人工校订，也不表示已在所有 Yomitan 客户端实测。
 
-### 日中 / 双语
+## 来源与限制
 
-| 词典 | 说明 | 获取 | 自动更新 |
-|---|---|---|---|
-| [新世纪日汉双解大辞典（完整图文版）](japanese/term/ja-zh/xsjrh/) | 日中双解；保留例句、Ruby、内部链接、百科插图、外字与字体资源 | [下载 ZIP](https://drive.google.com/file/d/1X_TOhkLsxOaTd_7ATWKpUq_WbxnO9rRa/view?usp=sharing) | [更新清单](manifests/xsjrh-illustrated/index.json) |
-| [新日汉拟声拟态词词典 第2版](japanese/term/ja-zh/onomatopoeia/) | 拟声拟态词专项；保留原版层级、配色、分类、词群关系和独立子词条检索 | [下载 ZIP](https://drive.google.com/file/d/1ovhYNnA7g9QP_KSHFCmX0yzCUZWKHppy/view?usp=sharing) | [更新清单](manifests/shin-nikkan-onomatopoeia/index.json) |
-| [複合動詞レキシコン〔NINJAL〕](japanese/term/ja-zh/vvlexicon/) | 日语 V-V 复合动词；含日文释义、简繁英译文、句型、例句、罗马字与相关字段 | [下载 ZIP](https://drive.google.com/file/d/1FYfk02zZuuuegz-OkGWgLdwM4u2WUpQs/view?usp=sharing) | [更新清单](manifests/vvlexicon/index.json) |
+- 新增现代形容词、研究社類義語使い分け、日米口语转换器保留现有正文；日米源缺项明确记为预览。
+- [基本动词](https://www2.ninjal.ac.jp/basicverbbank/)网页快照：754 个词头、2162 义项、9199 例句、672 张活用表；官网介绍的 800 词不作为已取得数量。
+- [格助词](https://www2.ninjal.ac.jp/caseparticlebank/)网页 JSON：9 种格助词、95 个语义角色组、10771 条分类用例。31 处普通文本与振假名字段差异保留原文两种写法。
+- 《日本語使い分け辞典》《日本語源辞典》《新明解日汉双解第五版》仍缺完整来源，没有算入成品。
 
-[浏览日语分类目录](japanese/)
+## 下载与更新
 
----
+[Releases](../../releases) 中本次 `catalog-2026.11.09` 发布提供代码与目录，不提供词典正文包。GitHub 自动生成的 Source code ZIP 是项目源码，不能导入 Yomitan。
 
-## 英语词典
+参照 [W1ght/simoneta-yomitan](https://github.com/W1ght/simoneta-yomitan) 的说明结构、Release 版本和更新元数据设计；没有复制其无明确代码许可证的实现，也没有把其版权声明当作本项目内容的授权。
+取得覆盖对应数据及媒体的许可后，才发布版本化 ZIP，并在资产通过下载哈希校验后启用 `isUpdatable`、`indexUrl`、`downloadUrl`。当前新增词典未配置指向不存在的下载包的自动更新。
 
-### 英中 / 双语
+仓库已有 `dictionary-assets` Release、历史 Drive 链接及旧更新清单。**这些历史公开资产的权利状态也尚未证实，本次未删除或撤回它们。** `catalog/dictionaries.json` 保留旧发布链路兼容元数据，不是新的授权清单。权利人如需报告问题，可通过仓库 Issues 提供涉及作品和资产信息；请勿公开个人敏感证明材料。
 
-| 词典 | 类型 | 说明 | 获取 | 自动更新 |
-|---|---|---|---|---|
-| [OALDPE En-Cn 2025.02.14（正文版）](english/term/en-zh/oald/) | 英中学习词典 | 完整正文与检索别名；紧凑 CEFR 徽章、可查询的 Idioms / Phrasal Verbs 入口，以及按类型配色的义项、翻译、例句、搭配、词族、辨析和可展开栏目；英美原声由本地音频伴侣提供 | [下载 ZIP](https://drive.google.com/file/d/1pt7r1-meO8dA4fCfRSMH3R4NKYuOY_Hz/view?usp=sharing) | [更新清单](manifests/oald-en-zh/index.json) |
-| [OALDPE En-Cn 2025.02.14（完整插图版）](english/term/en-zh/oald/) | 英中学习词典 / 图文 | 同版式的完整正文、检索别名、导航与特色栏目，并含 311 张原版高清插图；缩略显示后可打开原始大图，支持本地 OALD UK/US 原声音频 | [下载 ZIP](https://drive.google.com/file/d/1ti0TcgrWnjGSd72f3AxoXy1HN7ReIWdu/view?usp=sharing) | [更新清单](manifests/oald-en-zh-illustrated/index.json) |
+## 代码许可
 
-[浏览英语分类目录](english/)
-
----
-
-## 安装与自动更新
-
-1. 从上表下载所需的完整 ZIP；不要解压，也不要下载或导入更新清单 JSON。
-2. 打开 Yomitan 设置中的 **Dictionaries**，选择 **Import** 并导入 ZIP。
-3. 以后在同一页面点击 **Check for Updates**。词典会从 GitHub 读取最新
-   revision，再从 GitHub Release 下载新版 ZIP。
-
-五个现役版本从 `2026.07.30.1` 起全部使用 GitHub Release 自动更新；
-Google Drive 继续提供首次安装、手动下载和归档。更新清单只是 Yomitan
-的机器接口，首次安装仍必须导入 ZIP。
-
----
-
-## 项目结构
-
-GitHub 仓库保存公开目录、转换器、样式、配置、测试和稳定更新清单；生成的
-词典 ZIP 不提交到 Git。Google Drive 保存手动下载与归档副本，GitHub
-Release 保存 Yomitan 自动更新所需的版本化资产。
-
-```text
-<源语言>/<类型>/<语言方向>/<词典>/
-config/       构建与公开更新元数据
-manifests/    Yomitan 稳定更新清单
-scripts/      转换、QA、发布和公开链接检查
-styles/       词典专用样式
-```
-
-原创代码和文档使用 MIT 许可证。第三方词典正文、例句、图片、音频、字体、
-商标及其他内容不包含在该许可证中，详见
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+本仓库原创代码和文档依现有 MIT 许可证发布。MIT 不覆盖第三方词条、例句、图片、音频、字体及商标。来源记录和工具公开不能保证不存在版权争议，详见第三方声明。

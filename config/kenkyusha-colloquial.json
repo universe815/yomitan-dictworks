@@ -1,0 +1,17 @@
+{
+  "title": "研究社 日本語口語表現辞典［第2版］",
+  "revision": "2026.08.08.1",
+  "author": "監修：山根智恵 / Yomitan 转换维护：universe815",
+  "description": "《研究社 日本語口語表現辞典［第2版］》非官方 Yomitan 转换版。收录现代日语口语词汇与表达，保留假名、汉字表记、释义、用法、解说、会话例、Ruby 和内部参照。",
+  "attribution": "原辞典内容 © Chie Yamane, 2020，版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护，本项目与研究社、LogoVista 无隶属关系。请仅在获得合法内容来源及相应使用授权的前提下使用。",
+  "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-colloquial",
+  "inputNdjson": "generated/kenkyusha-colloquial.ndjson",
+  "outputFile": "研究社-日本語口語表現辞典-第2版-Yomitan.zip",
+  "stylesFile": "styles/kenkyusha-colloquial.css",
+  "resourcesDir": "generated/kenkyusha-colloquial-resources",
+  "sourceLanguage": "ja",
+  "targetLanguage": "ja",
+  "resourcePathPrefix": "img/kqcol",
+  "redirectDataKey": "kqcol",
+  "isUpdatable": false
+}

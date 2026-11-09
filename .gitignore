@@ -8,6 +8,8 @@ dictionary-output/*
 /index.json
 
 # Source dictionaries and extracted proprietary assets
+sources/
+reports/
 data/vvlexicon/
 *.mdx
 *.mdd

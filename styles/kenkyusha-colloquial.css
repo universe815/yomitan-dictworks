@@ -1,0 +1,165 @@
+[data-sc-kqcol~="dic-item"],
+[data-sc-kqcol~="appendix-entry"] {
+  --kqcol-text: var(--text-color, var(--fg-color, #252525));
+  --kqcol-muted: var(--text-color-light2, var(--meikyo-gray, #5f6368));
+  --kqcol-line: var(--text-color-light4, var(--fg-subtle, #d2d6da));
+  --kqcol-bg-soft: var(--background-color-light, var(--bg-elevated, #f4f6f8));
+  --kqcol-accent: var(--link-color, var(--meikyo-blue, #315f9e));
+  --kqcol-heading: var(--danger-color, var(--meikyo-red, #9c2f2f));
+  color: var(--kqcol-text);
+  font-family: "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 1.02em;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+  text-rendering: optimizeLegibility;
+}
+
+[data-sc-kqcol~="item-midashi"] {
+  align-items: baseline;
+  border-bottom: 1px solid var(--kqcol-line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 0.7em;
+  margin-bottom: 0.7em;
+  padding-bottom: 0.42em;
+}
+
+[data-sc-kqcol~="headword-kana"] {
+  color: var(--kqcol-heading);
+  font-size: 1.42em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+[data-sc-kqcol~="headword-hyoki"] {
+  color: var(--kqcol-text);
+  font-size: 1.08em;
+  font-weight: 500;
+}
+
+[data-sc-kqcol~="headword-hyoki-s"],
+[data-sc-kqcol~="headword-hyoki-e"] {
+  color: var(--kqcol-muted);
+}
+
+[data-sc-kqcol~="meaning-block"] {
+  border-left: 3px solid var(--kqcol-heading);
+  color: var(--kqcol-text);
+  font-size: 1.06em;
+  font-weight: 600;
+  margin: 0.55em 0 0.8em;
+  padding: 0.12em 0 0.12em 0.8em;
+}
+
+[data-sc-kqcol~="meaning-sub-block"],
+[data-sc-kqcol~="example-block"] {
+  margin: 0.72em 0 0.72em 0.65em;
+}
+
+[data-sc-kqcol~="sub-title"] {
+  color: var(--kqcol-accent);
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 0.45em;
+}
+
+[data-sc-kqcol~="meaning-text"] {
+  color: var(--kqcol-text);
+}
+
+[data-sc-kqcol~="example-block"] {
+  background: color-mix(in srgb, var(--kqcol-bg-soft) 82%, transparent);
+  border-left: 2px solid var(--kqcol-line);
+  border-radius: 0 5px 5px 0;
+  padding: 0.48em 0.72em;
+}
+
+[data-sc-kqcol~="example-text"] {
+  color: var(--kqcol-text);
+  display: block;
+  padding-left: 1.55em;
+  text-indent: -1.55em;
+}
+
+[data-sc-kqcol~="reference"] {
+  color: var(--kqcol-accent);
+  font-weight: 600;
+}
+
+[data-sc-kqcol~="ref-item"],
+[data-sc-kqcol~="ref-item-note"],
+[data-sc-kqcol~="xref-item"],
+[data-sc-kqcol~="menulink"] {
+  color: var(--kqcol-accent);
+  text-decoration: none;
+}
+
+[data-sc-kqcol~="ref-item"]:hover,
+[data-sc-kqcol~="ref-item-note"]:hover,
+[data-sc-kqcol~="xref-item"]:hover,
+[data-sc-kqcol~="menulink"]:hover {
+  text-decoration: underline;
+}
+
+[data-sc-kqcol~="midashi-info-appendix"] {
+  border-bottom: 2px solid var(--kqcol-line);
+  color: var(--kqcol-heading);
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 0.8em;
+  padding-bottom: 0.35em;
+}
+
+[data-sc-kqcol~="bulleted-list"],
+[data-sc-kqcol~="furoku-list"] {
+  margin: 0.34em 0 0.34em 1.4em;
+}
+
+[data-sc-kqcol~="furoku-p"],
+[data-sc-kqcol~="furoku-chu"],
+[data-sc-kqcol~="book-title"] {
+  color: var(--kqcol-text);
+  font-weight: 700;
+}
+
+[data-sc-kqcol~="rule"] {
+  border-top: 1px solid var(--kqcol-line);
+  margin: 0.8em 0;
+}
+
+[data-sc-kqcol~="appendix-entry"] img {
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 1em;
+}
+
+[data-sc-kqcol] ruby > rt {
+  color: var(--kqcol-muted);
+  font-size: 0.58em;
+  font-weight: 400;
+}
+
+[data-sc-kqcol] table {
+  border-collapse: collapse;
+  max-width: 100%;
+}
+
+[data-sc-kqcol] td,
+[data-sc-kqcol] th {
+  border-bottom: 1px solid var(--kqcol-line);
+  padding: 0.22em 0.65em;
+  text-align: left;
+  vertical-align: top;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-sc-kqcol~="dic-item"],
+  [data-sc-kqcol~="appendix-entry"] {
+    --kqcol-text: var(--text-color, var(--fg-color, #eef1f4));
+    --kqcol-muted: var(--text-color-light2, var(--meikyo-gray, #c4cbd1));
+    --kqcol-line: var(--text-color-light4, var(--fg-subtle, #68727c));
+    --kqcol-bg-soft: var(--background-color-light, var(--bg-elevated, #292d31));
+    --kqcol-accent: var(--link-color, var(--meikyo-blue, #82c4ff));
+    --kqcol-heading: var(--danger-color, var(--meikyo-red, #ff8b8b));
+  }
+}
