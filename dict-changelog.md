@@ -5,14 +5,14 @@
 Published the first four finished bodies as importable Yomitan packages on the
 `dictionary-assets` Release, each with its own manifest and update metadata:
 
-- 《明鏡 ことわざ成句使い方辞典》 `2026.08.13.1` →
-  `Meikyo-Kotowaza-Yomitan-2026.08.13.1.zip`
-- 《現代日本語副詞用法辞典（中文版）》 `2026.08.13.1` →
-  `Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip`
-- 《研究社 日本語表現活用辞典》 `2026.08.13.1` →
-  `Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip`
-- 《研究社 日本語口語表現辞典［第2版］》 `2026.08.08.1` →
-  `Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip`
+- 《明鏡 ことわざ成句使い方辞典》 `2026.11.09.1` →
+  `Meikyo-Kotowaza-Yomitan-2026.11.09.1.zip`
+- 《現代日本語副詞用法辞典（中文版）》 `2026.11.09.1` →
+  `Modern-Japanese-Adverb-Dictionary-zh-2026.11.09.1.zip`
+- 《研究社 日本語表現活用辞典》 `2026.11.09.1` →
+  `Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.11.09.1.zip`
+- 《研究社 日本語口語表現辞典［第2版］》 `2026.11.09.1` →
+  `Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.11.09.1.zip`
 
 Term banks, styles, images and page order are unchanged; only `index.json`
 inside each archive was rewritten to add `isUpdatable`, `indexUrl` and
@@ -20,6 +20,11 @@ inside each archive was rewritten to add `isUpdatable`, `indexUrl` and
 asset was re-downloaded anonymously to compare size and SHA-256.
 
 The release now keeps only the newest asset per dictionary; superseded revisions were removed from the release and remain documented here.
+Re-released the four 2026-08 packages as `2026.11.09.1`. Only `index.json` changed:
+`attribution` now uses a neutral rights line instead of "personal local use only",
+and `revision` moved forward so Yomitan's Check for updates picks the new build up.
+Term banks, styles, images and member order are byte-identical to the previous
+archives.
 
 ## 2026-08-11
 

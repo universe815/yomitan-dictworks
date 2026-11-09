@@ -1,9 +1,9 @@
 {
   "title": "研究社 日本語表現活用辞典",
-  "revision": "2026.08.13.1",
+  "revision": "2026.11.09.1",
   "author": "研究社 / Yomitan 转换维护：universe815",
   "description": "《研究社 日本語表現活用辞典》非官方 Yomitan 转换版。保留搭配模式、例文、惯用句、复合语、名词用法及原 MDX 的假名、汉字和英文检索别名。",
-  "attribution": "原辞典内容版权归原权利人所有。非官方 Yomitan 转换由 universe815 维护。仅供拥有合法来源的个人本地使用，不表示获得公开再分发授权。",
+  "attribution": "原辞典内容版权归原权利人所有；本仓库仅做格式转换，不代表原出版方。",
   "url": "https://github.com/universe815/yomitan-dictworks/tree/main/japanese/term/ja-ja/kenkyusha-expression-usage",
   "inputNdjson": "generated/kenkyusha-expression-usage.ndjson",
   "outputFile": "研究社-日本語表現活用辞典-Yomitan.zip",
@@ -15,5 +15,5 @@
   "redirectDataKey": "kexpr",
   "isUpdatable": true,
   "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/kenkyusha-expression-usage/index.json",
-  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip"
+  "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.11.09.1.zip"
 }
