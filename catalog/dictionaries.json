@@ -191,7 +191,9 @@
         "bytes": 1689084,
         "sha256": "F63C06E742DBA13B4FC77F5F2F0C1DAA9D2035C8C065351EF923C790AEED55BD",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/meikyo-kotowaza/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Meikyo-Kotowaza-Yomitan-2026.08.13.1.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Meikyo-Kotowaza-Yomitan-2026.08.13.1.zip",
+        "archivePath": "Downloads/[JA-JA] 明鏡 ことわざ成句使い方辞典.zip",
+        "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8"
       }
     },
     {
@@ -220,7 +222,9 @@
         "bytes": 911021,
         "sha256": "C65A7E670187EC7C8E4901598A0B2A71285312B0D7BCF4DACC94D8164396A459",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/modern-adverb/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Modern-Japanese-Adverb-Dictionary-zh-2026.08.13.1.zip",
+        "archivePath": "Downloads/[JA-ZH] 現代日本語副詞用法辞典（中文版）.zip",
+        "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8"
       }
     },
     {
@@ -249,7 +253,9 @@
         "bytes": 1178939,
         "sha256": "66E829B6ED5870257D801353AF1B0AEBDB42789723BC06B42BCDE84213DA54A1",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/kenkyusha-expression-usage/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip",
+        "archivePath": "Downloads/[JA-JA] 研究社 日本語表現活用辞典.zip",
+        "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8"
       }
     },
     {
@@ -278,7 +284,9 @@
         "bytes": 1749061,
         "sha256": "FCFF8954E55A5F0A7025BE9F8BB3FD4C007B7A641E2570305E5ED401DE45763E",
         "indexUrl": "https://raw.githubusercontent.com/universe815/yomitan-dictworks/main/manifests/kenkyusha-colloquial/index.json",
-        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip"
+        "downloadUrl": "https://github.com/universe815/yomitan-dictworks/releases/download/dictionary-assets/Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip",
+        "archivePath": "Downloads/[JA-JA] 研究社 日本語口語表現辞典［第2版］.zip",
+        "driveFolderUrl": "https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8"
       }
     }
   ]

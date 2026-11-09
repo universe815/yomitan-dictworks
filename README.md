@@ -50,6 +50,8 @@
 | 研究社 日本語表現活用辞典 | `Kenkyusha-Japanese-Expression-Usage-Yomitan-2026.08.13.1.zip` |
 | 研究社 日本語口語表現辞典［第2版］ | `Kenkyusha-Japanese-Colloquial-Expressions-2nd-Yomitan-2026.08.08.1.zip` |
 
+同一份最终 ZIP 也放在公开 Drive 目录 [`Yomitan Dictionaries/Downloads/`](https://drive.google.com/drive/folders/1Hm-Qt2CHAoqkG_k5G40cowWYgE-7CWT8)，文件名带语言方向前缀（`[JA-JA]`、`[JA-ZH]`），与 Release 资产字节数和 SHA-256 完全一致，供手动下载与归档。
+
 ### 首次安装
 
 1. 从上面的 Release 下载所需 ZIP（**不要解压**，也不要导入 `manifests/` 下的 JSON）。
